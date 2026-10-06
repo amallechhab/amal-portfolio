@@ -113,7 +113,7 @@ a:focus-visible,.lang:focus-visible{outline:3px solid var(--fg);outline-offset:3
 .photo-wrap::before{content:"";position:absolute;inset:-18px -26px 18px 26px;background:var(--lilac);border-radius:46% 54% 60% 40% / 50% 45% 55% 50%;z-index:0}
 .photo-wrap::after{content:"";position:absolute;width:64px;height:64px;right:-14px;bottom:-6px;background:var(--peach);border-radius:50%;z-index:0}
 .photo{position:relative;z-index:1;width:100%;height:100%;border-radius:50%;background:var(--card);box-shadow:0 0 0 6px var(--card),0 0 0 9px var(--accent);overflow:hidden;display:grid;place-items:center;color:var(--accent)}
-.photo img{width:100%;height:100%;object-fit:cover;object-position:center 75%;display:block}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
 .photo svg{width:84px;height:84px}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
 h1{font-family:var(--font-display);font-weight:400;font-size:clamp(2.2rem,6vw,3.8rem);line-height:1.06;margin:0 0 14px;text-wrap:balance}
