@@ -15,7 +15,12 @@ $competences = ["HTML", "CSS", "Bootstrap", "JavaScript", "POO", "PHP", "MySQL",
 
 // Tes ateliers / TP. Un bloc par atelier.
 // Quand un atelier est terminé : change "statut" en "ok", remplace le titre,
-// la description et mets le lien Git dans "git".
+// et la description. Chaque atelier a ses exercices (Ex 1, Ex 2, Ex 3, Ex Groupe).
+// Pour chaque exercice : mets les photos de la solution dans "photos", ex.
+//   "photos" => ["/images/ateliers/atelier1/ex1-1.jpg", "/images/ateliers/atelier1/ex1-2.jpg"]
+// (les images se mettent dans public/images/ateliers/atelier1/).
+// "doc" est optionnel : chemin d'un PDF/PPTX, ex. "/docs/atelier1-ex1.pdf".
+// Pour ajouter un exercice, copie une ligne ["label" => ...] et change le nom.
 // Pour ajouter un atelier, copie un bloc et colle-le a la suite.
 $ateliers = [
   [
@@ -25,7 +30,12 @@ $ateliers = [
     "title_en" => "Title of workshop 1",
     "desc_fr"  => "Description courte de ce que j'ai réalisé dans cet atelier.",
     "desc_en"  => "Short description of what I built in this workshop.",
-    "git"      => "",
+    "exercices" => [
+      ["label" => "Ex 1",      "photos" => [], "doc" => ""],
+      ["label" => "Ex 2",      "photos" => [], "doc" => ""],
+      ["label" => "Ex 3",      "photos" => [], "doc" => ""],
+      ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
+    ],
   ],
   [
     "num"      => "Atelier 2",
@@ -34,7 +44,12 @@ $ateliers = [
     "title_en" => "Title of workshop 2",
     "desc_fr"  => "Description courte de ce que j'ai réalisé dans cet atelier.",
     "desc_en"  => "Short description of what I built in this workshop.",
-    "git"      => "",
+    "exercices" => [
+      ["label" => "Ex 1",      "photos" => [], "doc" => ""],
+      ["label" => "Ex 2",      "photos" => [], "doc" => ""],
+      ["label" => "Ex 3",      "photos" => [], "doc" => ""],
+      ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
+    ],
   ],
   [
     "num"      => "Atelier 3",
@@ -43,7 +58,12 @@ $ateliers = [
     "title_en" => "Title of workshop 3",
     "desc_fr"  => "Description courte de ce que j'ai réalisé dans cet atelier.",
     "desc_en"  => "Short description of what I built in this workshop.",
-    "git"      => "",
+    "exercices" => [
+      ["label" => "Ex 1",      "photos" => [], "doc" => ""],
+      ["label" => "Ex 2",      "photos" => [], "doc" => ""],
+      ["label" => "Ex 3",      "photos" => [], "doc" => ""],
+      ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
+    ],
   ],
 ];
 
@@ -53,6 +73,7 @@ function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 function t($fr, $en) { return 'data-fr="' . e($fr) . '" data-en="' . e($en) . '"'; }
 
 $githubIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>';
+$docIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6Zm7 1.5L18.5 9H14a1 1 0 0 1-1-1V3.5ZM8 13h8v1.6H8V13Zm0 3.4h8V18H8v-1.6Z"/></svg>';
 
 $facts = [
   ["Âge",       "Age",            "20 ans",                    "20 years old"],
@@ -159,6 +180,34 @@ h2{font-family:var(--font-display);font-weight:400;font-size:clamp(1.7rem,4vw,2.
 .state{font-size:12px;font-weight:700;color:var(--muted);border:2px dashed var(--line);padding:2px 10px;border-radius:999px}
 .tp h3{margin:0;font-size:1.15rem;line-height:1.3}
 .tp p{margin:0;color:var(--muted);font-size:15px;flex:1}
+
+/* Atelier cliquable + fenêtre des exercices */
+.tp.has-gallery{cursor:pointer}
+.tp.has-gallery:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+dialog.gal{border:0;padding:0;background:transparent;max-width:min(94vw,960px);width:100%;color:var(--fg)}
+dialog.gal::backdrop{background:rgba(42,20,36,.78)}
+.gal-box{background:var(--card);border:2px solid var(--line);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:14px;max-height:92vh;overflow:auto}
+.gal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.gal-head h3{margin:0;font-family:var(--font-display);font-weight:400;font-size:1.3rem}
+.gal-x{font:inherit;font-weight:700;border:2px solid var(--accent);background:transparent;color:var(--accent);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1}
+.gal-x:hover{background:var(--accent);color:var(--accent-fg)}
+.ex-tabs{display:flex;flex-wrap:wrap;gap:10px}
+.ex-tabs button{font:inherit;font-weight:700;font-size:14px;padding:8px 18px;border-radius:999px;border:2px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.ex-tabs button:hover{background:var(--lilac)}
+.ex-tabs button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg)}
+.gal-stage{position:relative;display:grid;place-items:center;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-radius:20px;min-height:200px}
+.gal-stage img{max-width:100%;max-height:60vh;object-fit:contain;border-radius:16px;display:block}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:2px solid var(--accent);background:var(--card);color:var(--accent);font-size:20px;cursor:pointer;font-weight:700}
+.gal-nav:hover{background:var(--accent);color:var(--accent-fg)}
+.gal-prev{left:10px}.gal-next{right:10px}
+.gal-count{text-align:center;font-weight:700;font-size:14px;color:var(--muted)}
+.gal-empty{padding:40px 20px;text-align:center;color:var(--muted);font-weight:500;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-radius:20px}
+.gal-thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.gal-thumbs button{flex:0 0 auto;padding:0;border:2px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;background:none;width:72px;height:54px}
+.gal-thumbs button[aria-current="true"]{border-color:var(--accent)}
+.gal-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.ex-doc{align-self:flex-start}
+.gal [hidden]{display:none!important}
 
 /* Contact */
 .contact{background:var(--accent);color:var(--accent-fg);border-radius:32px;padding:36px 28px;text-align:center}
@@ -270,10 +319,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     <div class="wrap">
       <span class="tag" <?= t("Ateliers", "Workshops") ?>>Ateliers</span>
       <h2 <?= t("Mes ateliers", "My workshops") ?>>Mes ateliers</h2>
-      <p class="sub" <?= t("Chaque atelier a son lien Git. Je les ajoute au fur et à mesure.", "Each workshop has its Git link. I add them as I go.") ?>>Chaque atelier a son lien Git. Je les ajoute au fur et à mesure.</p>
+      <p class="sub" <?= t("Clique sur un atelier pour voir ses exercices et leurs solutions.", "Click a workshop to see its exercises and their solutions.") ?>>Clique sur un atelier pour voir ses exercices et leurs solutions.</p>
       <div class="grid">
 <?php foreach ($ateliers as $a): ?>
-        <article class="tp">
+        <article class="tp has-gallery" tabindex="0" role="button" aria-haspopup="dialog"
+                 data-title-fr="<?= e($a["num"] . " · " . $a["title_fr"]) ?>" data-title-en="<?= e($a["num"] . " · " . $a["title_en"]) ?>"
+                 data-ex="<?= e(json_encode($a["exercices"] ?? [])) ?>">
           <div class="row">
             <span class="badge"><?= e($a["num"]) ?></span>
 <?php if ($a["statut"] !== "ok"): ?>
@@ -282,11 +333,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           </div>
           <h3 <?= t($a["title_fr"], $a["title_en"]) ?>><?= e($a["title_fr"]) ?></h3>
           <p <?= t($a["desc_fr"], $a["desc_en"]) ?>><?= e($a["desc_fr"]) ?></p>
-<?php if (!empty($a["git"])): ?>
-          <a class="btn" href="<?= e($a["git"]) ?>" target="_blank" rel="noopener"><?= $githubIcon ?>Git</a>
-<?php else: ?>
-          <span class="btn" aria-disabled="true"><?= $githubIcon ?><span <?= t("Lien Git bientôt", "Git link soon") ?>>Lien Git bientôt</span></span>
-<?php endif; ?>
+<span class="btn solid" <?= t("Voir les exercices", "See the exercises") ?>>Voir les exercices</span>
         </article>
 <?php endforeach; ?>
       </div>
@@ -311,6 +358,27 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   </div>
 </footer>
 
+<dialog class="gal" id="gal" aria-labelledby="galTitle">
+  <div class="gal-box">
+    <div class="gal-head">
+      <h3 id="galTitle"></h3>
+      <button class="gal-x" id="galClose" type="button" aria-label="Fermer / Close">✕</button>
+    </div>
+    <div class="ex-tabs" id="exTabs" role="group" aria-label="Exercices"></div>
+    <div class="gal-empty" id="galEmpty" hidden data-fr="Les photos de la solution arrivent bientôt." data-en="The solution photos are coming soon.">Les photos de la solution arrivent bientôt.</div>
+    <div id="galMain">
+      <div class="gal-stage">
+        <button class="gal-nav gal-prev" id="galPrev" type="button" aria-label="Précédent / Previous">‹</button>
+        <img id="galImg" src="" alt="">
+        <button class="gal-nav gal-next" id="galNext" type="button" aria-label="Suivant / Next">›</button>
+      </div>
+      <div class="gal-count" id="galCount"></div>
+      <div class="gal-thumbs" id="galThumbs"></div>
+    </div>
+    <a class="btn ex-doc" id="exDoc" href="#" target="_blank" rel="noopener" hidden data-fr="Ouvrir le document" data-en="Open the document">Ouvrir le document</a>
+  </div>
+</dialog>
+
 <script>
 (function(){
   var lang='fr';
@@ -327,6 +395,74 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   });
   try{var l=localStorage.getItem('lang'); if(l==='en'||l==='fr'){lang=l;}}catch(e){}
   apply();
+
+  // Fenêtre des exercices : clic sur un atelier -> Ex 1, Ex 2, Ex 3, Ex Groupe
+  var dlgEl=document.getElementById('gal');
+  var gImg=document.getElementById('galImg'), gCount=document.getElementById('galCount');
+  var gThumbs=document.getElementById('galThumbs'), gMain=document.getElementById('galMain');
+  var gEmpty=document.getElementById('galEmpty'), gTitle=document.getElementById('galTitle');
+  var exTabs=document.getElementById('exTabs'), exDoc=document.getElementById('exDoc');
+  var exercises=[], photos=[], idx=0, trigger=null;
+  function show(i){
+    idx=(i+photos.length)%photos.length;
+    gImg.src=photos[idx];
+    gImg.alt=gTitle.textContent+' ('+(idx+1)+'/'+photos.length+')';
+    gCount.textContent=(idx+1)+' / '+photos.length;
+    Array.prototype.forEach.call(gThumbs.children,function(b,k){
+      if(k===idx){b.setAttribute('aria-current','true');}else{b.removeAttribute('aria-current');}
+    });
+    var multi=photos.length>1;
+    document.getElementById('galPrev').hidden=!multi;
+    document.getElementById('galNext').hidden=!multi;
+    gThumbs.hidden=!multi;
+  }
+  function selectEx(i){
+    var ex=exercises[i]||{};
+    Array.prototype.forEach.call(exTabs.children,function(b,k){b.setAttribute('aria-pressed',k===i?'true':'false');});
+    photos=ex.photos||[];
+    gThumbs.innerHTML='';
+    if(ex.doc){exDoc.href=ex.doc;exDoc.hidden=false;}else{exDoc.hidden=true;}
+    if(!photos.length){gMain.hidden=true;gEmpty.hidden=false;return;}
+    gMain.hidden=false;gEmpty.hidden=true;
+    photos.forEach(function(src,k){
+      var b=document.createElement('button');b.type='button';
+      b.setAttribute('aria-label','Photo '+(k+1));
+      var im=document.createElement('img');im.src=src;im.alt='';im.loading='lazy';
+      b.appendChild(im);b.addEventListener('click',function(){show(k);});
+      gThumbs.appendChild(b);
+    });
+    show(0);
+  }
+  function openAtelier(card){
+    trigger=card;
+    gTitle.textContent=card.getAttribute('data-title-'+lang);
+    try{exercises=JSON.parse(card.getAttribute('data-ex'))||[];}catch(e){exercises=[];}
+    exTabs.innerHTML='';
+    exercises.forEach(function(ex,k){
+      var b=document.createElement('button');b.type='button';b.textContent=ex.label||('Ex '+(k+1));
+      b.addEventListener('click',function(){selectEx(k);});
+      exTabs.appendChild(b);
+    });
+    selectEx(0);
+    if(dlgEl.showModal){dlgEl.showModal();}else{dlgEl.setAttribute('open','');}
+  }
+  document.querySelectorAll('.tp.has-gallery').forEach(function(card){
+    card.addEventListener('click',function(ev){ if(ev.target.closest('a')) return; openAtelier(card); });
+    card.addEventListener('keydown',function(ev){
+      if(ev.target!==card) return;
+      if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();openAtelier(card);}
+    });
+  });
+  document.getElementById('galClose').addEventListener('click',function(){dlgEl.close();});
+  dlgEl.addEventListener('click',function(ev){ if(ev.target===dlgEl) dlgEl.close(); });
+  dlgEl.addEventListener('close',function(){ if(trigger) trigger.focus(); });
+  document.getElementById('galPrev').addEventListener('click',function(){show(idx-1);});
+  document.getElementById('galNext').addEventListener('click',function(){show(idx+1);});
+  dlgEl.addEventListener('keydown',function(ev){
+    if(!photos.length) return;
+    if(ev.key==='ArrowLeft') show(idx-1);
+    if(ev.key==='ArrowRight') show(idx+1);
+  });
 
   // Si photo.jpg n'existe pas encore, afficher une icone a la place
   var img=document.getElementById('photoImg');
