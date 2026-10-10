@@ -19,36 +19,34 @@ $competences = ["HTML", "CSS", "Bootstrap", "JavaScript", "POO", "PHP", "MySQL",
 // Pour chaque exercice : mets les photos de la solution dans "photos", ex.
 //   "photos" => ["/images/ateliers/atelier1/ex1-1.jpg", "/images/ateliers/atelier1/ex1-2.jpg"]
 // (les images se mettent dans public/images/ateliers/atelier1/).
-// "doc" est optionnel : chemin d'un PDF/PPTX, ex. "/docs/atelier1-ex1.pdf".
+// "doc" (dans l'atelier) = l'énoncé en PDF, ex. "/docs/atelier1.pdf" (fichier dans public/docs/).
+// "doc" (dans un exercice) est optionnel : un PDF/PPTX de la solution.
 // Pour ajouter un exercice, copie une ligne ["label" => ...] et change le nom.
 // Pour ajouter un atelier, copie un bloc et colle-le a la suite.
 $ateliers = [
   [
     "num"      => "Atelier 1",
-    "statut"   => "bientot",
-    "title_fr" => "Titre de l'atelier 1",
-    "title_en" => "Title of workshop 1",
-    "desc_fr"  => "Description courte de ce que j'ai réalisé dans cet atelier.",
-    "desc_en"  => "Short description of what I built in this workshop.",
+    "statut"   => "ok",
+    "title_fr" => "Gestion de projet : Méthodes classiques",
+    "title_en" => "Project management: classic methods",
+    "desc_fr"  => "Planification du projet « Quick Annonces » : tâches, dépendances, diagramme de PERT, chemin critique et diagramme de Gantt.",
+    "desc_en"  => "Planning of the “Quick Annonces” project: tasks, dependencies, PERT diagram, critical path and Gantt chart.",
+    "doc"      => "/docs/atelier1.pdf", // énoncé de l'atelier (PDF)
     "exercices" => [
-      ["label" => "Ex 1",      "photos" => [], "doc" => ""],
-      ["label" => "Ex 2",      "photos" => [], "doc" => ""],
-      ["label" => "Ex 3",      "photos" => [], "doc" => ""],
       ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
     ],
   ],
   [
     "num"      => "Atelier 2",
-    "statut"   => "bientot",
-    "title_fr" => "Titre de l'atelier 2",
-    "title_en" => "Title of workshop 2",
-    "desc_fr"  => "Description courte de ce que j'ai réalisé dans cet atelier.",
-    "desc_en"  => "Short description of what I built in this workshop.",
+    "statut"   => "ok",
+    "title_fr" => "Gestion de projet : Agile Scrum",
+    "title_en" => "Project management: Agile Scrum",
+    "desc_fr"  => "Questions sur Agile et Scrum, puis sprint de conception du projet « Quick Annonce » avec Jira : Product Backlog, Sprint Planning, Review et Retrospective.",
+    "desc_en"  => "Agile and Scrum questions, then a design sprint for the “Quick Annonce” project with Jira: Product Backlog, Sprint Planning, Review and Retrospective.",
+    "doc"      => "/docs/atelier2.pdf", // énoncé de l'atelier (PDF)
     "exercices" => [
-      ["label" => "Ex 1",      "photos" => [], "doc" => ""],
-      ["label" => "Ex 2",      "photos" => [], "doc" => ""],
-      ["label" => "Ex 3",      "photos" => [], "doc" => ""],
-      ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
+      ["label" => "Partie 1 (individuel)", "photos" => [], "doc" => ""],
+      ["label" => "Partie 2 (groupe)",     "photos" => [], "doc" => ""],
     ],
   ],
   [
@@ -58,6 +56,7 @@ $ateliers = [
     "title_en" => "Title of workshop 3",
     "desc_fr"  => "Description courte de ce que j'ai réalisé dans cet atelier.",
     "desc_en"  => "Short description of what I built in this workshop.",
+    "doc"      => "", // énoncé de l'atelier (PDF), ex. "/docs/atelier3.pdf"
     "exercices" => [
       ["label" => "Ex 1",      "photos" => [], "doc" => ""],
       ["label" => "Ex 2",      "photos" => [], "doc" => ""],
@@ -92,21 +91,21 @@ $facts = [
 <title>Portfolio <?= e($nom) ?></title>
 <meta name="description" content="Portfolio d'Amal Ben Haaman Lechhab, stagiaire OFPPT en Développement Digital à Tanger.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;700&display=swap">
 <style>
 :root{
-  --bg:#fff4f8; --fg:#4a2338; --muted:#8a5a72;
-  --accent:#e0457b; --accent-fg:#ffffff;
-  --lilac:#e7d6fa; --peach:#ffd9cc; --card:#ffffff; --line:#f3c9da;
-  --font-display:'Caprasimo','Georgia',serif;
+  --bg:#f5f7fb; --fg:#13213b; --muted:#56637a;
+  --accent:#1d4ed8; --accent-fg:#ffffff;
+  --lilac:#dce6fa; --peach:#e0eef0; --card:#ffffff; --line:#d5deec;
+  --font-display:'DM Serif Display','Georgia',serif;
   --font-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root{
-    --bg:#2a1424; --fg:#ffe9f1; --muted:#d3a4bb;
-    --accent:#ff7aa8; --accent-fg:#3a0f23;
-    --lilac:#4b3466; --peach:#5a3342; --card:#3a1d31; --line:#5d3350;
+    --bg:#0e1626; --fg:#e8eefb; --muted:#9db0cc;
+    --accent:#6ea8fe; --accent-fg:#0a1426;
+    --lilac:#1c2d52; --peach:#173a42; --card:#15203a; --line:#2a3b5e;
     color-scheme:dark;
   }
 }
@@ -185,7 +184,7 @@ h2{font-family:var(--font-display);font-weight:400;font-size:clamp(1.7rem,4vw,2.
 .tp.has-gallery{cursor:pointer}
 .tp.has-gallery:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
 dialog.gal{border:0;padding:0;background:transparent;max-width:min(94vw,960px);width:100%;color:var(--fg)}
-dialog.gal::backdrop{background:rgba(42,20,36,.78)}
+dialog.gal::backdrop{background:rgba(8,15,30,.8)}
 .gal-box{background:var(--card);border:2px solid var(--line);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:14px;max-height:92vh;overflow:auto}
 .gal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .gal-head h3{margin:0;font-family:var(--font-display);font-weight:400;font-size:1.3rem}
@@ -206,7 +205,7 @@ dialog.gal::backdrop{background:rgba(42,20,36,.78)}
 .gal-thumbs button{flex:0 0 auto;padding:0;border:2px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;background:none;width:72px;height:54px}
 .gal-thumbs button[aria-current="true"]{border-color:var(--accent)}
 .gal-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
-.ex-doc{align-self:flex-start}
+.ex-links{display:flex;flex-wrap:wrap;gap:10px}
 .gal [hidden]{display:none!important}
 
 /* Contact */
@@ -324,6 +323,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 <?php foreach ($ateliers as $a): ?>
         <article class="tp has-gallery" tabindex="0" role="button" aria-haspopup="dialog"
                  data-title-fr="<?= e($a["num"] . " · " . $a["title_fr"]) ?>" data-title-en="<?= e($a["num"] . " · " . $a["title_en"]) ?>"
+                 data-doc="<?= e($a["doc"] ?? "") ?>"
                  data-ex="<?= e(json_encode($a["exercices"] ?? [])) ?>">
           <div class="row">
             <span class="badge"><?= e($a["num"]) ?></span>
@@ -375,7 +375,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <div class="gal-count" id="galCount"></div>
       <div class="gal-thumbs" id="galThumbs"></div>
     </div>
-    <a class="btn ex-doc" id="exDoc" href="#" target="_blank" rel="noopener" hidden data-fr="Ouvrir le document" data-en="Open the document">Ouvrir le document</a>
+    <div class="ex-links">
+      <a class="btn solid" id="exStatement" href="#" target="_blank" rel="noopener" hidden data-fr="Voir l'énoncé (PDF)" data-en="View the instructions (PDF)">Voir l'énoncé (PDF)</a>
+      <a class="btn" id="exDoc" href="#" target="_blank" rel="noopener" hidden data-fr="Ouvrir la solution (document)" data-en="Open the solution (document)">Ouvrir la solution (document)</a>
+    </div>
   </div>
 </dialog>
 
@@ -401,7 +404,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   var gImg=document.getElementById('galImg'), gCount=document.getElementById('galCount');
   var gThumbs=document.getElementById('galThumbs'), gMain=document.getElementById('galMain');
   var gEmpty=document.getElementById('galEmpty'), gTitle=document.getElementById('galTitle');
-  var exTabs=document.getElementById('exTabs'), exDoc=document.getElementById('exDoc');
+  var exTabs=document.getElementById('exTabs'), exDoc=document.getElementById('exDoc'), exStatement=document.getElementById('exStatement');
   var exercises=[], photos=[], idx=0, trigger=null;
   function show(i){
     idx=(i+photos.length)%photos.length;
@@ -437,6 +440,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     trigger=card;
     gTitle.textContent=card.getAttribute('data-title-'+lang);
     try{exercises=JSON.parse(card.getAttribute('data-ex'))||[];}catch(e){exercises=[];}
+    var st=card.getAttribute('data-doc')||'';
+    if(st){exStatement.href=st;exStatement.hidden=false;}else{exStatement.hidden=true;}
     exTabs.innerHTML='';
     exercises.forEach(function(ex,k){
       var b=document.createElement('button');b.type='button';b.textContent=ex.label||('Ex '+(k+1));
