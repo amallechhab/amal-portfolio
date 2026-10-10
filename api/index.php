@@ -66,6 +66,27 @@ $ateliers = [
   ],
 ];
 
+// Tes projets (PDF ou PPTX). Mets le fichier dans public/docs/ puis remplis "file".
+// Tant que "file" est vide, la carte affiche "Bientôt".
+$projets = [
+  [
+    "type"     => "PDF", // "PDF" ou "PPTX"
+    "title_fr" => "Projet 1",
+    "title_en" => "Project 1",
+    "desc_fr"  => "Description de mon projet 1.",
+    "desc_en"  => "Description of my project 1.",
+    "file"     => "", // ex. "/docs/projet1.pdf"
+  ],
+  [
+    "type"     => "PPTX",
+    "title_fr" => "Projet 2",
+    "title_en" => "Project 2",
+    "desc_fr"  => "Description de mon projet 2.",
+    "desc_en"  => "Description of my project 2.",
+    "file"     => "", // ex. "/docs/projet2.pptx"
+  ],
+];
+
 // ------------------------------------------------------------
 function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 // Texte bilingue : affiche le français, l'anglais est stocké pour le bouton EN/FR
@@ -183,6 +204,14 @@ h2{font-family:var(--font-display);font-weight:400;font-size:clamp(1.7rem,4vw,2.
 /* Atelier cliquable + fenêtre des exercices */
 .tp.has-gallery{cursor:pointer}
 .tp.has-gallery:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+/* Projets */
+.pj{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.pj:nth-child(3n+2){background:color-mix(in srgb,var(--lilac) 45%,var(--card))}
+.pj:nth-child(3n){background:color-mix(in srgb,var(--peach) 55%,var(--card))}
+.pj h3{margin:0;font-size:1.15rem;line-height:1.3}
+.pj p{margin:0;color:var(--muted);font-size:15px;flex:1}
+.pj .btns{display:flex;flex-wrap:wrap;gap:10px}
+
 dialog.gal{border:0;padding:0;background:transparent;max-width:min(94vw,960px);width:100%;color:var(--fg)}
 dialog.gal::backdrop{background:rgba(8,15,30,.8)}
 .gal-box{background:var(--card);border:2px solid var(--line);border-radius:28px;padding:20px;display:flex;flex-direction:column;gap:14px;max-height:92vh;overflow:auto}
@@ -243,6 +272,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <a href="#apropos" <?= t("À propos", "About") ?>>À propos</a>
       <a href="#competences" <?= t("Compétences", "Skills") ?>>Compétences</a>
       <a href="#ateliers" <?= t("Ateliers", "Workshops") ?>>Ateliers</a>
+      <a href="#projets" <?= t("Projets", "Projects") ?>>Projets</a>
       <a href="#contact">Contact</a>
       <button class="lang" id="langBtn" type="button" aria-label="Changer de langue / Change language">EN</button>
     </div>
@@ -334,6 +364,36 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           <h3 <?= t($a["title_fr"], $a["title_en"]) ?>><?= e($a["title_fr"]) ?></h3>
           <p <?= t($a["desc_fr"], $a["desc_en"]) ?>><?= e($a["desc_fr"]) ?></p>
 <span class="btn solid" <?= t("Voir les exercices", "See the exercises") ?>>Voir les exercices</span>
+        </article>
+<?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+
+  <section id="projets">
+    <div class="wrap">
+      <span class="tag" <?= t("Projets", "Projects") ?>>Projets</span>
+      <h2 <?= t("Mes projets", "My projects") ?>>Mes projets</h2>
+      <p class="sub" <?= t("Mes projets de formation, à ouvrir en PDF ou PowerPoint.", "My training projects, to open as PDF or PowerPoint.") ?>>Mes projets de formation, à ouvrir en PDF ou PowerPoint.</p>
+      <div class="grid">
+<?php foreach ($projets as $p): ?>
+        <article class="pj">
+          <div class="row">
+            <span class="badge"><?= e($p["type"]) ?></span>
+<?php if (empty($p["file"])): ?>
+            <span class="state" <?= t("Bientôt", "Soon") ?>>Bientôt</span>
+<?php endif; ?>
+          </div>
+          <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><?= e($p["title_fr"]) ?></h3>
+          <p <?= t($p["desc_fr"], $p["desc_en"]) ?>><?= e($p["desc_fr"]) ?></p>
+<?php if (!empty($p["file"])): ?>
+          <div class="btns">
+            <a class="btn solid" href="<?= e($p["file"]) ?>" target="_blank" rel="noopener" <?= t("Voir", "View") ?>>Voir</a>
+            <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
+          </div>
+<?php else: ?>
+          <span class="btn" aria-disabled="true" <?= t("Fichier bientôt", "File soon") ?>>Fichier bientôt</span>
+<?php endif; ?>
         </article>
 <?php endforeach; ?>
       </div>
