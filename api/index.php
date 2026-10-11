@@ -99,9 +99,9 @@ $facts = [
   ["Âge",       "Age",            "20 ans",                    "20 years old"],
   ["Ville",     "City",           "Tanger, Maroc",             "Tangier, Morocco"],
   ["École",     "School",         "OFPPT · ISMONTIC",          "OFPPT · ISMONTIC"],
-  ["Filière",   "Program",        "Développement Digital",     "Digital Development"],
+  ["Filière",   "Program",        "Développement Digital – Option Web Full Stack", "Digital Development – Web Full Stack option"],
   ["Statut",    "Status",         "Stagiaire",                 "Trainee"],
-  ["Spécialité","Focus",          "Développement Web",         "Web Development"],
+  ["Objectif",  "Goal",           "Full-Stack Web Developer",  "Full-Stack Web Developer"],
 ];
 ?>
 <!DOCTYPE html>
@@ -110,7 +110,7 @@ $facts = [
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portfolio <?= e($nom) ?></title>
-<meta name="description" content="Portfolio d'Amal Ben Haaman Lechhab, stagiaire OFPPT en Développement Digital à Tanger.">
+<meta name="description" content="Portfolio d'Amal Ben Haaman Lechhab, stagiaire OFPPT en Développement Digital, option Web Full Stack, à Tanger. Objectif : Full-Stack Web Developer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;700&display=swap">
 <style>
@@ -290,7 +290,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <div>
         <p class="eyebrow" <?= t("Stagiaire OFPPT · ISMONTIC Tanger", "OFPPT trainee · ISMONTIC Tangier") ?>>Stagiaire OFPPT · ISMONTIC Tanger</p>
         <h1><?= e($nom) ?></h1>
-        <p class="role" <?= t("Développement Web", "Web Development") ?>>Développement Web</p>
+        <p class="role" <?= t("Full-Stack Web Developer", "Full-Stack Web Developer") ?>>Full-Stack Web Developer</p>
         <p class="intro" <?= t(
           "Étudiante de 20 ans à Tanger. J'apprends à créer des sites web, de la page que l'on voit jusqu'à la base de données.",
           "20-year-old student in Tangier. I am learning to build websites, from the page you see to the database behind it."
@@ -311,9 +311,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <div class="about">
         <article class="story">
           <p <?= t(
-            "Je m'appelle Amal, j'ai 20 ans et j'habite à Tanger, au Maroc. Je suis stagiaire à l'OFPPT, à l'ISMONTIC, en filière Développement Digital.",
-            "My name is Amal, I am 20 and I live in Tangier, Morocco. I am a trainee at OFPPT, at ISMONTIC, in the Digital Development program."
-          ) ?>>Je m'appelle Amal, j'ai 20 ans et j'habite à Tanger, au Maroc. Je suis stagiaire à l'OFPPT, à l'ISMONTIC, en filière Développement Digital.</p>
+            "Je m'appelle Amal, j'ai 20 ans et j'habite à Tanger, au Maroc. Je suis stagiaire à l'OFPPT, à l'ISMONTIC, en filière Développement Digital, option Web Full Stack. Mon objectif : devenir Full-Stack Web Developer.",
+            "My name is Amal, I am 20 and I live in Tangier, Morocco. I am a trainee at OFPPT, at ISMONTIC, in the Digital Development program, Web Full Stack option. My goal: to become a Full-Stack Web Developer."
+          ) ?>>Je m'appelle Amal, j'ai 20 ans et j'habite à Tanger, au Maroc. Je suis stagiaire à l'OFPPT, à l'ISMONTIC, en filière Développement Digital, option Web Full Stack. Mon objectif : devenir Full-Stack Web Developer.</p>
           <p <?= t(
             "En formation, j'apprends le front-end, le back-end et les bases de données. Ce portfolio rassemble mes ateliers au fur et à mesure, avec le code sur GitHub.",
             "In training, I learn front-end, back-end and databases. This portfolio gathers my workshops as I complete them, with the code on GitHub."
