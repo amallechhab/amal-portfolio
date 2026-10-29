@@ -92,7 +92,7 @@ $projets = [
     "desc_fr"  => "Application PHP et MySQL pour inscrire des stagiaires, enregistrer leurs informations et gérer les photos avec Cloudinary.",
     "desc_en"  => "A PHP and MySQL app for trainee registration, saving trainee details and handling photos with Cloudinary.",
     "file"     => "",
-    "github"   => "https://github.com/amallechhab/amal-portfolio/tree/main/projects/atelier-stagiaires",
+    "overview" => "/projects/atelier-stagiaires/overview.html",
   ],];
 
 // ------------------------------------------------------------
@@ -388,20 +388,20 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
         <article class="pj">
           <div class="row">
             <span class="badge"><?= e($p["type"]) ?></span>
-<?php if (empty($p["file"]) && empty($p["github"])): ?>
+<?php if (empty($p["file"]) && empty($p["overview"])): ?>
             <span class="state" <?= t("Bientôt", "Soon") ?>>Bientôt</span>
 <?php endif; ?>
           </div>
           <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><?= e($p["title_fr"]) ?></h3>
           <p <?= t($p["desc_fr"], $p["desc_en"]) ?>><?= e($p["desc_fr"]) ?></p>
-<?php if (!empty($p["file"]) || !empty($p["github"])): ?>
+<?php if (!empty($p["file"]) || !empty($p["overview"])): ?>
           <div class="btns">
 <?php if (!empty($p["file"])): ?>
             <a class="btn solid" href="<?= e($p["file"]) ?>" target="_blank" rel="noopener" <?= t("Voir", "View") ?>>Voir</a>
             <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
 <?php endif; ?>
-<?php if (!empty($p["github"])): ?>
-            <a class="btn solid" href="<?= e($p["github"]) ?>" target="_blank" rel="noopener" <?= t("Code source", "Source code") ?>>Code source</a>
+<?php if (!empty($p["overview"])): ?>
+            <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener" <?= t("Découvrir le projet", "View project") ?>>Code source</a>
 <?php endif; ?>
           </div>
 <?php else: ?>
