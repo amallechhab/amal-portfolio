@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscription des stagiaires</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 480px; margin: 40px auto; padding: 0 16px; }
+    form { display: grid; gap: 12px; }
+    input, button { padding: 10px; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Inscription</h1>
+  <form id="form" enctype="multipart/form-data">
+    <input name="nom" placeholder="Nom" required>
+    <input name="prenom" placeholder="Prénom" required>
+    <input name="ville" placeholder="Ville" required>
+    <input name="photo" type="file" accept="image/*" required>
+    <button type="submit" id="btn">Inscrire</button>
+  </form>
+  <p id="msg"></p>
+  <p><a href="liste.html">Voir la liste des stagiaires</a></p>
+  <script>
+    const form = document.getElementById('form');
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('btn');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      msg.textContent = 'Envoi...';
+      try {
+        const res = await fetch('/api/inscrire.php', { method: 'POST', body: new FormData(form) });
+        const data = await res.json();
+        if (data.success) { msg.textContent = 'Stagiaire inscrit ✓'; form.reset(); }
+        else { msg.textContent = data.error || 'Erreur'; }
+      } catch { msg.textContent = 'Erreur réseau'; }
+      btn.disabled = false;
+    });
+  </script>
+</body>
+</html>
