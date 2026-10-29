@@ -19,7 +19,7 @@
     (async () => {
       const container = document.getElementById('liste');
       try {
-        const res = await fetch('/api/liste.php');
+        const res = await fetch('/liste-stagiaires.php');
         const data = await res.json();
         if (!Array.isArray(data)) throw new Error();
         container.replaceChildren(...data.map((s) => {

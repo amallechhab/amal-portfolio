@@ -16,7 +16,7 @@
     <input name="nom" placeholder="Nom" required>
     <input name="prenom" placeholder="Prénom" required>
     <input name="ville" placeholder="Ville" required>
-    <input name="photo" type="file" accept="image/*" required>
+    <input name="photo" type="file" accept=".jpg,.jpeg,.png,.webp" required>
     <button type="submit" id="btn">Inscrire</button>
   </form>
   <p id="msg"></p>
@@ -30,7 +30,7 @@
       btn.disabled = true;
       msg.textContent = 'Envoi...';
       try {
-        const res = await fetch('/api/inscrire.php', { method: 'POST', body: new FormData(form) });
+        const res = await fetch('/inscrire-stagiaire.php', { method: 'POST', body: new FormData(form) });
         const data = await res.json();
         if (data.success) { msg.textContent = 'Stagiaire inscrit ✓'; form.reset(); }
         else { msg.textContent = data.error || 'Erreur'; }
