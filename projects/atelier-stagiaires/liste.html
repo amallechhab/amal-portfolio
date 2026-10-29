@@ -1,42 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Liste des stagiaires</title>
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="Répertoire des stagiaires inscrits.">
+  <title>Répertoire des stagiaires</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700&display=swap">
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 16px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
-    .card { border: 1px solid #ddd; border-radius: 10px; padding: 12px; text-align: center; }
-    .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
+    :root{--bg:#f5f7fb;--fg:#13213b;--muted:#63718a;--blue:#1d4ed8;--soft:#e6edfc;--line:#dce3ef;--card:#fff;--shadow:0 18px 50px rgba(28,49,91,.09);--display:'DM Serif Display',Georgia,serif;--body:'Figtree',system-ui,sans-serif}
+    *{box-sizing:border-box}body{min-height:100vh;margin:0;background:radial-gradient(ellipse at 8% 8%,#e4ecff 0,transparent 34%),var(--bg);color:var(--fg);font:16px/1.6 var(--body)}a{color:inherit}.shell{width:min(100% - 36px,1080px);margin:auto}
+    header{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line)}.brand{font-weight:700;text-decoration:none;letter-spacing:-.03em}.brand span{color:var(--blue)}.back{color:var(--muted);font-size:14px;font-weight:700;text-decoration:none}.back:hover{color:var(--blue)}
+    main{padding:52px 0 76px}.eyebrow{margin:0 0 10px;color:var(--blue);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}h1{font:400 clamp(2.5rem,6vw,4rem)/1.08 var(--display);margin:0 0 8px;letter-spacing:-.025em}.lede{margin:0;color:var(--muted)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:34px 0 18px}.count{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;padding:0 12px;background:var(--soft);color:var(--blue);border-radius:999px;font-weight:700}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:18px}.card{overflow:hidden;background:var(--card);border:1px solid rgba(210,220,238,.85);border-radius:20px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}.card:hover{transform:translateY(-3px);box-shadow:0 22px 55px rgba(28,49,91,.14)}.card img{display:block;width:100%;height:210px;object-fit:cover;background:var(--soft)}.card-content{padding:17px 18px 19px}.card strong{display:block;font-size:1.05rem;letter-spacing:-.02em}.card p{display:flex;align-items:center;gap:7px;margin:5px 0 0;color:var(--muted);font-size:14px}.pin{width:7px;height:7px;background:#7191d3;border-radius:50%}
+    .message{margin:18px 0;padding:22px;border:1px dashed #bdcbe1;border-radius:18px;background:rgba(255,255,255,.62);color:var(--muted);text-align:center}.message.error{color:#ad2e2e}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 16px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--fg);font-weight:700;text-decoration:none}.btn.primary{border-color:var(--blue);background:var(--blue);color:#fff}.btn:hover{border-color:var(--blue);color:var(--blue)}.btn.primary:hover{background:#183eaa;color:#fff}
+    :focus-visible{outline:3px solid #7da4ff;outline-offset:3px}@media(max-width:600px){header{padding:17px 0}.back{font-size:13px}main{padding:34px 0 56px}.section-head{align-items:center;margin-top:26px}.card img{height:230px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <h1>Stagiaires</h1>
-  <p><a href="index.html">Nouvelle inscription</a></p>
-  <div class="grid" id="liste"></div>
+  <div class="shell">
+    <header>
+      <a class="brand" href="/#accueil">Amal<span>.</span></a>
+      <a class="back" href="index.html">← Nouvelle inscription</a>
+    </header>
+    <main>
+      <p class="eyebrow">Atelier PHP · MySQL</p>
+      <h1>Répertoire des stagiaires</h1>
+      <p class="lede">Retrouvez les stagiaires inscrits et leurs informations.</p>
+      <div class="section-head">
+        <h2 style="font-size:1rem;margin:0">Toutes les inscriptions</h2>
+        <span class="count" id="count" aria-label="Nombre de stagiaires">—</span>
+      </div>
+      <div class="grid" id="liste" aria-live="polite">
+        <p class="message" style="grid-column:1/-1">Chargement du répertoire…</p>
+      </div>
+      <div class="actions"><a class="btn primary" href="index.html">Ajouter un stagiaire</a><a class="btn" href="/projects/atelier-stagiaires/overview.html">À propos du projet</a></div>
+    </main>
+  </div>
   <script>
-    (async () => {
-      const container = document.getElementById('liste');
-      try {
-        const res = await fetch('/liste-stagiaires.php');
-        const data = await res.json();
-        if (!Array.isArray(data)) throw new Error();
-        container.replaceChildren(...data.map((s) => {
-          const card = document.createElement('div');
-          card.className = 'card';
-          const img = document.createElement('img');
-          img.src = s.photo;
-          img.alt = `${s.prenom} ${s.nom}`;
-          const name = document.createElement('strong');
-          name.textContent = `${s.prenom} ${s.nom}`;
-          const city = document.createElement('p');
-          city.textContent = s.ville;
-          card.append(img, name, city);
+    (async function(){
+      var container=document.getElementById('liste');
+      var count=document.getElementById('count');
+      try{
+        var response=await fetch('/liste-stagiaires.php');
+        var data=await response.json();
+        if(!response.ok || !Array.isArray(data)) throw new Error(data.error || 'Impossible de charger le répertoire.');
+        count.textContent=String(data.length);
+        if(!data.length){
+          container.innerHTML='<p class="message" style="grid-column:1/-1">Aucun stagiaire pour le moment. Vous pouvez ajouter la première inscription.</p>';
+          return;
+        }
+        container.replaceChildren.apply(container,data.map(function(stagiaire){
+          var card=document.createElement('article');
+          card.className='card';
+          var image=document.createElement('img');
+          image.src=stagiaire.photo;
+          image.alt='Photo de '+stagiaire.prenom+' '+stagiaire.nom;
+          image.loading='lazy';
+          var content=document.createElement('div');
+          content.className='card-content';
+          var name=document.createElement('strong');
+          name.textContent=stagiaire.prenom+' '+stagiaire.nom;
+          var city=document.createElement('p');
+          var pin=document.createElement('span');
+          pin.className='pin';
+          pin.setAttribute('aria-hidden','true');
+          city.append(pin,document.createTextNode(stagiaire.ville));
+          content.append(name,city);
+          card.append(image,content);
           return card;
         }));
-      } catch {
-        container.textContent = 'Impossible de charger la liste.';
+      }catch(error){
+        container.replaceChildren();
+        var message=document.createElement('p');
+        message.className='message error';
+        message.style.gridColumn='1/-1';
+        message.textContent=error.message || 'Impossible de charger le répertoire.';
+        container.appendChild(message);
+        count.textContent='!';
       }
     })();
   </script>
