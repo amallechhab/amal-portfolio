@@ -7,7 +7,7 @@ function getDatabase(): PDO
     $user = getenv('DB_USER');
     $password = getenv('DB_PASSWORD');
     if (!$host || !$name || !$user || !$password) { throw new RuntimeException('Missing database environment variables.'); }
-    $caPath = dirname(__DIR__) . '/certs/ca.pem';
+    $caPath = __DIR__ . '/../certs/ca.pem';
     $dsn = "mysql:host=$host;port=$port;dbname=$name;charset=utf8mb4";
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
