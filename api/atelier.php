@@ -27,18 +27,6 @@ $ateliers = [
     'pdf' => $root.'At3_git.pdf',
     'parts' => ['Partie 1 — Configuration et création du projet', 'Partie 2 — Premier commit', 'Partie 3 — Modifier un fichier', 'Partie 4 — Gérer plusieurs fichiers', 'Partie 5 — Bilan'],
   ],
-  4 => [
-    'title' => 'GitHub : travail collaboratif',
-    'desc' => 'Travail sur GitHub, gestion des versions et collaboration à partir d\'un dépôt distant.',
-    'pdf' => $root.'At4_github.pdf',
-    'parts' => [],
-  ],
-  5 => [
-    'title' => 'Entraînement Git type EFM',
-    'desc' => 'S\'exercer à utiliser Git dans le cadre d\'un sujet type EFM.',
-    'pdf' => $root.'At5_github.pdf',
-    'parts' => [],
-  ],
   6 => [
     'title' => 'Prérequis Sprint 3 : PHP, MySQL & Cloudinary',
     'desc' => 'Application d\'inscription des stagiaires avec formulaire HTML, backend PHP, base MySQL Aiven et photos Cloudinary.',
