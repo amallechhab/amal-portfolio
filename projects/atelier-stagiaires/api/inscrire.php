@@ -39,17 +39,41 @@ if (!in_array($mime, ['image/jpeg', 'image/png', 'image/webp'], true) || $_FILES
     exit;
 }
 
+$cloudinaryUrl = getenv('CLOUDINARY_URL');
+if (!is_string($cloudinaryUrl) || trim($cloudinaryUrl) === '') {
+    error_log('Inscription stagiaires: missing CLOUDINARY_URL');
+    http_response_code(503);
+    echo json_encode(['error' => 'Le stockage des photos n’est pas configuré sur le serveur.']);
+    exit;
+}
+
+// Vérifier la base avant l’upload, pour éviter de stocker des photos orphelines
+// lorsque la connexion MySQL ne fonctionne pas.
 try {
-    $cloudinary = new Cloudinary(getenv('CLOUDINARY_URL'));
+    $pdo = getDatabase();
+} catch (Throwable $e) {
+    error_log('Inscription stagiaires: MySQL connection failed (' . get_class($e) . ')');
+    http_response_code(503);
+    echo json_encode(['error' => 'Connexion MySQL indisponible. Vérifiez la configuration du serveur.']);
+    exit;
+}
+
+$step = 'upload';
+try {
+    $cloudinary = new Cloudinary($cloudinaryUrl);
     $result = $cloudinary->uploadApi()->upload($_FILES['photo']['tmp_name'], ['folder' => 'stagiaires']);
     $photoUrl = $result['secure_url'];
 
-    $pdo = getDatabase();
+    $step = 'insert';
     $stmt = $pdo->prepare('INSERT INTO stagiaires (nom, prenom, ville, photo) VALUES (?, ?, ?, ?)');
     $stmt->execute([$nom, $prenom, $ville, $photoUrl]);
 
     echo json_encode(['success' => true, 'photo' => $photoUrl]);
 } catch (Throwable $e) {
+    // No tokens, passwords or raw SQL exceptions are logged or returned.
+    error_log('Inscription stagiaires: ' . $step . ' failed (' . get_class($e) . ')');
     http_response_code(500);
-    echo json_encode(['error' => 'Erreur serveur']);
+    echo json_encode(['error' => $step === 'upload'
+        ? 'Impossible d’enregistrer la photo. Vérifiez Cloudinary.'
+        : 'Impossible d’enregistrer le stagiaire dans MySQL.']);
 }
