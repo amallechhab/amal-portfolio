@@ -23,7 +23,7 @@ Sur Vercel (Project > Settings > Environment Variables), renseigner les variable
 
 Ne jamais publier les valeurs, mots de passe ou jetons dans GitHub.
 
-Créer la table dans la base MySQL :
+Importer `init.sql` (à la racine du dépôt) dans la base MySQL. La définition de la table est :
 
 ```sql
 CREATE TABLE IF NOT EXISTS stagiaires (
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS stagiaires (
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-Installer les dépendances PHP avec `composer install` dans le dossier `projects/atelier-stagiaires/` lors d'une exécution locale. Le projet utilise l'autoload Composer dans ce dossier : s'assurer que `vendor/autoload.php` est présent dans l'environnement d'exécution Vercel. Le fichier `composer.json` existe également à la racine du dépôt, mais son installation ne crée pas automatiquement le dossier `projects/atelier-stagiaires/vendor`.
+Installer les dépendances PHP avec `composer install` dans le dossier `projects/atelier-stagiaires/` lors d'une exécution locale. Le projet utilise l'autoload Composer dans ce dossier : s'assurer que `vendor/autoload.php` est présent dans l'environnement d'exécution Vercel. L'endpoint charge les dépendances depuis `vendor/autoload.php` à la racine si ce fichier existe, sinon depuis `projects/atelier-stagiaires/vendor/autoload.php`. Vérifier que Composer installe les dépendances dans l'environnement de déploiement.
 
 La configuration PDO utilise le certificat `projects/atelier-stagiaires/certs/ca.pem`. Vérifier sa compatibilité avec le fournisseur MySQL. Les photos acceptées sont JPG, PNG ou WebP, avec une limite de 4 Mo.
 
