@@ -11,9 +11,9 @@ $root = 'https://portfoliofs202.vercel.app/docs/';
 $ateliers = [
   1 => [
     'title' => 'Méthodes classiques : PERT & Gantt',
-    'desc' => 'Planification du projet Quick Annonces : tâches, dépendances, diagramme PERT, chemin critique et Gantt.',
+    'desc' => 'Exercices individuels : ordonnancement, diagrammes PERT et Gantt et calcul du chemin critique. Le projet Quick Annonces en groupe est présenté dans la rubrique Projets.',
     'pdf' => $root.'At1_gestionprojet.pdf',
-    'parts' => ['Planification en groupe : Quick Annonces', 'Proposition : modèle en V, tableau des tâches, PERT, chemin critique et Gantt'],
+    'parts' => ['Exercice 1 — Gantt et chemin critique', 'Exercice 2 — Réseau PERT', 'Exercice 3 — Gantt et chemin critique'],
   ],
   2 => [
     'title' => 'Agile Scrum & Sprint',
@@ -132,7 +132,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 </div></header>
 <?php if (!$atelier): ?>
 <section class="hero"><div class="wrap"><h1>Atelier introuvable</h1><p>Ce numéro n'existe pas dans la liste des ateliers.</p></div></section>
-<main class="wrap"><a class="action" href="/#ateliers">Revenir aux 7 ateliers <span>↗</span></a></main>
+<main class="wrap"><a class="action" href="/#ateliers">Revenir aux ateliers <span>↗</span></a></main>
 <?php else: ?>
 <section class="hero"><div class="wrap">
 <div class="kicker"><span class="eyebrow">Atelier <?= $num ?></span><span class="pill">Module M02</span></div>
@@ -146,7 +146,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <p>La page d'inscription et le répertoire sont reliés au code PHP, à MySQL Aiven et à Cloudinary. Leur fonctionnement complet dépend des services et variables d'environnement du projet.</p>
 <?php elseif ($atelier['parts']): ?>
 <?php if ($num === 1): ?>
-<p>Une proposition complète de planification est disponible : modèle en V, dépendances, PERT, chemin critique et Gantt. Les durées proposées restent à valider avec le groupe.</p>
+<p>Les exercices PERT et Gantt de cet atelier sont individuels. Les réponses et les captures personnelles ne sont pas encore publiées.</p>
 <?php else: ?>
 <p>Parties décrites dans le support du formateur. Les solutions personnelles ne sont pas encore publiées ici.</p>
 <?php endif; ?>
@@ -168,7 +168,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <p>Support pédagogique publié par le formateur. Ce document est un énoncé, pas une correction personnelle.</p>
 <a class="action" target="_blank" rel="noopener noreferrer" href="<?= h($atelier['pdf']) ?>">Consulter l'énoncé (PDF) <span aria-hidden="true">↗</span></a>
 <?php if ($num === 1): ?>
-<a class="action" style="margin-top:12px" href="/projects/atelier1-quick-annonces/index.html">Voir la proposition de planification <span aria-hidden="true">↗</span></a>
+<a class="action" style="margin-top:12px" href="/ateliers/atelier1/index.html">Voir mes exercices individuels <span aria-hidden="true">↗</span></a>
 <?php endif; ?>
 <?php endif; ?>
 </section>
