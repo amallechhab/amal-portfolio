@@ -128,13 +128,6 @@ $projets = [
   ],
 ];
 
-// Compétences classées par domaine pour faciliter la lecture.
-$skillGroups = [
-  ["01", "Front-end", ["HTML", "CSS", "Bootstrap", "JavaScript"]],
-  ["02", "Back-end et données", ["PHP", "MySQL", "POO", "Python"]],
-  ["03", "Outils et versionnement", ["Git", "GitHub"]],
-];
-
 // ------------------------------------------------------------
 function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 // Texte bilingue : affiche le français, l'anglais est stocké pour le bouton EN/FR
@@ -149,7 +142,7 @@ $facts = [
   ["École",     "School",         "OFPPT · ISMONTIC",          "OFPPT · ISMONTIC"],
   ["Filière",   "Program",        "Développement Digital – Option Web Full Stack", "Digital Development – Web Full Stack option"],
   ["Statut",    "Status",         "Stagiaire",                 "Trainee"],
-  ["Portfolio", "Portfolio", "Ateliers et projets de formation", "Training workshops and projects"],
+  ["Objectif",  "Goal",           "Full-Stack Web Developer",  "Full-Stack Web Developer"],
 ];
 ?>
 <!DOCTYPE html>
@@ -158,7 +151,7 @@ $facts = [
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portfolio <?= e($nom) ?></title>
-<meta name="description" content="Portfolio personnel d'Amal Ben Haaman Lechhab, étudiante OFPPT à Tanger en Développement Digital, option Web Full Stack. Ateliers, projets, compétences et parcours.">
+<meta name="description" content="Portfolio d'Amal Ben Haaman Lechhab, stagiaire OFPPT en Développement Digital, option Web Full Stack, à Tanger. Objectif : Full-Stack Web Developer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;700&display=swap">
 <style>
@@ -310,21 +303,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   .tp:hover,.chip:hover{transform:translateY(-4px)}
 }
 </style>
-<link rel="stylesheet" href="/assets/amal-editorial.css">
 </head>
 <body>
 
 <nav class="nav" aria-label="Navigation principale">
   <div class="wrap">
-    <a class="brand" href="#accueil" aria-label="Amal — accueil"><span class="brand-mark">A.</span><span>Amal / Portfolio</span></a>
-    <button type="button" class="menu-toggle" id="menuToggle" aria-controls="navLinks" aria-expanded="false" aria-label="Ouvrir le menu">☰ Menu</button>
-    <div class="links" id="navLinks">
-      <a href="#accueil" <?= t("Accueil", "Home") ?>>Accueil</a>
+    <a class="brand" href="#accueil">Amal</a>
+    <div class="links">
       <a href="#apropos" <?= t("À propos", "About") ?>>À propos</a>
       <a href="#competences" <?= t("Compétences", "Skills") ?>>Compétences</a>
       <a href="#ateliers" <?= t("Ateliers", "Workshops") ?>>Ateliers</a>
       <a href="#projets" <?= t("Projets", "Projects") ?>>Projets</a>
-      <a href="#formation" <?= t("Formation", "Education") ?>>Formation</a>
       <a href="#contact">Contact</a>
       <button class="lang" id="langBtn" type="button" aria-label="Changer de langue / Change language">EN</button>
     </div>
@@ -332,59 +321,27 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 </nav>
 
 <main>
-  <section class="hero-banner" id="accueil">
-    <div class="wrap">
-      <header class="hero hero-new">
-        <div class="hero-copy">
-          <p class="eyebrow" <?= t("Mon portfolio de formation · OFPPT Tanger", "My training portfolio · OFPPT Tangier") ?>>Mon portfolio de formation · OFPPT Tanger</p>
-          <h1><?= e($nom) ?></h1>
-          <p class="hero-role" <?= t("Développement Digital · Option Web Full Stack", "Digital Development · Web Full Stack track") ?>>Développement Digital · Option Web Full Stack</p>
-          <p class="intro" <?= t(
-            "Bienvenue dans mon espace de formation. Je présente ici mon parcours, les outils que j'apprends et mes ateliers pratiques, étape par étape.",
-            "Welcome to my training portfolio. Here I share my learning journey, the tools I study and my practical workshops, step by step."
-          ) ?>>Bienvenue dans mon espace de formation. Je présente ici mon parcours, les outils que j'apprends et mes ateliers pratiques, étape par étape.</p>
-          <div class="actions">
-            <a class="btn solid" href="#ateliers" <?= t("Découvrir mes ateliers", "Explore my workshops") ?>>Découvrir mes ateliers</a>
-            <a class="btn" href="<?= e($github) ?>" target="_blank" rel="noopener noreferrer"><?= $githubIcon ?>GitHub</a>
-          </div>
+  <div class="wrap">
+    <header class="hero" id="accueil">
+      <div class="photo-wrap">
+        <div class="photo" id="photoBox">
+          <img src="<?= e($photo) ?>" alt="<?= e($nom) ?>" id="photoImg">
         </div>
-        <aside class="editor-card" aria-label="Carte de présentation d'Amal">
-          <div class="editor-top">
-            <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-            <span>amal / parcours.php</span>
-          </div>
-          <div class="editor-body">
-            <div class="editor-profile">
-              <div class="photo-wrap">
-                <div class="photo" id="photoBox">
-                  <img src="<?= e($photo) ?>" alt="<?= e($nom) ?>" id="photoImg">
-                </div>
-              </div>
-              <div>
-                <strong>Amal Lechhab</strong>
-                <small>OFPPT · ISMONTIC · Tanger</small>
-              </div>
-            </div>
-            <div class="code-note" aria-hidden="true">
-              <span class="cm">// mon parcours</span><br>
-              <span class="kw">$formation</span> = <span class="val">'Web Full Stack'</span>;<br>
-              <span class="kw">$outils</span> = ['PHP', 'Git', 'JS'];<br>
-              <span class="kw">$objectif</span> = <span class="val">'apprendre'</span>;
-            </div>
-            <div class="editor-footer" aria-label="Technologies étudiées">
-              <span>HTML / CSS</span><span>PHP / MySQL</span><span>GitHub</span>
-            </div>
-          </div>
-        </aside>
-      </header>
-    </div>
-  </section>
-  <div class="portfolio-metrics">
-    <div class="wrap">
-      <div class="metric"><strong><?= str_pad((string)count($ateliers), 2, '0', STR_PAD_LEFT) ?></strong><span <?= t("Ateliers répertoriés", "Listed workshops") ?>>Ateliers répertoriés</span></div>
-      <div class="metric"><strong><?= count($competences) ?></strong><span <?= t("Technologies et outils étudiés", "Technologies and tools studied") ?>>Technologies et outils étudiés</span></div>
-      <div class="metric"><strong><?= count($projets) ?></strong><span <?= t("Projets à documenter", "Projects to document") ?>>Projets à documenter</span></div>
-    </div>
+      </div>
+      <div>
+        <p class="eyebrow" <?= t("Stagiaire OFPPT · ISMONTIC Tanger", "OFPPT trainee · ISMONTIC Tangier") ?>>Stagiaire OFPPT · ISMONTIC Tanger</p>
+        <h1><?= e($nom) ?></h1>
+        <p class="role" <?= t("Full-Stack Web Developer", "Full-Stack Web Developer") ?>>Full-Stack Web Developer</p>
+        <p class="intro" <?= t(
+          "Étudiante de 20 ans à Tanger. J'apprends à créer des sites web, de la page que l'on voit jusqu'à la base de données.",
+          "20-year-old student in Tangier. I am learning to build websites, from the page you see to the database behind it."
+        ) ?>>Étudiante de 20 ans à Tanger. J'apprends à créer des sites web, de la page que l'on voit jusqu'à la base de données.</p>
+        <div class="actions">
+          <a class="btn solid" href="#ateliers" <?= t("Voir mes ateliers", "See my workshops") ?>>Voir mes ateliers</a>
+          <a class="btn" href="<?= e($github) ?>" target="_blank" rel="noopener"><?= $githubIcon ?>GitHub</a>
+        </div>
+      </div>
+    </header>
   </div>
 
   <section id="apropos">
@@ -395,9 +352,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <div class="about">
         <article class="story">
           <p <?= t(
-            "Je m'appelle Amal, j'ai 20 ans et j'habite à Tanger. Je suis stagiaire à l'OFPPT, à l'ISMONTIC, en Développement Digital, option Web Full Stack. Ce site présente les travaux que je réalise pendant ma formation.",
-            "My name is Amal, I am 20 and I live in Tangier. I study Digital Development, Web Full Stack track, at OFPPT ISMONTIC. This site presents the work I do during my training."
-          ) ?>>Je m'appelle Amal, j'ai 20 ans et j'habite à Tanger. Je suis stagiaire à l'OFPPT, à l'ISMONTIC, en Développement Digital, option Web Full Stack. Ce site présente les travaux que je réalise pendant ma formation.</p>
+            "Je m'appelle Amal, j'ai 20 ans et j'habite à Tanger, au Maroc. Je suis stagiaire à l'OFPPT, à l'ISMONTIC, en filière Développement Digital, option Web Full Stack. Mon objectif : devenir Full-Stack Web Developer.",
+            "My name is Amal, I am 20 and I live in Tangier, Morocco. I am a trainee at OFPPT, at ISMONTIC, in the Digital Development program, Web Full Stack option. My goal: to become a Full-Stack Web Developer."
+          ) ?>>Je m'appelle Amal, j'ai 20 ans et j'habite à Tanger, au Maroc. Je suis stagiaire à l'OFPPT, à l'ISMONTIC, en filière Développement Digital, option Web Full Stack. Mon objectif : devenir Full-Stack Web Developer.</p>
           <p <?= t(
             "En formation, j'apprends le front-end, le back-end et les bases de données. Ce portfolio rassemble mes ateliers au fur et à mesure, avec le code sur GitHub.",
             "In training, I learn front-end, back-end and databases. This portfolio gathers my workshops as I complete them, with the code on GitHub."
@@ -415,22 +372,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     </div>
   </section>
 
-  <section id="competences" class="section-soft">
+  <section id="competences">
     <div class="wrap">
       <span class="tag" <?= t("Compétences", "Skills") ?>>Compétences</span>
       <h2 <?= t("Ce que j'apprends", "What I am learning") ?>>Ce que j'apprends</h2>
       <p class="sub" <?= t("Les langages et outils que j'utilise dans ma formation.", "The languages and tools I use in my training.") ?>>Les langages et outils que j'utilise dans ma formation.</p>
-      <div class="skill-layout">
-<?php foreach ($skillGroups as [$number, $groupName, $tools]): ?>
-        <article class="skill-card">
-          <span class="skill-number"><?= e($number) ?> / COMPÉTENCES</span>
-          <h3><?= e($groupName) ?></h3>
-          <div class="chips">
-<?php foreach ($tools as $tool): ?>
-            <span class="chip"><?= e($tool) ?></span>
-<?php endforeach; ?>
-          </div>
-        </article>
+      <div class="chips">
+<?php foreach ($competences as $c): ?>
+        <span class="chip"><?= e($c) ?></span>
 <?php endforeach; ?>
       </div>
     </div>
@@ -440,10 +389,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     <div class="wrap">
       <span class="tag" <?= t("Ateliers", "Workshops") ?>>Ateliers</span>
       <h2 <?= t("Mes ateliers", "My workshops") ?>>Mes ateliers</h2>
-      <div class="atelier-lead">
-        <p class="sub" <?= t("Des travaux pratiques au fil de ma formation. Ouvre une carte pour consulter les exercices et les liens disponibles.", "Practical assignments throughout my training. Open a card to see exercises and available links.") ?>>Des travaux pratiques au fil de ma formation. Ouvre une carte pour consulter les exercices et les liens disponibles.</p>
-        <span class="mini-pill" <?= t("Mon carnet de TP", "My workshop journal") ?>>Mon carnet de TP</span>
-      </div>
+      <p class="sub" <?= t("Clique sur un atelier pour voir ses exercices et leurs solutions.", "Click a workshop to see its exercises and their solutions.") ?>>Clique sur un atelier pour voir ses exercices et leurs solutions.</p>
       <div class="grid">
 <?php foreach ($ateliers as $a): ?>
         <article class="tp has-gallery" tabindex="0" role="button" aria-haspopup="dialog"
@@ -500,37 +446,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     </div>
   </section>
 
-  <section id="formation">
-    <div class="wrap">
-      <span class="tag" <?= t("Formation", "Education") ?>>Formation</span>
-      <h2 <?= t("Mon parcours", "My journey") ?>>Mon parcours</h2>
-      <p class="sub" <?= t("Les étapes de ma formation, du réseau au développement digital.", "My learning journey, from computer networking to digital development.") ?>>Les étapes de ma formation, du réseau au développement digital.</p>
-      <div class="timeline">
-        <article class="timeline-item">
-          <div class="timeline-mark" aria-hidden="true">01</div>
-          <span class="timeline-badge">2024 – 2025</span>
-          <h3 <?= t("Baccalauréat professionnel", "Vocational baccalaureate") ?>>Baccalauréat professionnel</h3>
-          <p <?= t("Maintenance Informatique et Réseaux", "Computer Maintenance and Networking") ?>>Maintenance Informatique et Réseaux</p>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-mark" aria-hidden="true">02</div>
-          <span class="timeline-badge" <?= t("En cours", "In progress") ?>>En cours</span>
-          <h3>OFPPT · ISMONTIC Tanger</h3>
-          <p <?= t("Développement Digital — Option Web Full Stack", "Digital Development — Web Full Stack track") ?>>Développement Digital — Option Web Full Stack</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
   <section id="contact">
     <div class="wrap">
       <div class="contact">
-        <div>
-          <span class="tag" style="color:#9fc9ff" <?= t("Restons connectés", "Stay connected") ?>>Restons connectés</span>
-          <h2 <?= t("Mon parcours continue sur GitHub", "My learning journey continues on GitHub") ?>>Mon parcours continue sur GitHub</h2>
-          <p <?= t("Consulte les dépôts, le code et les ateliers publiés dans le cadre de ma formation.", "Explore my repositories, code and workshops from my training.") ?>>Consulte les dépôts, le code et les ateliers publiés dans le cadre de ma formation.</p>
-        </div>
-        <a class="btn" href="<?= e($github) ?>" target="_blank" rel="noopener noreferrer"><?= $githubIcon ?>github.com/amallechhab</a>
+        <h2 <?= t("Mon code est sur GitHub", "My code is on GitHub") ?>>Mon code est sur GitHub</h2>
+        <p <?= t("Retrouve tous mes projets et ateliers sur mon profil.", "Find all my projects and workshops on my profile.") ?>>Retrouve tous mes projets et ateliers sur mon profil.</p>
+        <a class="btn" href="<?= e($github) ?>" target="_blank" rel="noopener"><?= $githubIcon ?>github.com/amallechhab</a>
       </div>
     </div>
   </section>
@@ -583,22 +504,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   });
   try{var l=localStorage.getItem('lang'); if(l==='en'||l==='fr'){lang=l;}}catch(e){}
   apply();
-
-  // Navigation compacte sur mobile ; le contenu reste accessible sans JavaScript.
-  var menuToggle=document.getElementById('menuToggle');
-  var navLinks=document.getElementById('navLinks');
-  if(menuToggle&&navLinks){
-    menuToggle.addEventListener('click',function(){
-      var opened=navLinks.classList.toggle('is-open');
-      menuToggle.setAttribute('aria-expanded',opened?'true':'false');
-    });
-    navLinks.querySelectorAll('a').forEach(function(link){
-      link.addEventListener('click',function(){
-        navLinks.classList.remove('is-open');
-        menuToggle.setAttribute('aria-expanded','false');
-      });
-    });
-  }
 
   // Fenêtre des exercices : clic sur un atelier -> Ex 1, Ex 2, Ex 3, Ex Groupe
   var dlgEl=document.getElementById('gal');
