@@ -341,8 +341,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 }
 </style>
 <link rel="stylesheet" href="/assets/amal-ateliers.css">
+<link rel="stylesheet" href="/assets/portfolio.css">
 </head>
-<body>
+<body class="portfolio-home">
 
 <nav class="nav" aria-label="Navigation principale">
   <div class="wrap">

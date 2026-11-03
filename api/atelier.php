@@ -136,8 +136,9 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
  header .wrap{flex-wrap:wrap}
 }
 </style>
+<link rel="stylesheet" href="/assets/portfolio.css">
 </head>
-<body>
+<body class="atelier-detail">
 <header><div class="wrap">
 <a class="logo" href="/">Amal</a>
 <a class="back" href="/#ateliers">← Retour aux ateliers</a>

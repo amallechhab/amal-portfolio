@@ -1,0 +1,157 @@
+/* Shared visual system for the portfolio and its workshop application. */
+:root {
+  --bg:#f5f7fb; --fg:#13213b; --muted:#56637a;
+  --accent:#1d4ed8; --accent-fg:#fff; --card:#fff; --line:#d5deec;
+  --lilac:#e7edfb; --peach:#e7f0f1; --soft:var(--lilac);
+  --blue:var(--accent); --blue-dark:#183eaa;
+  --green:#176c48; --red:#ad2e2e;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --display:var(--font-display); --body:var(--font-body);
+  --radius:20px; --button-radius:12px;
+  --shadow:0 10px 32px rgb(19 33 59 / .045);
+  color-scheme:light;
+}
+@media(prefers-color-scheme:dark) {
+  :root {
+    --bg:#0e1626; --fg:#e8eefb; --muted:#acbdd5;
+    --accent:#8bb8ff; --accent-fg:#0a1426; --card:#15203a;
+    --line:#304260; --lilac:#1c2d52; --peach:#173a42;
+    --blue-dark:#adcfff; --green:#86dcb3; --red:#ffaaaa;
+    --shadow:0 10px 32px rgb(0 0 0 / .08);
+    color-scheme:dark;
+  }
+}
+html {scroll-padding-top:96px}
+body {background:var(--bg); color:var(--fg); font-family:var(--font-body); line-height:1.65}
+.wrap,.shell {width:min(1080px,calc(100% - 48px)); max-width:1080px; margin-inline:auto; padding-inline:0}
+h1,h2 {font-family:var(--font-display); font-weight:400; text-wrap:balance}
+h1 {letter-spacing:-.035em}
+h2 {letter-spacing:-.02em}
+a,button,input {touch-action:manipulation}
+a:focus-visible,button:focus-visible,input:focus-visible {outline:3px solid var(--accent); outline-offset:4px}
+.brand,.logo {font:400 1.5rem var(--font-display); letter-spacing:-.025em; color:var(--accent); text-decoration:none}
+.brand span {color:inherit}
+.eyebrow,.tag {font-size:12px; font-weight:700; letter-spacing:.14em; color:var(--accent)}
+.btn,.action,.submit,#ateliers .at-detail {border-radius:var(--button-radius); min-height:44px; font-size:14px; font-weight:700; border-width:1px}
+.btn,.action {padding:11px 18px}
+.btn.solid,.btn.primary,.submit {background:var(--accent); color:var(--accent-fg)}
+.btn:hover,.action:hover {background:var(--accent); color:var(--accent-fg)}
+.back {color:var(--muted); font-size:14px; font-weight:600}
+.back:hover {color:var(--accent)}
+
+/* Home: one grid, one spacing rhythm, quiet cards. */
+.portfolio-home section,#ateliers {padding-block:64px}
+.portfolio-home .nav {border-bottom:1px solid var(--line)}
+.portfolio-home .nav .wrap {min-height:72px; gap:24px}
+.portfolio-home .links a {font-weight:600; padding:9px 12px; border-radius:10px}
+.portfolio-home .lang {border-width:1px; border-radius:10px; min-height:40px}
+.portfolio-home .hero {grid-template-columns:260px minmax(0,1fr); gap:64px; padding-block:80px 72px; min-height:470px}
+.portfolio-home .photo-wrap {width:240px; height:240px; margin-left:10px}
+.portfolio-home h1 {font-size:clamp(2.4rem,4.5vw,3.65rem); max-width:19ch; line-height:1.08}
+.portfolio-home .hero .eyebrow {margin-bottom:18px}
+.portfolio-home .role {font-size:14px; padding:6px 13px; margin-bottom:18px}
+.portfolio-home .intro {font-size:16px; max-width:56ch; margin-bottom:26px}
+.portfolio-home h2,#ateliers h2 {font-size:clamp(1.9rem,3.5vw,2.5rem); line-height:1.18; margin-bottom:12px}
+.portfolio-home .sub,#ateliers .sub {font-size:16px; line-height:1.65; max-width:67ch; margin-bottom:32px}
+.portfolio-home .tag {margin-bottom:12px}
+.portfolio-home #apropos,.portfolio-home #ateliers,.portfolio-home #contact {border-top:1px solid var(--line)}
+.portfolio-home .about {gap:24px; grid-template-columns:1.05fr 1fr; align-items:stretch}
+.portfolio-home .story,.portfolio-home .fact,.portfolio-home .pj,#ateliers .at-card {
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow);
+}
+.portfolio-home .story {padding:30px}
+.portfolio-home .facts {gap:12px}
+.portfolio-home .fact {border-radius:14px; padding:16px 18px; box-shadow:none}
+.portfolio-home .fact span {font-size:11px; margin-bottom:5px}
+.portfolio-home .fact strong {font-size:15px; line-height:1.45}
+.portfolio-home .chips {gap:10px}
+.portfolio-home .chip {background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px 18px; font-size:14px; font-weight:600}
+.portfolio-home .chip:hover {border-color:var(--accent)}
+#ateliers .wrap {max-width:1080px}
+#ateliers .at-grid {gap:20px}
+#ateliers .at-card {padding:24px; min-height:290px}
+#ateliers .at-card h3 {font-size:18px; line-height:1.4; margin-bottom:12px}
+#ateliers .at-number {background:var(--lilac); color:var(--accent); border-radius:9px; padding:9px 11px}
+#ateliers .at-module {border:none; padding:0; background:transparent; letter-spacing:.08em}
+#ateliers .at-top {margin-bottom:22px}
+#ateliers .at-bottom {gap:12px; margin-top:24px; padding-top:18px}
+#ateliers .at-detail {padding:8px 13px}
+#ateliers .at-card:hover {box-shadow:0 14px 36px rgb(19 33 59 / .08); transform:translateY(-3px)}
+.portfolio-home .grid {gap:20px}
+.portfolio-home .pj {padding:26px; min-height:230px}
+.portfolio-home .pj .badge {border-radius:8px; background:var(--lilac); color:var(--accent); padding:5px 10px; font-size:11px}
+.portfolio-home .pj .state {border:1px solid var(--line); font-weight:500}
+.portfolio-home .pj .btn[aria-disabled] {border:0; padding:0; justify-content:flex-start; min-height:30px; font-size:13px; opacity:1; color:var(--muted)}
+.portfolio-home .contact {border-radius:24px; padding:48px 28px}
+.portfolio-home footer {padding-block:0 32px}
+.portfolio-home footer .wrap {border-top:1px solid var(--line); padding-top:24px; font-size:13px}
+
+/* Workshop detail and the working app share home typography and controls. */
+.atelier-detail header {border-bottom:1px solid var(--line)}
+.atelier-detail header .wrap {min-height:72px}
+.atelier-detail .hero {padding:64px 0 36px}
+.atelier-detail h1 {max-width:25ch}
+.atelier-detail .box {border:1px solid var(--line); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow)}
+.atelier-detail footer {border-top:1px solid var(--line)}
+.registration-page .topbar,.directory-page header {min-height:72px; padding-block:18px; border-bottom:1px solid var(--line)}
+.registration-page main {padding-top:64px; gap:56px}
+.registration-page .card,.directory-page .card {border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow)}
+.registration-page .intro p {color:var(--muted)}
+.registration-page .feature {background:var(--card); color:var(--muted)}
+.registration-page .field label {color:var(--fg)}
+.registration-page .field input,.registration-page .field input[type=file] {background:var(--bg); color:var(--fg)}
+.registration-page .card-head h2 {font:400 1.7rem var(--font-display); letter-spacing:-.02em}
+.registration-page .submit {box-shadow:none}
+.registration-page .submit:hover {background:var(--blue-dark); color:var(--accent-fg)}
+.registration-page .dot {background:var(--accent); box-shadow:0 0 0 4px var(--lilac)}
+.directory-page .message {background:var(--card); border-color:var(--line)}
+.directory-page .message.error {color:var(--red)}
+.directory-page .btn {background:var(--card); color:var(--accent); border-color:var(--accent)}
+.directory-page .btn.primary {background:var(--accent); color:var(--accent-fg)}
+.project-overview .top {min-height:72px; padding-block:18px}
+.project-overview main {padding-top:64px}
+.project-overview h1 {font-size:clamp(2.5rem,5vw,3.65rem)}
+.project-overview .panel,.project-overview .feature,.project-overview .setup {border-radius:var(--radius)}
+.project-overview .lang {border-width:1px; border-radius:10px; min-height:40px}
+
+@media(max-width:900px) {
+  .portfolio-home .hero {grid-template-columns:210px minmax(0,1fr); gap:40px}
+  .portfolio-home .photo-wrap {width:195px; height:195px}
+  .portfolio-home .nav .wrap {gap:12px}
+  .portfolio-home .links a {padding:8px}
+  .registration-page main {gap:32px}
+}
+@media(max-width:760px) {
+  .wrap,.shell {width:calc(100% - 40px)}
+  .portfolio-home section,#ateliers {padding-block:44px}
+  .portfolio-home .nav .wrap {align-items:flex-start; flex-direction:column; gap:10px; padding-block:12px}
+  .portfolio-home .brand {display:block}
+  .portfolio-home .links {width:100%; flex-wrap:nowrap; gap:4px; overflow-x:auto; padding-bottom:4px}
+  .portfolio-home .links a {white-space:nowrap; font-size:13px; padding:7px 9px}
+  .portfolio-home .lang {margin-left:auto; flex-shrink:0; min-height:36px; padding:4px 10px}
+  html {scroll-padding-top:124px}
+  .portfolio-home .hero {grid-template-columns:1fr; gap:40px; padding-block:52px; min-height:auto}
+  .portfolio-home .photo-wrap {width:185px; height:185px; margin:0}
+  .portfolio-home h1 {max-width:20ch; margin-inline:auto}
+  .portfolio-home .about {grid-template-columns:1fr}
+  .portfolio-home .story {padding:24px}
+  .portfolio-home .contact {padding:36px 22px}
+  .registration-page main {padding-top:36px; grid-template-columns:1fr}
+  .registration-page .intro {max-width:none; text-align:left}
+  .registration-page .card {max-width:none}
+  .atelier-detail .hero {padding-top:40px}
+  .project-overview main {padding-top:40px}
+}
+@media(max-width:420px) {
+  .portfolio-home .facts {grid-template-columns:1fr 1fr}
+  .portfolio-home .fact {padding:13px; border-radius:12px}
+  .portfolio-home .fact strong {font-size:13px}
+  .portfolio-home .actions .btn {flex:1; padding-inline:12px}
+  .registration-page .topbar,.directory-page header {gap:16px}
+  .registration-page .back,.directory-page .back {font-size:12px; text-align:right}
+}
+@media(prefers-reduced-motion:reduce) {
+  html {scroll-behavior:auto}
+  *,*::before,*::after {transition:none!important; animation:none!important}
+}
