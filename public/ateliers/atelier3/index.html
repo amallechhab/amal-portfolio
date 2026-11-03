@@ -1,9 +1,4 @@
-<!doctype html>
-<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Atelier 3 M02 — Les bases de Git. Cinq parties : installation, commits, modifications, plusieurs fichiers et bilan ; travail individuel à documenter.">
-<title>Atelier 3 — Les bases de Git | Amal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700;800&display=swap">
-<style>
+<!doctype html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Dépôt local, fichiers et historique des commits."><title>Atelier 3 — Les bases de Git | Amal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700;800&display=swap"><style>
 :root{--bg:#f5f7fb;--fg:#13213b;--muted:#56637a;--accent:#1d4ed8;--accent-fg:#fff;--lilac:#dce6fa;--peach:#e0eef0;--card:#fff;--line:#d5deec;color-scheme:light}
 @media(prefers-color-scheme:dark){:root{--bg:#0e1626;--fg:#e8eefb;--muted:#9db0cc;--accent:#6ea8fe;--accent-fg:#0a1426;--lilac:#1c2d52;--peach:#173a42;--card:#15203a;--line:#2a3b5e;color-scheme:dark}}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 Figtree,system-ui,sans-serif}
@@ -29,85 +24,11 @@ footer{padding:20px 0 40px;border-top:2px dashed var(--line);font-size:13px;colo
 @media(max-width:680px){.grid{grid-template-columns:1fr}.hero{padding-top:36px}.box,.ex-body{padding:19px}.ex-header{padding:20px}}
 @media print{header,.actions{display:none}body{background:white;color:#13213b}.ex,.box{break-inside:avoid}.placeholder{border-style:solid}}
 
-.questions{display:grid;gap:12px;margin:22px 0}.question{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px}.question .num{background:var(--accent);color:var(--accent-fg);min-width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:13px}.question strong{font-size:14px;display:block}.question p{font-size:13px;color:var(--muted);margin:7px 0 0}.groupnote{padding:18px;background:color-mix(in srgb,var(--peach) 55%,var(--card));border:1px solid var(--line);border-radius:17px}.section-anchor{scroll-margin-top:18px}
-
-.part{margin-top:20px;background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden}
-.part-head{padding:21px 24px;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-bottom:1px solid var(--line)}
-.part-head .pill{margin-bottom:9px}.part-head h3{font-size:20px;margin-bottom:2px}.part-head p{color:var(--muted);font-size:13px;margin:0}
-.part-body{padding:24px}.part-body h4{margin:18px 0 9px;font-size:14px;color:var(--fg)}.part-body h4:first-child{margin-top:0}
-.cmd{background:#172540;color:#eaf0ff;border-radius:16px;padding:18px 20px;overflow-x:auto;font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;margin:8px 0 15px;white-space:pre}
-.qs{display:grid;gap:9px;list-style:none;margin:0;padding:0}
-.qs li{background:color-mix(in srgb,var(--lilac) 32%,var(--card));border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:14px}
-.qs small{display:block;color:var(--muted);font-size:12px;margin-top:3px}.badge-time{border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--muted)}
-.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:19px}.to-do{border-radius:14px;background:color-mix(in srgb,var(--peach) 53%,var(--card));border:1px solid var(--line);padding:13px 16px;font-size:13px;color:var(--muted)}
-.result{margin-top:13px;border:2px dashed var(--line);border-radius:14px;padding:23px 18px;text-align:center;color:var(--muted);font-size:13px}
-.result strong{display:block;color:var(--fg);margin-bottom:4px}
-.cheat{width:100%;border-collapse:collapse;margin:12px 0}.cheat th,.cheat td{text-align:left;border:1px solid var(--line);padding:9px 12px;font-size:13px}.cheat th{background:var(--lilac)}.cheat td:first-child{font-family:ui-monospace,Consolas,monospace;font-weight:700}
-.steps li{margin:3px 0}.mini-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.mini-links a{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
-@media(max-width:780px){.two-col{grid-template-columns:1fr}.part-body{padding:18px}.part-head{padding:19px}.cmd{font-size:12px}}
-@media print{.part{break-inside:avoid;page-break-inside:avoid}.cmd{color:#13213b;background:#edf2ff;white-space:pre-wrap}.result{display:none}}
-</style></head><body>
-<header><nav class="wrap"><a class="logo" href="/">Amal</a><a class="back" href="/#ateliers">← Retour aux ateliers</a></nav></header>
-<main class="wrap"><section class="hero"><span class="eyebrow">Portfolio / M02 / Atelier 03 · Travail individuel</span>
-<h1>Les bases de Git</h1>
-<p class="lead">Découvrir Git en créant un dépôt local, en enregistrant plusieurs versions de fichiers et en consultant l'historique du projet.</p>
-<span class="status">Travail individuel · Captures et réponses à compléter</span>
-<div class="actions"><a class="btn solid" href="https://portfoliofs202.vercel.app/docs/At3_git.pdf" target="_blank" rel="noopener noreferrer">Consulter l'énoncé du formateur (PDF)</a><a class="btn" href="#partie-1">Voir les exercices</a></div></section>
-<div class="grid"><section class="box"><span class="pill">Objectif pédagogique</span><h2>Ce que je dois réaliser</h2><p>Créer le dossier <code>atelier-git</code>, suivre les fichiers avec Git, distinguer la zone de travail du staging, enregistrer au moins trois commits et afficher l'historique.</p><p><strong>Durée prévue :</strong> 1 h 30 · Niveau débutant.</p></section>
-<section class="box tint"><span class="pill">Livrables attendus</span><h2>Résultats à fournir</h2><ol class="steps"><li>Un dossier <code>atelier-git</code> avec <code>index.html</code>, <code>style.css</code> et <code>README.md</code>.</li><li>Un dépôt Git local initialisé.</li><li>Au moins 3 commits avec messages explicites.</li><li>Une capture de <code>git log --oneline</code>.</li></ol></section></div>
-<section class="box"><span class="pill">Les cinq parties</span><h2>Déroulement de l'Atelier 3</h2><p>Les étapes, questions et commandes ci-dessous proviennent de l'énoncé. Les captures présentées dans les portfolios d'autres stagiaires sont des exemples de mise en page, pas mes résultats.</p>
-<div class="mini-links"><a href="#partie-1">Partie 1</a><a href="#partie-2">Partie 2</a><a href="#partie-3">Partie 3</a><a href="#partie-4">Partie 4</a><a href="#partie-5">Partie 5</a></div></section>
-<section class="part" id="partie-1">
-<div class="part-head"><span class="pill">PARTIE 1</span> <span class="badge-time">15 min</span><h3>Configuration et création du projet</h3><p>Exercice individuel du support de formation.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Vérifier l&#39;installation de Git.</li><li>Configurer l&#39;identité Git (nom et e-mail).</li><li>Créer le dossier atelier-git.</li><li>Initialiser un dépôt Git dans ce dossier.</li><li>Afficher l&#39;état du dépôt.</li></ol></div><div><h4>Commandes à utiliser</h4><pre class="cmd"><code>git --version
-git config --global user.name &quot;Votre Nom&quot;
-git config --global user.email &quot;votre@email.com&quot;
-mkdir atelier-git
-cd atelier-git
-git init
-git status</code></pre></div></div>
-
-<h4>Questions du formateur</h4><ul class="qs"><li>À quoi sert la commande git init ?<small>Ma réponse : à rédiger.</small></li><li>Quel est le rôle des commandes git config ?<small>Ma réponse : à rédiger.</small></li><li>Que signifie l’expression working directory ?<small>Ma réponse : à rédiger.</small></li></ul>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Capture du terminal : version de Git, initialisation et état du dépôt.</div><div class="result"><strong>Captures personnelles — à ajouter</strong>Aucun résultat n'est présenté comme terminé avant réalisation et vérification.</div>
-</div></section><section class="part" id="partie-2">
-<div class="part-head"><span class="pill">PARTIE 2</span> <span class="badge-time">20 min</span><h3>Suivi des fichiers et premier commit</h3><p>Exercice individuel du support de formation.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer index.html avec le titre « Mon premier projet Git ».</li><li>Afficher l&#39;état du dépôt.</li><li>Ajouter index.html à la zone de staging.</li><li>Vérifier le nouvel état.</li><li>Créer le premier commit : « Initialisation du projet ».</li><li>Consulter l&#39;historique.</li></ol></div><div><h4>Commandes à utiliser</h4><pre class="cmd"><code>git status
-git add index.html
-git status
-git commit -m &quot;Initialisation du projet&quot;
-git log</code></pre></div></div>
-
-<h4>Questions du formateur</h4><ul class="qs"><li>Quelle est la différence entre git add et git commit ?<small>Ma réponse : à rédiger.</small></li><li>Quel est le rôle de la zone de staging ?<small>Ma réponse : à rédiger.</small></li><li>À quoi sert l’option -m ?<small>Ma réponse : à rédiger.</small></li></ul>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Capture de index.html, du premier commit et de git log.</div><div class="result"><strong>Captures personnelles — à ajouter</strong>Aucun résultat n'est présenté comme terminé avant réalisation et vérification.</div>
-</div></section><section class="part" id="partie-3">
-<div class="part-head"><span class="pill">PARTIE 3</span> <span class="badge-time">20 min</span><h3>Modifier un fichier</h3><p>Exercice individuel du support de formation.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Ajouter un paragraphe de présentation dans index.html.</li><li>Exécuter git status.</li><li>Afficher les modifications avec git diff.</li><li>Ajouter les modifications au staging.</li><li>Créer un deuxième commit : « Ajout de la présentation ».</li><li>Afficher l&#39;historique des commits.</li></ol></div><div><h4>Commandes à utiliser</h4><pre class="cmd"><code>git status
-git diff
-git add index.html
-git diff --staged
-git commit -m &quot;Ajout de la présentation&quot;
-git log --oneline</code></pre></div></div>
-
-<h4>Questions du formateur</h4><ul class="qs"><li>Que montre git diff ?<small>Ma réponse : à rédiger.</small></li><li>Quelle est la différence entre git diff et git diff --staged ?<small>Ma réponse : à rédiger.</small></li><li>Pourquoi créer plusieurs commits au lieu d’un seul ?<small>Ma réponse : à rédiger.</small></li></ul>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Capture des modifications et de l&#39;historique avec deux commits.</div><div class="result"><strong>Captures personnelles — à ajouter</strong>Aucun résultat n'est présenté comme terminé avant réalisation et vérification.</div>
-</div></section><section class="part" id="partie-4">
-<div class="part-head"><span class="pill">PARTIE 4</span> <span class="badge-time">20 min</span><h3>Gérer plusieurs fichiers</h3><p>Exercice individuel du support de formation.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer style.css.</li><li>Créer README.md avec une courte présentation du projet.</li><li>Afficher les fichiers suivis et non suivis.</li><li>Ajouter les deux fichiers avec une seule commande.</li><li>Créer un troisième commit.</li><li>Afficher l&#39;historique compact.</li></ol></div><div><h4>Commandes à utiliser</h4><pre class="cmd"><code>git status
-git add style.css README.md
-git status
-git commit -m &quot;Ajout du style et de la documentation&quot;
-git log --oneline</code></pre></div></div>
-
-<h4>Questions du formateur</h4><ul class="qs"><li>Quelle est la différence entre un fichier tracked et untracked ?<small>Ma réponse : à rédiger.</small></li><li>Peut-on ajouter plusieurs fichiers avec une seule commande git add ?<small>Ma réponse : à rédiger.</small></li><li>À quoi sert le fichier README.md ?<small>Ma réponse : à rédiger.</small></li></ul>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Capture de l&#39;arborescence des trois fichiers et de git log --oneline.</div><div class="result"><strong>Captures personnelles — à ajouter</strong>Aucun résultat n'est présenté comme terminé avant réalisation et vérification.</div>
-</div></section><section class="part" id="partie-5">
-<div class="part-head"><span class="pill">PARTIE 5</span> <span class="badge-time">15 min</span><h3>Bilan et vérification</h3><p>Exercice individuel du support de formation.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Compléter le tableau des rôles des commandes Git.</li><li>Vérifier la présence de index.html, style.css et README.md.</li><li>Vérifier que le dépôt local contient au moins trois commits.</li><li>Réaliser une capture d&#39;écran de git log --oneline.</li></ol></div><div><h4>Commandes à utiliser</h4><pre class="cmd"><code>git status
-git log --oneline</code></pre></div></div>
-<h4>Tableau à compléter</h4><table class="cheat"><thead><tr><th>Commande</th><th>Rôle</th></tr></thead><tbody><tr><td>git init</td><td>À compléter</td></tr><tr><td>git status</td><td>À compléter</td></tr><tr><td>git add</td><td>À compléter</td></tr><tr><td>git commit</td><td>À compléter</td></tr><tr><td>git log</td><td>À compléter</td></tr><tr><td>git diff</td><td>À compléter</td></tr></tbody></table>
-
-<h4>Mes preuves de réalisation</h4><div class="to-do">Capture finale de l&#39;historique et tableau de bilan complété.</div><div class="result"><strong>Captures personnelles — à ajouter</strong>Aucun résultat n'est présenté comme terminé avant réalisation et vérification.</div>
-</div></section>
-<section class="box"><span class="pill">Mon travail</span><h2>Présentation du mini-projet Git</h2><p>Lorsque j'aurai terminé l'exercice dans mon propre dépôt, j'ajouterai ici le code de mon mini-site, les captures des commandes et le résultat réel de <code>git log --oneline</code>. Les numéros de commits, l'identité du terminal et les captures d'un autre stagiaire ne sont pas repris.</p>
-<div class="result"><strong>Mon historique Git — en attente</strong>Capture réelle du terminal et/ou lien vers mon dépôt à ajouter.</div></section>
-</main><footer><div class="wrap">© Amal · OFPPT · M02 · Atelier 3 · Travail individuel</div></footer></body></html>
+.hero{padding:42px 0 16px}.lead{max-width:63ch}.short-label{font-size:13px;color:var(--muted);font-weight:600}.box{margin-top:16px}.compact-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.proof{padding:19px;border:2px dashed var(--line);border-radius:16px;background:color-mix(in srgb,var(--lilac) 18%,var(--card));margin-top:12px}.proof b{display:block;font-size:15px}.proof p{font-size:13px;color:var(--muted);margin:6px 0 0}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.links .btn{margin:0}.mono{font:12px ui-monospace,Consolas,monospace}.embed{width:100%;height:480px;display:block;border:1px solid var(--line);border-radius:15px;background:var(--card);margin-top:15px}.tiny{font-size:12px;color:var(--muted)}.cardlet{padding:19px;border:1px solid var(--line);border-radius:17px;background:color-mix(in srgb,var(--lilac) 20%,var(--card))}.cardlet h3{margin:4px 0 6px}.cardlet p{font-size:13px;color:var(--muted);margin:0}.cardlet .btn{margin-top:12px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{border:1px solid var(--line);background:var(--card);border-radius:15px;padding:12px;text-align:center}.metric strong{display:block;font-size:22px;color:var(--accent)}.metric span{color:var(--muted);font-size:12px}.faint{background:color-mix(in srgb,var(--peach) 32%,var(--card))}.footnote{color:var(--muted);font-size:12px;margin-top:12px}.tag{font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--accent)}@media(max-width:690px){.compact-row{grid-template-columns:1fr}.embed{height:365px}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.metric strong{font-size:19px}}
+</style></head><body><header><nav class="wrap"><a class="logo" href="/">Amal</a><a class="back" href="/#ateliers">← Retour</a></nav></header><main class="wrap"><section class="hero"><span class="eyebrow">Portfolio · M02</span><h1>Atelier 3 — Les bases de Git</h1><p class="lead">Dépôt local, fichiers et historique des commits.</p></section>
+<section class="box"><span class="pill">Travail individuel</span><h2>Mon mini-projet Git</h2>
+<div class="compact-row">
+<div class="cardlet"><h3>Fichiers du projet</h3><p>index.html · style.css · README.md</p><div class="proof"><b>Mes fichiers</b><p>Capture ou lien à ajouter.</p></div></div>
+<div class="cardlet"><h3>Historique Git</h3><p>Au moins 3 commits et git log --oneline.</p><div class="proof"><b>Mon terminal</b><p>Capture des commits à ajouter.</p></div></div>
+</div><div class="links"><a class="btn " href="https://portfoliofs202.vercel.app/docs/At3_git.pdf" target="_blank" rel="noopener noreferrer">Énoncé ↗</a></div></section>
+</main><footer><div class="wrap">© Amal · OFPPT · Portfolio</div></footer></body></html>
