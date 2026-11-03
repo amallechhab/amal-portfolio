@@ -67,6 +67,28 @@ $ateliers = [
   ],
 
   [
+    "num"      => "Atelier 4",
+    "statut"   => "bientot",
+    "title_fr" => "GitHub",
+    "title_en" => "GitHub",
+    "desc_fr"  => "Atelier sur GitHub. Support du formateur disponible ; travail personnel à ajouter.",
+    "desc_en"  => "Workshop on GitHub. Teacher's instructions available; personal work to be added.",
+    "doc"      => "https://portfoliofs202.vercel.app/docs/At4_github.pdf",
+    "exercices" => [],
+  ],
+
+  [
+    "num"      => "Atelier 5",
+    "statut"   => "bientot",
+    "title_fr" => "Git : Exemple EFM",
+    "title_en" => "Git: EFM example",
+    "desc_fr"  => "Mise en pratique de Git à partir d'un sujet type EFM. Support du formateur disponible ; solution personnelle à ajouter.",
+    "desc_en"  => "Git practice with an EFM-style exercise. Teacher's instructions available; personal solution to be added.",
+    "doc"      => "https://portfoliofs202.vercel.app/docs/At5_github.pdf",
+    "exercices" => [],
+  ],
+
+  [
     "num"      => "Atelier 6",
     "statut"   => "ok",
     "title_fr" => "Prérequis Sprint 3 : Inscription des stagiaires",
@@ -404,7 +426,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   <section id="ateliers" class="atelier-showcase">
     <div class="wrap">
       <span class="tag" <?= t("ATELIERS", "WORKSHOPS") ?>>ATELIERS</span>
-      <h2 <?= t("Mes 5 ateliers M02.", "The 7 M02 workshops.") ?>>Mes 5 ateliers M02.</h2>
+      <h2 <?= t("Mes 7 ateliers M02.", "My 7 M02 workshops.") ?>>Mes 7 ateliers M02.</h2>
       <p class="sub" <?= t(
         "Mes exercices de gestion de projets, Agile, Git, GitHub, PHP/MySQL et GitLab. Les énoncés sont accessibles et mes travaux seront ajoutés au fur et à mesure.",
         "My workshops on project management, Agile, Git, GitHub, PHP/MySQL and GitLab. Instructions are available, and my work will be added progressively."
@@ -419,6 +441,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           "Agile Scrum & Sprint", "Learn Agile roles and build a backlog and sprint."],
     3 => ["Les bases de Git", "Initialiser un dépôt, enregistrer des versions et suivre l'historique.",
           "Git fundamentals", "Initialize a repository, record versions and track history."],
+    4 => ["GitHub : travail collaboratif", "Gérer un dépôt distant, partager son code et découvrir le travail en équipe.",
+          "GitHub: collaboration", "Manage a remote repository, share code and learn teamwork."],
+    5 => ["Git : entraînement type EFM", "S'exercer aux commandes Git à travers un sujet type EFM.",
+          "Git: EFM practice", "Practice Git commands with an EFM-style exercise."],
     6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "Préparer une application avec formulaire, base de données et gestion d'images.",
           "Sprint 3: PHP, MySQL & Cloudinary", "Build a training app with a form, database and image uploads."],
     7 => ["GitLab CI/CD & SonarQube Cloud", "Découvrir l'analyse qualité et les étapes d'une pipeline CI/CD.",
