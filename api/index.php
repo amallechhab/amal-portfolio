@@ -55,8 +55,8 @@ $ateliers = [
     "statut"   => "bientot",
     "title_fr" => "Les bases de Git",
     "title_en" => "Git fundamentals",
-    "desc_fr"  => "Créer un dépôt Git, suivre les changements, utiliser le staging, faire des commits et consulter l'historique. Support du formateur disponible ; solutions à ajouter.",
-    "desc_en"  => "Create a Git repository, track changes, use staging, make commits and inspect history. Teacher's instructions available; solutions to be added.",
+    "desc_fr"  => "Travail individuel en 5 parties : initialiser un dépôt local, ajouter des fichiers, créer au moins trois commits et documenter l'historique. Mes captures personnelles seront ajoutées après réalisation.",
+    "desc_en"  => "Individual five-part exercise: initialize a local Git repository, add files, create at least three commits and document its history. Personal evidence will be added when completed.",
     "doc"      => "https://portfoliofs202.vercel.app/docs/At3_git.pdf",
     "exercices" => [
       ["label" => "Partie 1 — Configuration", "photos" => [], "doc" => ""],
@@ -439,8 +439,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           "Classical methods: PERT & Gantt", "Plan a project, organize tasks and create a clear diagram."],
     2 => ["Agile & Scrum — Travail individuel", "16 questions de cours sur l'Agilité et Scrum, réponses à rédiger.",
           "Agile & Scrum — Individual work", "16 theory questions on Agile and Scrum, answers to write."],
-    3 => ["Les bases de Git", "Initialiser un dépôt, enregistrer des versions et suivre l'historique.",
-          "Git fundamentals", "Initialize a repository, record versions and track history."],
+    3 => ["Les bases de Git", "5 parties individuelles : dépôt Git, 3 commits, fichiers et historique.",
+          "Git fundamentals", "Five individual sections: Git repository, three commits, files and history."],
     6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "Préparer une application avec formulaire, base de données et gestion d'images.",
           "Sprint 3: PHP, MySQL & Cloudinary", "Build a training app with a form, database and image uploads."],
     7 => ["GitLab CI/CD & SonarQube Cloud", "Découvrir l'analyse qualité et les étapes d'une pipeline CI/CD.",
@@ -452,7 +452,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     $n=(int)preg_replace('/[^0-9]/','',$a["num"]);
     $copy=$cardText[$n] ?? [$a["title_fr"],$a["desc_fr"],$a["title_en"],$a["desc_en"]];
     $isApp=$n===6;
-    $isPersonal=in_array($n,[1,2],true);
+    $isPersonal=in_array($n,[1,2,3],true);
 ?>
         <article class="at-card">
           <div class="at-top">
