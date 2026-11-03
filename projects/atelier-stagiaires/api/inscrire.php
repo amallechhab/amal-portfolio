@@ -1,11 +1,4 @@
 <?php
-$autoload = dirname(__DIR__, 3) . '/vendor/autoload.php';
-if (!is_file($autoload)) {
-    $autoload = dirname(__DIR__) . '/vendor/autoload.php';
-}
-require $autoload;
-require __DIR__ . '/../config/db.php';
-
 use Cloudinary\Cloudinary;
 
 header('Content-Type: application/json; charset=utf-8');
@@ -38,6 +31,27 @@ if (!in_array($mime, ['image/jpeg', 'image/png', 'image/webp'], true) || $_FILES
     echo json_encode(['error' => 'Image invalide (jpg/png/webp, max 4 Mo)']);
     exit;
 }
+
+// Composer dependencies may be installed at repository or project level.
+$autoload = dirname(__DIR__, 3) . '/vendor/autoload.php';
+if (!is_file($autoload)) {
+    $autoload = dirname(__DIR__) . '/vendor/autoload.php';
+}
+if (!is_file($autoload)) {
+    error_log('Inscription stagiaires: Composer autoload missing');
+    http_response_code(503);
+    echo json_encode(['error' => 'Dépendances PHP indisponibles sur le serveur. Vérifiez le déploiement Composer.']);
+    exit;
+}
+require_once $autoload;
+
+if (!class_exists(Cloudinary::class)) {
+    error_log('Inscription stagiaires: Cloudinary package unavailable');
+    http_response_code(503);
+    echo json_encode(['error' => 'Bibliothèque Cloudinary indisponible sur le serveur.']);
+    exit;
+}
+require_once __DIR__ . '/../config/db.php';
 
 $cloudinaryUrl = getenv('CLOUDINARY_URL');
 if (!is_string($cloudinaryUrl) || trim($cloudinaryUrl) === '') {
