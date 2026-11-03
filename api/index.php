@@ -64,6 +64,47 @@ $ateliers = [
       ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
     ],
   ],
+
+  [
+    "num"      => "Atelier 6",
+    "statut"   => "ok",
+    "title_fr" => "Inscription des stagiaires",
+    "title_en" => "Trainee registration",
+    "desc_fr"  => "Application PHP / MySQL avec formulaire d'inscription, photos stockées sur Cloudinary et liste des stagiaires.",
+    "desc_en"  => "PHP / MySQL application with a registration form, Cloudinary photo uploads, and a trainee directory.",
+    "doc"      => "",
+    "exercices" => [
+      [
+        "label" => "Formulaire d'inscription",
+        "photos" => [],
+        "link" => "/atelier-stagiaires/index.html",
+        "link_fr" => "Ouvrir le formulaire",
+        "link_en" => "Open registration form"
+      ],
+      [
+        "label" => "Liste des stagiaires",
+        "photos" => [],
+        "link" => "/atelier-stagiaires/liste.html",
+        "link_fr" => "Consulter le répertoire",
+        "link_en" => "View trainee directory"
+      ],
+      [
+        "label" => "Présentation du projet",
+        "photos" => [],
+        "link" => "/projects/atelier-stagiaires/overview.html",
+        "link_fr" => "Découvrir le projet",
+        "link_en" => "Explore the project"
+      ],
+      [
+        "label" => "Code source",
+        "photos" => [],
+        "link" => "https://github.com/amallechhab/amal-portfolio/tree/main/projects/atelier-stagiaires",
+        "link_fr" => "Voir le code sur GitHub",
+        "link_en" => "View source on GitHub"
+      ]
+    ]
+  ],
+
 ];
 
 // Tes projets (PDF ou PPTX). Mets le fichier dans public/docs/ puis remplis "file".
@@ -497,7 +538,23 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     Array.prototype.forEach.call(exTabs.children,function(b,k){b.setAttribute('aria-pressed',k===i?'true':'false');});
     photos=ex.photos||[];
     gThumbs.innerHTML='';
-    if(ex.doc){exDoc.href=ex.doc;exDoc.hidden=false;}else{exDoc.hidden=true;}
+    var destination=ex.link||ex.doc||'';
+    if(destination){
+      exDoc.href=destination;
+      exDoc.hidden=false;
+      var linkFR=ex.link_fr||(ex.link?'Ouvrir la page':'Ouvrir la solution (document)');
+      var linkEN=ex.link_en||(ex.link?'Open the page':'Open the solution (document)');
+      exDoc.setAttribute('data-fr',linkFR);
+      exDoc.setAttribute('data-en',linkEN);
+      exDoc.textContent=lang==='fr'?linkFR:linkEN;
+    }else{
+      exDoc.hidden=true;
+    }
+    var emptyFR=ex.link?'Clique sur le bouton ci-dessous pour ouvrir cette partie du projet.':'Les photos de la solution arrivent bientôt.';
+    var emptyEN=ex.link?'Use the button below to open this part of the project.':'The solution photos are coming soon.';
+    gEmpty.setAttribute('data-fr',emptyFR);
+    gEmpty.setAttribute('data-en',emptyEN);
+    gEmpty.textContent=lang==='fr'?emptyFR:emptyEN;
     if(!photos.length){gMain.hidden=true;gEmpty.hidden=false;return;}
     gMain.hidden=false;gEmpty.hidden=true;
     photos.forEach(function(src,k){
