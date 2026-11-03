@@ -29,9 +29,9 @@ if (!isset($_FILES['photo']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
 }
 
 $mime = mime_content_type($_FILES['photo']['tmp_name']);
-if (!in_array($mime, ['image/jpeg', 'image/png', 'image/webp'], true) || $_FILES['photo']['size'] > 5 * 1024 * 1024) {
+if (!in_array($mime, ['image/jpeg', 'image/png', 'image/webp'], true) || $_FILES['photo']['size'] > 4 * 1024 * 1024) {
     http_response_code(400);
-    echo json_encode(['error' => 'Image invalide (jpg/png/webp, max 5 Mo)']);
+    echo json_encode(['error' => 'Image invalide (jpg/png/webp, max 4 Mo)']);
     exit;
 }
 
