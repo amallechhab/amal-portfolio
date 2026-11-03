@@ -1,0 +1,50 @@
+/* Amal — M02 atelier showcase. Changes are scoped to #ateliers only. */
+#ateliers{
+  background:radial-gradient(ellipse at 94% 2%,rgba(117,64,135,.23),transparent 42%),
+             radial-gradient(ellipse at 4% 90%,rgba(45,105,181,.23),transparent 48%),
+             linear-gradient(125deg,#171a30,#111d32 57%,#271a32);
+  color:#f2f5ff;
+  padding-block:68px 76px;
+}
+#ateliers .wrap{max-width:1120px}
+#ateliers .tag{color:#93b7ff;letter-spacing:.16em;font-size:11px}
+#ateliers h2{font-family:var(--font-body);font-weight:800;letter-spacing:-.045em;font-size:clamp(1.85rem,3.3vw,2.8rem);line-height:1.13;color:#fff;margin:8px 0 12px}
+#ateliers .sub{color:#c2cce0;max-width:750px;font-size:14px;line-height:1.65;margin-bottom:26px}
+#ateliers .at-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+#ateliers .at-card{
+  background:linear-gradient(140deg,rgba(255,255,255,.085),rgba(52,76,114,.15));
+  color:#f6f7ff;
+  border:1px solid rgba(175,186,216,.25);
+  border-radius:18px;
+  padding:20px 18px 16px;
+  display:flex;flex-direction:column;
+  min-width:0;
+  min-height:230px;
+  box-shadow:0 10px 35px rgba(5,9,21,.11);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+#ateliers .at-card:nth-child(3n+2){background:linear-gradient(138deg,rgba(32,66,94,.6),rgba(33,48,77,.65))}
+#ateliers .at-card:nth-child(3n){background:linear-gradient(138deg,rgba(64,45,79,.48),rgba(37,43,77,.69))}
+#ateliers .at-card:hover,#ateliers .at-card:focus-within{transform:translateY(-3px);border-color:#8bb8ff;box-shadow:0 16px 36px rgba(5,9,21,.27)}
+#ateliers .at-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px}
+#ateliers .at-number{
+  background:linear-gradient(120deg,#3d9de7,#b74e9e);
+  color:white;
+  border-radius:7px;
+  font-size:11px;font-weight:900;line-height:1;
+  padding:6px 8px;letter-spacing:.06em;
+}
+#ateliers .at-module{color:#ced8eb;font-size:10px;font-weight:700;background:rgba(255,255,255,.075);border:1px solid rgba(206,219,245,.18);padding:4px 9px;border-radius:999px}
+#ateliers .at-card h3{font-family:var(--font-body);color:#f7f9ff;font-size:15.5px;line-height:1.28;letter-spacing:-.015em;font-weight:800;margin:0 0 8px}
+#ateliers .at-card p{margin:0;color:#bfcce4;font-size:12.5px;line-height:1.58;flex:1}
+#ateliers .at-bottom{margin-top:18px;padding-top:13px;border-top:1px solid rgba(221,233,255,.16);display:flex;align-items:center;justify-content:space-between;gap:7px}
+#ateliers .at-status{color:#b8cce9;font-size:11px;font-weight:600}
+#ateliers .at-status.is-ready{color:#bfe5db}
+#ateliers .at-detail{color:#eff5ff;text-decoration:none;font-size:12px;font-weight:850;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;border-radius:6px;padding:3px 1px}
+#ateliers .at-detail:hover{text-decoration:underline;color:#a9d1ff}
+#ateliers .at-detail:focus-visible{outline:2px solid #95c5ff;outline-offset:4px}
+#ateliers .at-detail span[aria-hidden]{font-size:15px;line-height:1}
+#ateliers .at-note{color:#a6b9d9;font-size:12px;margin:20px 0 0}
+@media (max-width:790px){#ateliers .at-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#ateliers .at-card{min-height:225px}}
+@media (max-width:520px){#ateliers{padding-block:48px 55px}#ateliers .at-grid{grid-template-columns:1fr}#ateliers .at-card{min-height:180px}#ateliers .at-card h3{font-size:16px}}
+@media(prefers-reduced-motion:reduce){#ateliers .at-card{transition:none}}
