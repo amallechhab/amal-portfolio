@@ -31,7 +31,7 @@ $ateliers = [
     "title_en" => "Project management: classic methods",
     "desc_fr"  => "Planification du projet « Quick Annonces » : tâches, dépendances, diagramme de PERT, chemin critique et diagramme de Gantt.",
     "desc_en"  => "Planning of the “Quick Annonces” project: tasks, dependencies, PERT diagram, critical path and Gantt chart.",
-    "doc"      => "/docs/atelier1.pdf", // énoncé de l'atelier (PDF)
+    "doc"      => "", // énoncé de l'atelier (PDF)
     "exercices" => [
       ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
     ],
@@ -43,7 +43,7 @@ $ateliers = [
     "title_en" => "Project management: Agile Scrum",
     "desc_fr"  => "Questions sur Agile et Scrum, puis sprint de conception du projet « Quick Annonce » avec Jira : Product Backlog, Sprint Planning, Review et Retrospective.",
     "desc_en"  => "Agile and Scrum questions, then a design sprint for the “Quick Annonce” project with Jira: Product Backlog, Sprint Planning, Review and Retrospective.",
-    "doc"      => "/docs/atelier2.pdf", // énoncé de l'atelier (PDF)
+    "doc"      => "", // énoncé de l'atelier (PDF)
     "exercices" => [
       ["label" => "Partie 1 (individuel)", "photos" => [], "doc" => ""],
       ["label" => "Partie 2 (groupe)",     "photos" => [], "doc" => ""],
@@ -401,7 +401,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
             <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
 <?php endif; ?>
 <?php if (!empty($p["overview"])): ?>
-            <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener" <?= t("Découvrir le projet", "View project") ?>>Code source</a>
+            <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener" <?= t("Découvrir le projet", "View project") ?>>Découvrir le projet</a>
 <?php endif; ?>
           </div>
 <?php else: ?>
