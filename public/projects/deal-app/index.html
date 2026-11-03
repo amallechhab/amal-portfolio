@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="DEAL App — projet web de groupe : prototype de petites annonces, version publiée, code GitHub, Sprint 1 et User Stories.">
+<title>DEAL App — Projet de groupe | Amal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#f5f7fb;--fg:#13213b;--muted:#56637a;--accent:#1d4ed8;--accent-fg:#fff;--lilac:#dce6fa;--peach:#e0eef0;--card:#fff;--line:#d5deec;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1626;--fg:#e8eefb;--muted:#9db0cc;--accent:#6ea8fe;--accent-fg:#0a1426;--lilac:#1c2d52;--peach:#173a42;--card:#15203a;--line:#2a3b5e;color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 Figtree,system-ui,sans-serif}
+a{color:var(--accent)}.wrap{width:min(1040px,calc(100% - 40px));margin:auto}
+header{border-bottom:2px solid var(--line);background:var(--card)}
+nav{display:flex;align-items:center;justify-content:space-between;min-height:70px;gap:12px;flex-wrap:wrap;padding-block:12px}
+.logo{text-decoration:none;font:400 23px "DM Serif Display",Georgia,serif}.back{text-decoration:none;font-size:14px;font-weight:700}
+main{padding-bottom:60px}.hero{padding:56px 0 28px}.eyebrow{color:var(--accent);font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+h1,h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400}h1{font-size:clamp(35px,5vw,54px);line-height:1.12;margin:10px 0 17px}h2{font-size:clamp(24px,4vw,31px);margin:0 0 10px}h3{margin:0 0 9px;font-size:18px}
+.lead{max-width:70ch;color:var(--muted);margin:0 0 20px}.pill{display:inline-block;border-radius:999px;background:var(--lilac);color:var(--accent);font-size:12px;font-weight:800;padding:4px 11px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.box{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:25px;margin-top:19px}
+.box.tint{background:color-mix(in srgb,var(--lilac) 25%,var(--card))}.box p{color:var(--muted);margin:0 0 15px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;justify-content:center;align-items:center;min-height:42px;border:2px solid var(--accent);border-radius:999px;padding:8px 17px;color:var(--accent);font-size:13px;font-weight:800;text-decoration:none}
+.btn.solid{color:var(--accent-fg);background:var(--accent)}.btn:hover{filter:brightness(.95)}
+.steps{padding-left:22px;margin:12px 0}.steps li{padding:4px 2px}.note{background:color-mix(in srgb,var(--peach) 52%,var(--card));border:1px solid var(--line);border-radius:14px;padding:14px 17px;font-size:14px;color:var(--fg)}
+.ex{margin-top:20px;border:2px solid var(--line);border-radius:24px;background:var(--card);overflow:hidden}
+.ex-header{padding:22px 25px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--lilac) 30%,var(--card))}
+.ex-header:nth-child(2n){background:var(--peach)}.ex-header p{color:var(--muted);margin:0}
+.ex-body{padding:24px 25px}.ex-body ul{padding-left:20px;margin:8px 0 20px}.ex-body li{padding:3px}
+.status{display:inline-block;border:1px dashed var(--line);border-radius:999px;color:var(--muted);font-size:12px;font-weight:700;padding:4px 11px}
+.placeholder{border:2px dashed var(--line);border-radius:15px;padding:25px 18px;background:color-mix(in srgb,var(--peach) 32%,var(--card));text-align:center;color:var(--muted);font-size:13px}
+footer{padding:20px 0 40px;border-top:2px dashed var(--line);font-size:13px;color:var(--muted)}
+@media(max-width:680px){.grid{grid-template-columns:1fr}.hero{padding-top:36px}.box,.ex-body{padding:19px}.ex-header{padding:20px}}
+@media print{header,.actions{display:none}body{background:white;color:#13213b}.ex,.box{break-inside:avoid}.placeholder{border-style:solid}}
+
+.questions{display:grid;gap:12px;margin:22px 0}.question{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px}.question .num{background:var(--accent);color:var(--accent-fg);min-width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:13px}.question strong{font-size:14px;display:block}.question p{font-size:13px;color:var(--muted);margin:7px 0 0}.groupnote{padding:18px;background:color-mix(in srgb,var(--peach) 55%,var(--card));border:1px solid var(--line);border-radius:17px}.section-anchor{scroll-margin-top:18px}
+
+.part{margin-top:20px;background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden}
+.part-head{padding:21px 24px;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-bottom:1px solid var(--line)}
+.part-head .pill{margin-bottom:9px}.part-head h3{font-size:20px;margin-bottom:2px}.part-head p{color:var(--muted);font-size:13px;margin:0}
+.part-body{padding:24px}.part-body h4{margin:18px 0 9px;font-size:14px;color:var(--fg)}.part-body h4:first-child{margin-top:0}
+.cmd{background:#172540;color:#eaf0ff;border-radius:16px;padding:18px 20px;overflow-x:auto;font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;margin:8px 0 15px;white-space:pre}
+.qs{display:grid;gap:9px;list-style:none;margin:0;padding:0}
+.qs li{background:color-mix(in srgb,var(--lilac) 32%,var(--card));border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:14px}
+.qs small{display:block;color:var(--muted);font-size:12px;margin-top:3px}.badge-time{border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--muted)}
+.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:19px}.to-do{border-radius:14px;background:color-mix(in srgb,var(--peach) 53%,var(--card));border:1px solid var(--line);padding:13px 16px;font-size:13px;color:var(--muted)}
+.result{margin-top:13px;border:2px dashed var(--line);border-radius:14px;padding:23px 18px;text-align:center;color:var(--muted);font-size:13px}
+.result strong{display:block;color:var(--fg);margin-bottom:4px}
+.cheat{width:100%;border-collapse:collapse;margin:12px 0}.cheat th,.cheat td{text-align:left;border:1px solid var(--line);padding:9px 12px;font-size:13px}.cheat th{background:var(--lilac)}.cheat td:first-child{font-family:ui-monospace,Consolas,monospace;font-weight:700}
+.steps li{margin:3px 0}.mini-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.mini-links a{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
+@media(max-width:780px){.two-col{grid-template-columns:1fr}.part-body{padding:18px}.part-head{padding:19px}.cmd{font-size:12px}}
+@media print{.part{break-inside:avoid;page-break-inside:avoid}.cmd{color:#13213b;background:#edf2ff;white-space:pre-wrap}.result{display:none}}
+
+.part{margin-top:20px;background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden}
+.part-head{padding:21px 24px;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-bottom:1px solid var(--line)}
+.part-head .pill{margin-bottom:9px}.part-head h3{font-size:20px;margin-bottom:4px}.part-head p{color:var(--muted);font-size:14px;margin:0}
+.part-body{padding:24px}.part-body h4{margin:18px 0 9px;font-size:14px;color:var(--fg)}.part-body h4:first-child{margin-top:0}
+.two-col{display:grid;grid-template-columns:1.12fr .88fr;gap:20px}.to-do{border-radius:14px;background:color-mix(in srgb,var(--peach) 53%,var(--card));border:1px solid var(--line);padding:13px 16px;font-size:13px;color:var(--muted)}
+.result{margin-top:13px;border:2px dashed var(--line);border-radius:14px;padding:21px 18px;text-align:center;color:var(--muted);font-size:13px}.result strong{display:block;color:var(--fg);margin-bottom:4px}
+.resources{display:grid;gap:9px}.resources a{display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;border:2px solid var(--accent);border-radius:999px;padding:9px 15px;color:var(--accent);font-weight:700;font-size:13px}.resources a:hover{background:var(--accent);color:var(--accent-fg)}
+.muted{font-size:13px;color:var(--muted)}.cmd{background:#172540;color:#eaf0ff;border-radius:15px;padding:15px;overflow-x:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+.mini-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.mini-links a{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);font-size:13px}
+.arch{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch;margin-top:16px}.arch div{border:1px solid var(--line);border-radius:15px;text-align:center;background:color-mix(in srgb,var(--lilac) 43%,var(--card));padding:15px}.arch strong{display:block;color:var(--accent)}.arch span{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+.arch div:nth-child(2){background:color-mix(in srgb,var(--peach) 55%,var(--card))}
+.checklist{margin:8px 0;padding-left:22px}.checklist li{margin-bottom:8px}.notice{background:color-mix(in srgb,var(--peach) 56%,var(--card));border-left:4px solid var(--accent);padding:16px 19px;border-radius:13px;font-size:14px}
+.section-anchor{scroll-margin-top:28px}.status{border-color:var(--line)}.actions{margin-bottom:8px}
+@media(max-width:800px){.arch{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.part-body{padding:18px}}
+@media(max-width:480px){.arch{grid-template-columns:1fr}.part-head{padding:18px}}
+@media print{.result,.mini-links{display:none}.part{break-inside:avoid}.cmd{background:#edf2ff;color:#13213b}}
+
+.hero{padding-bottom:24px}.hero .lead{max-width:78ch}.subtitle{font-size:13px;color:var(--muted)}
+.cardlinks{display:grid;grid-template-columns:1fr 1fr;gap:12px}.cardlink{border:2px solid var(--line);border-radius:17px;padding:17px;background:color-mix(in srgb,var(--lilac) 22%,var(--card));display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-decoration:none;color:var(--fg)}.cardlink strong{font-size:15px;color:var(--accent)}.cardlink small{font-size:12px;color:var(--muted)}.cardlink:hover{border-color:var(--accent)}
+.viewer{border:2px solid var(--line);border-radius:17px;overflow:hidden;background:var(--card);margin:18px 0}.viewer-bar{display:flex;align-items:center;gap:8px;background:var(--lilac);border-bottom:1px solid var(--line);padding:11px 14px;font-size:12px;color:var(--fg);font-weight:700}.viewer-bar .dot{border-radius:50%;width:9px;height:9px;background:var(--accent);opacity:.5}.viewer-bar span:last-child{margin-left:10px;overflow-wrap:anywhere}.viewer iframe{display:block;width:100%;height:520px;border:0;background:#f5f1e8}
+.note{border-left:4px solid var(--accent);font-size:14px}.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:15px 0}.slot{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:175px;gap:8px;text-align:center;padding:18px;border:2px dashed var(--line);border-radius:16px;background:color-mix(in srgb,var(--peach) 34%,var(--card))}.slot b{font-size:14px}.slot small{color:var(--muted);font-size:12px}.small{font-size:13px;color:var(--muted)}.evidence{display:grid;gap:12px}.evidence dl{display:grid;grid-template-columns:145px 1fr;gap:13px;margin:0;border-bottom:1px solid var(--line);padding:9px 0}.evidence dt{font-size:13px;font-weight:800}.evidence dd{font-size:13px;color:var(--muted);margin:0}.features{display:flex;gap:10px;flex-wrap:wrap}.features span{border-radius:999px;padding:7px 13px;background:var(--lilac);font-size:12px;font-weight:700}
+@media(max-width:720px){.viewer iframe{height:420px}.cardlinks{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.evidence dl{grid-template-columns:1fr;gap:4px}}
+@media print{.viewer iframe{display:none}.gallery .slot{min-height:60px}.box{break-inside:avoid}}
+</style></head><body><header><nav class="wrap"><a class="logo" href="/">Amal</a><a class="back" href="/#projets">← Retour aux projets</a></nav></header>
+<main class="wrap">
+<section class="hero"><span class="eyebrow">Portfolio / Projet de groupe · Développement web</span><h1>DEAL App<br>Application de petites annonces</h1>
+<p class="lead">Notre projet de groupe : un prototype web responsive pour consulter, rechercher et explorer des petites annonces. Il est réalisé en HTML, CSS et JavaScript et dispose d'une version en ligne et d'un dépôt GitHub.</p>
+<div class="actions"><a class="btn solid" href="https://dealappamallechhab.vercel.app" target="_blank" rel="noopener noreferrer">Ouvrir DEAL App ↗</a><a class="btn" href="https://github.com/amallechhab/Deal-App" target="_blank" rel="noopener noreferrer">Voir le code sur GitHub ↗</a><a class="btn" href="#captures">Mes captures</a></div>
+<p class="subtitle">Liens vers le véritable projet de groupe ; aucune capture ni fonctionnalité non vérifiée n'est présentée comme achevée.</p>
+</section>
+<div class="grid"><section class="box"><span class="pill">Notre projet</span><h2>Présentation de DEAL</h2><p>DEAL est un prototype de site de petites annonces pour les catégories voitures, immobilier, téléphones et mode. Le dépôt décrit la conception du Sprint 1, les User Stories et l'organisation avec Figma, Jira, Git et GitHub.</p><div class="features"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Responsive</span></div></section>
+<section class="box tint"><span class="pill">État réel</span><h2>Prototype, pas application complète</h2><p>Les pages de consultation, de recherche, de détail et de connexion sont présentes dans le code. Les annonces visibles sont des données de démonstration. Selon le README du dépôt, l'authentification et la base de données ne sont pas reliées à la version principale de ce prototype.</p><p class="small">Une mise en ligne réussie ne prouve pas que toutes les User Stories sont implémentées.</p></section></div>
+<section class="box" id="demo"><span class="pill">Résultat visible immédiatement</span><h2>DEAL App — Aperçu du site en ligne</h2>
+<p>Le cadre ci-dessous charge le vrai site publié. Si le navigateur empêche l'intégration, le lien « Ouvrir DEAL App » fonctionne indépendamment.</p>
+<div class="viewer"><div class="viewer-bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>dealappamallechhab.vercel.app</span></div><iframe src="https://dealappamallechhab.vercel.app/" title="Aperçu interactif du site DEAL App publié sur Vercel" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<div class="actions"><a class="btn solid" href="https://dealappamallechhab.vercel.app/" target="_blank" rel="noopener noreferrer">Voir le vrai site plein écran ↗</a></div></section>
+<section class="box"><span class="pill">Pages disponibles</span><h2>Ouvrir les pages du projet</h2><p>Chaque lien ouvre une page déjà présente dans le dépôt publié et permet au formateur de voir le prototype directement.</p><div class="cardlinks">
+<a class="cardlink" href="https://dealappamallechhab.vercel.app/index.html" target="_blank" rel="noopener noreferrer"><strong>Accueil ↗</strong><small>Page principale du prototype</small></a>
+<a class="cardlink" href="https://dealappamallechhab.vercel.app/annonces.html" target="_blank" rel="noopener noreferrer"><strong>Annonces ↗</strong><small>Liste, recherche et filtres des annonces</small></a>
+<a class="cardlink" href="https://dealappamallechhab.vercel.app/produit.html?id=golf" target="_blank" rel="noopener noreferrer"><strong>Détail d&#39;une annonce ↗</strong><small>Exemple de fiche détaillée</small></a>
+<a class="cardlink" href="https://dealappamallechhab.vercel.app/connexion.html" target="_blank" rel="noopener noreferrer"><strong>Connexion ↗</strong><small>Écran de connexion (prototype)</small></a>
+</div></section>
+<section class="box"><span class="pill">Preuves vérifiables</span><h2>Code, Sprint 1 et User Stories</h2><p>Ces ressources appartiennent au dépôt DEAL App et constituent des liens consultables, distincts des captures personnelles à ajouter.</p><div class="cardlinks">
+<a class="cardlink" href="https://github.com/amallechhab/Deal-App" target="_blank" rel="noopener noreferrer"><strong>Code source GitHub ↗</strong><small>Dépôt du projet DEAL</small></a>
+<a class="cardlink" href="https://github.com/amallechhab/Deal-App/blob/main/Sprint1.md" target="_blank" rel="noopener noreferrer"><strong>Sprint 1 ↗</strong><small>Objectif du sprint et fonctionnalités prévues</small></a>
+<a class="cardlink" href="https://github.com/amallechhab/Deal-App/blob/main/UserStories.md" target="_blank" rel="noopener noreferrer"><strong>User Stories ↗</strong><small>Liste des User Stories documentées</small></a>
+<a class="cardlink" href="https://github.com/amallechhab/Deal-App/commits/main/" target="_blank" rel="noopener noreferrer"><strong>Historique Git ↗</strong><small>Commits du projet sur la branche principale</small></a>
+</div><div class="note" style="margin-top:18px"><strong>Figma / Jira :</strong> le README mentionne ces outils, mais aucun lien de prototype Figma ni tableau Jira vérifiable n'est fourni dans les fichiers consultés. Il faudra ajouter les liens de l'équipe, s'ils sont partageables.</div></section>
+<section class="box" id="captures"><span class="pill">Documentation visuelle</span><h2>Captures d'écran de notre travail</h2><p>Le professeur pourra retrouver ici des captures du vrai site et du travail du groupe. Les images suivantes sont des emplacements, <strong>pas des fausses captures</strong>.</p>
+<div class="gallery"><div class="slot"><b>01 · Accueil DEAL</b><small>Capture réelle du site à ajouter</small></div><div class="slot"><b>02 · Annonces et filtres</b><small>Capture réelle à ajouter</small></div><div class="slot"><b>03 · Détail d'une annonce</b><small>Capture réelle à ajouter</small></div><div class="slot"><b>04 · Prototype Figma</b><small>Capture de la maquette à ajouter</small></div><div class="slot"><b>05 · Jira / Sprint</b><small>Capture du vrai tableau à ajouter</small></div><div class="slot"><b>06 · Mon travail dans le groupe</b><small>Rôle, captures et commits à préciser</small></div></div>
+<div class="note">Pour démontrer la participation individuelle, compléter le rôle et les tâches réellement effectuées, accompagnés de captures ou de commits. Aucun rôle personnel n'est attribué sans confirmation.</div></section>
+<section class="box"><span class="pill">Bilan documentaire</span><h2>Ce qui est établi et ce qui reste à ajouter</h2><div class="evidence"><dl><dt>Site publié</dt><dd><a href="https://dealappamallechhab.vercel.app" target="_blank" rel="noopener noreferrer">https://dealappamallechhab.vercel.app</a></dd></dl><dl><dt>Dépôt GitHub</dt><dd><a href="https://github.com/amallechhab/Deal-App" target="_blank" rel="noopener noreferrer">https://github.com/amallechhab/Deal-App</a></dd></dl><dl><dt>Écrans vérifiables</dt><dd>Accueil, annonces, recherche et filtres, fiche d'annonce, écran de connexion.</dd></dl><dl><dt>Documentation du sprint</dt><dd>Sprint1.md et UserStories.md dans le dépôt.</dd></dl><dl><dt>À compléter</dt><dd>Captures personnelles, liens Jira/Figma, répartition du travail et tests réels des fonctionnalités.</dd></dl></div></section>
+</main><footer><div class="wrap">© Amal · OFPPT · Projet de groupe DEAL App · Documentation des réalisations</div></footer></body></html>
