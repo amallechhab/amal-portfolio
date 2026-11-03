@@ -29,7 +29,7 @@ $ateliers = [
   ],
   6 => [
     'title' => 'Prérequis Sprint 3 : PHP, MySQL & Cloudinary',
-    'desc' => 'Application d\'inscription des stagiaires avec formulaire HTML, backend PHP, base MySQL Aiven et photos Cloudinary.',
+    'desc' => 'Application de formation en neuf étapes : formulaire HTML, PHP, MySQL Aiven, Cloudinary et Vercel. Pages et code disponibles ; intégration à vérifier.',
     'pdf' => '',
     'parts' => [],
     'links' => [
@@ -143,7 +143,8 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <section class="box">
 <h2><?= $num === 6 ? 'Application de formation' : 'Exercices et travaux pratiques' ?></h2>
 <?php if ($num === 6): ?>
-<p>La page d'inscription et le répertoire sont reliés au code PHP, à MySQL Aiven et à Cloudinary. Leur fonctionnement complet dépend des services et variables d'environnement du projet.</p>
+<p>Les pages du formulaire et de la liste ainsi que le code PHP sont dans le dépôt. La connexion à MySQL et à Cloudinary dépend des configurations côté serveur ; le fonctionnement complet reste à vérifier.</p>
+<a class="action" href="/ateliers/atelier6/index.html">Consulter les 9 étapes de l'atelier <span aria-hidden="true">↗</span></a>
 <?php elseif ($atelier['parts']): ?>
 <?php if ($num === 1): ?>
 <p>Les exercices PERT et Gantt de cet atelier sont individuels. Les réponses et les captures personnelles ne sont pas encore publiées.</p>
@@ -162,7 +163,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <section class="box">
 <h2>Liens et ressources</h2>
 <?php if ($num === 6): ?>
-<p>Ouvre chaque partie de ton application ou son code.</p>
+<p>Ouvre chaque partie de l'application ou son code. Les essais réussis ne sont pas encore documentés.</p>
 <div class="links">
 <?php foreach ($atelier['links'] as [$label,$href]): ?>
 <a class="action" href="<?= h($href) ?>"<?= str_starts_with($href,'http') ? ' target="_blank" rel="noopener noreferrer"' : '' ?>><?= h($label) ?><span aria-hidden="true">↗</span></a>
