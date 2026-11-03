@@ -134,6 +134,8 @@ $projets = [
     "desc_en"  => "Our real group project: responsive classified-ads prototype. Live Vercel website, browsable pages, GitHub code, Sprint 1 and user stories.",
     "file"     => "",
     "overview" => "/projects/deal-app/index.html",
+    "live"     => "https://dealappamallechhab.vercel.app",
+    "source"   => "https://github.com/amallechhab/Deal-App",
   ],
 ];
 
@@ -488,6 +490,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
               <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
 <?php elseif (!empty($p["overview"])): ?>
               <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Découvrir le projet", "View project") ?>>Découvrir le projet</a>
+<?php if (!empty($p["live"])): ?>
+              <a class="btn" href="<?= e($p["live"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Site en ligne", "Live website") ?>>Site en ligne</a>
+<?php endif; ?>
+<?php if (!empty($p["source"])): ?>
+              <a class="btn" href="<?= e($p["source"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Code GitHub", "GitHub code") ?>>Code GitHub</a>
+<?php endif; ?>
 <?php else: ?>
               <span class="btn" aria-disabled="true" <?= t("Projet à compléter", "Project to be added") ?>>Projet à compléter</span>
 <?php endif; ?>
