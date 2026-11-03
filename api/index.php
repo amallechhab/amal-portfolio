@@ -431,6 +431,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     $n=(int)preg_replace('/[^0-9]/','',$a["num"]);
     $copy=$cardText[$n] ?? [$a["title_fr"],$a["desc_fr"],$a["title_en"],$a["desc_en"]];
     $isApp=$n===6;
+    $isPlan=$n===1;
 ?>
         <article class="at-card">
           <div class="at-top">
@@ -440,7 +441,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           <h3 <?= t($copy[0],$copy[2]) ?>><?= e($copy[0]) ?></h3>
           <p <?= t($copy[1],$copy[3]) ?>><?= e($copy[1]) ?></p>
           <div class="at-bottom">
-            <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Application publiée","Application published"):t("Énoncé disponible","Instructions available") ?>><?= $isApp?'Application publiée':'Énoncé disponible' ?></span>
+            <span class="at-status<?= ($isApp||$isPlan)?' is-ready':'' ?>" <?= $isApp?t("Application publiée","Application published"):($isPlan?t("Planification proposée","Proposed planning"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Application publiée':($isPlan?'Planification proposée':'Énoncé disponible') ?></span>
+<?php if ($isPlan): ?>
+            <a class="at-detail" href="/projects/atelier1-quick-annonces/index.html" aria-label="Voir le travail proposé pour l'atelier 1">
+              <span <?= t("Voir le travail", "View proposed work") ?>>Voir le travail</span> <span aria-hidden="true">↗</span>
+            </a>
+<?php endif; ?>
             <a class="at-detail" href="/api/atelier.php?num=<?= $n ?>" aria-label="Détail atelier <?= $n ?>">
               <span <?= t("Détail", "Details") ?>>Détail</span> <span aria-hidden="true">↗</span>
             </a>
@@ -448,7 +454,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
         </article>
 <?php endforeach; ?>
       </div>
-      <p class="at-note" <?= t("Les PDF sont des énoncés de formation ; les solutions personnelles sont ajoutées séparément.", "The PDFs are course instructions; personal solutions are added separately.") ?>>Les PDF sont des énoncés de formation ; les solutions personnelles sont ajoutées séparément.</p>
+      <p class="at-note" <?= t("Les PDF sont des énoncés de formation ; une proposition de planification est publiée pour l'Atelier 1, avec ses hypothèses explicites.", "The PDFs are course instructions; a proposed plan is published for Workshop 1, with explicit assumptions.") ?>>Les PDF sont des énoncés de formation ; une proposition de planification est publiée pour l'Atelier 1, avec ses hypothèses explicites.</p>
     </div>
   </section>
 
