@@ -31,7 +31,7 @@ $ateliers = [
     "title_en" => "Project management: classic methods",
     "desc_fr"  => "Planification du projet « Quick Annonces » : tâches, dépendances, diagramme de PERT, chemin critique et diagramme de Gantt.",
     "desc_en"  => "Planning of the “Quick Annonces” project: tasks, dependencies, PERT diagram, critical path and Gantt chart.",
-    "doc"      => "", // énoncé de l'atelier (PDF)
+    "doc"      => "https://portfoliofs202.vercel.app/docs/At1_gestionprojet.pdf", // énoncé de l'atelier (PDF)
     "exercices" => [
       ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
     ],
@@ -43,7 +43,7 @@ $ateliers = [
     "title_en" => "Project management: Agile Scrum",
     "desc_fr"  => "Questions sur Agile et Scrum, puis sprint de conception du projet « Quick Annonce » avec Jira : Product Backlog, Sprint Planning, Review et Retrospective.",
     "desc_en"  => "Agile and Scrum questions, then a design sprint for the “Quick Annonce” project with Jira: Product Backlog, Sprint Planning, Review and Retrospective.",
-    "doc"      => "", // énoncé de l'atelier (PDF)
+    "doc"      => "https://portfoliofs202.vercel.app/docs/At2_gestionprojet.pdf", // énoncé de l'atelier (PDF)
     "exercices" => [
       ["label" => "Partie 1 (individuel)", "photos" => [], "doc" => ""],
       ["label" => "Partie 2 (groupe)",     "photos" => [], "doc" => ""],
