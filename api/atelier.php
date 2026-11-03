@@ -13,7 +13,7 @@ $ateliers = [
     'title' => 'Méthodes classiques : PERT & Gantt',
     'desc' => 'Planification du projet Quick Annonces : tâches, dépendances, diagramme PERT, chemin critique et Gantt.',
     'pdf' => $root.'At1_gestionprojet.pdf',
-    'parts' => ['Planification en groupe : Quick Annonces'],
+    'parts' => ['Planification en groupe : Quick Annonces', 'Proposition : modèle en V, tableau des tâches, PERT, chemin critique et Gantt'],
   ],
   2 => [
     'title' => 'Agile Scrum & Sprint',
@@ -145,7 +145,11 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <?php if ($num === 6): ?>
 <p>La page d'inscription et le répertoire sont reliés au code PHP, à MySQL Aiven et à Cloudinary. Leur fonctionnement complet dépend des services et variables d'environnement du projet.</p>
 <?php elseif ($atelier['parts']): ?>
+<?php if ($num === 1): ?>
+<p>Une proposition complète de planification est disponible : modèle en V, dépendances, PERT, chemin critique et Gantt. Les durées proposées restent à valider avec le groupe.</p>
+<?php else: ?>
 <p>Parties décrites dans le support du formateur. Les solutions personnelles ne sont pas encore publiées ici.</p>
+<?php endif; ?>
 <ul class="list"><?php foreach ($atelier['parts'] as $part): ?><li><?= h($part) ?></li><?php endforeach; ?></ul>
 <?php else: ?>
 <p class="notice">L'énoncé de cet atelier est disponible. Les captures et les solutions personnelles seront ajoutées au fur et à mesure.</p>
@@ -163,6 +167,9 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <?php else: ?>
 <p>Support pédagogique publié par le formateur. Ce document est un énoncé, pas une correction personnelle.</p>
 <a class="action" target="_blank" rel="noopener noreferrer" href="<?= h($atelier['pdf']) ?>">Consulter l'énoncé (PDF) <span aria-hidden="true">↗</span></a>
+<?php if ($num === 1): ?>
+<a class="action" style="margin-top:12px" href="/projects/atelier1-quick-annonces/index.html">Voir la proposition de planification <span aria-hidden="true">↗</span></a>
+<?php endif; ?>
 <?php endif; ?>
 </section>
 </div></main>
