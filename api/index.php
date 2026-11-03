@@ -67,28 +67,6 @@ $ateliers = [
   ],
 
   [
-    "num"      => "Atelier 4",
-    "statut"   => "bientot",
-    "title_fr" => "GitHub",
-    "title_en" => "GitHub",
-    "desc_fr"  => "Atelier sur GitHub. Support du formateur disponible ; travail personnel à ajouter.",
-    "desc_en"  => "Workshop on GitHub. Teacher's instructions available; personal work to be added.",
-    "doc"      => "https://portfoliofs202.vercel.app/docs/At4_github.pdf",
-    "exercices" => [],
-  ],
-
-  [
-    "num"      => "Atelier 5",
-    "statut"   => "bientot",
-    "title_fr" => "Git : Exemple EFM",
-    "title_en" => "Git: EFM example",
-    "desc_fr"  => "Mise en pratique de Git à partir d'un sujet type EFM. Support du formateur disponible ; solution personnelle à ajouter.",
-    "desc_en"  => "Git practice with an EFM-style exercise. Teacher's instructions available; personal solution to be added.",
-    "doc"      => "https://portfoliofs202.vercel.app/docs/At5_github.pdf",
-    "exercices" => [],
-  ],
-
-  [
     "num"      => "Atelier 6",
     "statut"   => "ok",
     "title_fr" => "Prérequis Sprint 3 : Inscription des stagiaires",
@@ -341,6 +319,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 }
 </style>
 <link rel="stylesheet" href="/assets/amal-ateliers.css">
+<link rel="stylesheet" href="/assets/amal-projets.css">
 <link rel="stylesheet" href="/assets/portfolio.css">
 </head>
 <body class="portfolio-home">
@@ -427,11 +406,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   <section id="ateliers" class="atelier-showcase">
     <div class="wrap">
       <span class="tag" <?= t("ATELIERS", "WORKSHOPS") ?>>ATELIERS</span>
-      <h2 <?= t("Mes 7 ateliers M02.", "My 7 M02 workshops.") ?>>Mes 7 ateliers M02.</h2>
+      <h2 <?= t("Mes 5 ateliers M02.", "My 5 M02 workshops.") ?>>Mes 5 ateliers M02.</h2>
       <p class="sub" <?= t(
-        "Mes exercices de gestion de projets, Agile, Git, GitHub, PHP/MySQL et GitLab. Les énoncés sont accessibles et mes travaux seront ajoutés au fur et à mesure.",
-        "My workshops on project management, Agile, Git, GitHub, PHP/MySQL and GitLab. Instructions are available, and my work will be added progressively."
-      ) ?>>Mes exercices de gestion de projets, Agile, Git, GitHub, PHP/MySQL et GitLab. Les énoncés sont accessibles et mes travaux seront ajoutés au fur et à mesure.</p>
+        "Mes supports de cours et ateliers disponibles : 1, 2, 3, 6 et 7. Les énoncés du formateur sont accessibles et mes solutions personnelles seront ajoutées progressivement.",
+        "My available workshops are 1, 2, 3, 6 and 7. Teacher handouts are available, and my personal solutions will be added progressively."
+      ) ?>>Mes supports de cours et ateliers disponibles : 1, 2, 3, 6 et 7. Les énoncés du formateur sont accessibles et mes solutions personnelles seront ajoutées progressivement.</p>
 <?php
   // Titres et résumés courts pour ces cartes uniquement. Les données détaillées
   // des ateliers et des projets ci-dessus restent inchangées.
@@ -442,10 +421,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           "Agile Scrum & Sprint", "Learn Agile roles and build a backlog and sprint."],
     3 => ["Les bases de Git", "Initialiser un dépôt, enregistrer des versions et suivre l'historique.",
           "Git fundamentals", "Initialize a repository, record versions and track history."],
-    4 => ["GitHub : travail collaboratif", "Gérer un dépôt distant, partager son code et découvrir le travail en équipe.",
-          "GitHub: collaboration", "Manage a remote repository, share code and learn teamwork."],
-    5 => ["Git : entraînement type EFM", "S'exercer aux commandes Git à travers un sujet type EFM.",
-          "Git: EFM practice", "Practice Git commands with an EFM-style exercise."],
     6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "Préparer une application avec formulaire, base de données et gestion d'images.",
           "Sprint 3: PHP, MySQL & Cloudinary", "Build a training app with a form, database and image uploads."],
     7 => ["GitLab CI/CD & SonarQube Cloud", "Découvrir l'analyse qualité et les étapes d'une pipeline CI/CD.",
@@ -482,31 +457,42 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     <div class="wrap">
       <span class="tag" <?= t("Projets", "Projects") ?>>Projets</span>
       <h2 <?= t("Mes projets", "My projects") ?>>Mes projets</h2>
-      <p class="sub" <?= t("Mes projets de formation, à ouvrir en PDF ou PowerPoint.", "My training projects, to open as PDF or PowerPoint.") ?>>Mes projets de formation, à ouvrir en PDF ou PowerPoint.</p>
-      <div class="grid">
+      <p class="sub" <?= t("Mes projets de formation, présentés au fur et à mesure de leur réalisation.", "My training projects, added as they are completed.") ?>>Mes projets de formation, présentés au fur et à mesure de leur réalisation.</p>
+      <div class="projet-grid">
 <?php foreach ($projets as $p): ?>
         <article class="pj">
-          <div class="row">
-            <span class="badge"><?= e($p["type"]) ?></span>
+          <div class="pj-preview" aria-hidden="true">
+            <div class="pj-window">
+              <div class="pj-windowbar"><i></i><i></i><i></i></div>
+              <div class="pj-window-content">
+                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                  <path d="M5 3h10l4 4v14H5zM15 3v5h4M8 12h8M8 16h6" />
+                </svg>
+                <span><?= e($p["type"]) ?></span>
+              </div>
+            </div>
+          </div>
+          <div class="pj-body">
+            <div class="pj-heading">
+              <span class="pj-type"><?= e($p["type"]) ?></span>
 <?php if (empty($p["file"]) && empty($p["overview"])): ?>
-            <span class="state" <?= t("Bientôt", "Soon") ?>>Bientôt</span>
+              <span class="pj-pending" <?= t("Bientôt", "Soon") ?>>Bientôt</span>
 <?php endif; ?>
-          </div>
-          <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><?= e($p["title_fr"]) ?></h3>
-          <p <?= t($p["desc_fr"], $p["desc_en"]) ?>><?= e($p["desc_fr"]) ?></p>
-<?php if (!empty($p["file"]) || !empty($p["overview"])): ?>
-          <div class="btns">
+            </div>
+            <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><?= e($p["title_fr"]) ?></h3>
+            <p <?= t($p["desc_fr"], $p["desc_en"]) ?>><?= e($p["desc_fr"]) ?></p>
+            <div class="pj-tech"><span <?= t("Projet de formation", "Training project") ?>>Projet de formation</span></div>
+            <div class="btns">
 <?php if (!empty($p["file"])): ?>
-            <a class="btn solid" href="<?= e($p["file"]) ?>" target="_blank" rel="noopener" <?= t("Voir", "View") ?>>Voir</a>
-            <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
-<?php endif; ?>
-<?php if (!empty($p["overview"])): ?>
-            <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener" <?= t("Découvrir le projet", "View project") ?>>Découvrir le projet</a>
-<?php endif; ?>
-          </div>
+              <a class="btn solid" href="<?= e($p["file"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Voir", "View") ?>>Voir</a>
+              <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
+<?php elseif (!empty($p["overview"])): ?>
+              <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Découvrir le projet", "View project") ?>>Découvrir le projet</a>
 <?php else: ?>
-          <span class="btn" aria-disabled="true" <?= t("Fichier bientôt", "File soon") ?>>Fichier bientôt</span>
+              <span class="btn" aria-disabled="true" <?= t("Projet à compléter", "Project to be added") ?>>Projet à compléter</span>
 <?php endif; ?>
+            </div>
+          </div>
         </article>
 <?php endforeach; ?>
       </div>

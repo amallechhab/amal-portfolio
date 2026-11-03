@@ -155,3 +155,6 @@ a:focus-visible,button:focus-visible,input:focus-visible {outline:3px solid var(
   html {scroll-behavior:auto}
   *,*::before,*::after {transition:none!important; animation:none!important}
 }
+
+#projets .pj {border-width:1px; border-radius:var(--radius)}
+#projets .pj h3 {font-family:var(--font-body); font-size:1.15rem; font-weight:700}
