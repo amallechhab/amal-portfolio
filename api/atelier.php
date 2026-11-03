@@ -149,7 +149,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <?php if ($num === 1): ?>
 <p>Les exercices PERT et Gantt de cet atelier sont individuels. Les réponses et les captures personnelles ne sont pas encore publiées.</p>
 <?php elseif ($num === 2): ?>
-<p>Les 16 questions d'Agile et Scrum sont à traiter individuellement. Le travail Jira et le prototype sont suivis séparément dans la rubrique Projets.</p>
+<p>Les 16 questions d'Agile et Scrum correspondent à la partie individuelle. Le projet de groupe réalisé est DEAL App : site, code, Sprint 1 et User Stories sont accessibles dans Projets ; les captures personnelles restent à ajouter.</p>
 <?php elseif ($num === 3): ?>
 <p>Les cinq parties de cet atelier sont individuelles. Les étapes et commandes sont documentées, mais les trois commits requis, les réponses et les captures personnelles restent à réaliser.</p>
 <?php elseif ($num === 7): ?>
