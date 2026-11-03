@@ -23,7 +23,7 @@ $ateliers = [
   ],
   3 => [
     'title' => 'Les bases de Git',
-    'desc' => 'Initialiser un dépôt, enregistrer des versions et consulter l\'historique du projet.',
+    'desc' => 'Atelier individuel en cinq parties : configuration, premiers commits, modifications, ajout de fichiers, bilan et preuves de l\'historique Git.',
     'pdf' => $root.'At3_git.pdf',
     'parts' => ['Partie 1 — Configuration et création du projet', 'Partie 2 — Premier commit', 'Partie 3 — Modifier un fichier', 'Partie 4 — Gérer plusieurs fichiers', 'Partie 5 — Bilan'],
   ],
@@ -149,6 +149,8 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <p>Les exercices PERT et Gantt de cet atelier sont individuels. Les réponses et les captures personnelles ne sont pas encore publiées.</p>
 <?php elseif ($num === 2): ?>
 <p>Les 16 questions d'Agile et Scrum sont à traiter individuellement. Le travail Jira et le prototype sont suivis séparément dans la rubrique Projets.</p>
+<?php elseif ($num === 3): ?>
+<p>Les cinq parties de cet atelier sont individuelles. Les étapes et commandes sont documentées, mais les trois commits requis, les réponses et les captures personnelles restent à réaliser.</p>
 <?php else: ?>
 <p>Parties décrites dans le support du formateur. Les solutions personnelles ne sont pas encore publiées ici.</p>
 <?php endif; ?>
@@ -169,7 +171,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <?php else: ?>
 <p>Support pédagogique publié par le formateur. Ce document est un énoncé, pas une correction personnelle.</p>
 <a class="action" target="_blank" rel="noopener noreferrer" href="<?= h($atelier['pdf']) ?>">Consulter l'énoncé (PDF) <span aria-hidden="true">↗</span></a>
-<?php if ($num === 1 || $num === 2): ?>
+<?php if (in_array($num, [1, 2, 3], true)): ?>
 <a class="action" style="margin-top:12px" href="/ateliers/atelier<?= $num ?>/index.html">Voir mes exercices individuels <span aria-hidden="true">↗</span></a>
 <?php endif; ?>
 <?php endif; ?>
