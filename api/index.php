@@ -68,11 +68,11 @@ $ateliers = [
   [
     "num"      => "Atelier 6",
     "statut"   => "ok",
-    "title_fr" => "Inscription des stagiaires",
-    "title_en" => "Trainee registration",
-    "desc_fr"  => "Application PHP / MySQL avec formulaire d'inscription, photos stockées sur Cloudinary et liste des stagiaires.",
-    "desc_en"  => "PHP / MySQL application with a registration form, Cloudinary photo uploads, and a trainee directory.",
-    "doc"      => "",
+    "title_fr" => "Prérequis Sprint 3 : Inscription des stagiaires",
+    "title_en" => "Sprint 3 prerequisites: Trainee registration",
+    "desc_fr"  => "Atelier 6 : préparation au Sprint 3 Quick Annonces. Formulaire PHP, MySQL Aiven, photos Cloudinary, liste des stagiaires et déploiement Vercel.",
+    "desc_en"  => "Workshop 6: Quick Annonces Sprint 3 preparation with PHP, Aiven MySQL, Cloudinary photos, trainee directory and Vercel deployment.",
+    "doc"      => "https://github.com/karim-azeggouar/portfoliofs202/blob/master/public/docs/At6_github.pdf",
     "exercices" => [
       [
         "label" => "Formulaire d'inscription",
@@ -126,15 +126,7 @@ $projets = [
     "desc_en"  => "Description of my project 2.",
     "file"     => "", // ex. "/docs/projet2.pptx"
   ],
-  [
-    "type"     => "PHP · MySQL",
-    "title_fr" => "Inscription des stagiaires",
-    "title_en" => "Trainee registration app",
-    "desc_fr"  => "Application PHP et MySQL pour inscrire des stagiaires, enregistrer leurs informations et gérer les photos avec Cloudinary.",
-    "desc_en"  => "A PHP and MySQL app for trainee registration, saving trainee details and handling photos with Cloudinary.",
-    "file"     => "",
-    "overview" => "/projects/atelier-stagiaires/overview.html",
-  ],];
+];
 
 // ------------------------------------------------------------
 function e($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
