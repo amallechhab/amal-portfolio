@@ -3,5 +3,19 @@
     "api/*.php": {
       "runtime": "vercel-php@0.9.0"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/index.php"
+    },
+    {
+      "source": "/inscrire-stagiaire.php",
+      "destination": "/api/inscrire-stagiaire.php"
+    },
+    {
+      "source": "/liste-stagiaires.php",
+      "destination": "/api/liste-stagiaires.php"
+    }
+  ]
 }
