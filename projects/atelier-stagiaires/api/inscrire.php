@@ -1,5 +1,9 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+$autoload = dirname(__DIR__, 3) . '/vendor/autoload.php';
+if (!is_file($autoload)) {
+    $autoload = dirname(__DIR__) . '/vendor/autoload.php';
+}
+require $autoload;
 require __DIR__ . '/../config/db.php';
 
 use Cloudinary\Cloudinary;
