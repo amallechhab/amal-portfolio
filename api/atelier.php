@@ -41,7 +41,7 @@ $ateliers = [
   ],
   7 => [
     'title' => 'GitLab CI/CD & SonarQube Cloud',
-    'desc' => 'Découvrir l\'analyse qualité, comparer les versions V1 et V2, et observer le pipeline GitLab CI/CD.',
+    'desc' => 'Comparer V1 et V2 d\'un mini-site, comprendre SonarQube Cloud et GitLab CI/CD, puis vérifier le Quality Gate et le déploiement.',
     'pdf' => $root.'At7_gitlab_sonarqube.pdf',
     'parts' => ['V1 — Code correct, analyse et déploiement', 'V2 — Code modifié et analyse SonarQube'],
   ],
@@ -152,6 +152,8 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <p>Les 16 questions d'Agile et Scrum sont à traiter individuellement. Le travail Jira et le prototype sont suivis séparément dans la rubrique Projets.</p>
 <?php elseif ($num === 3): ?>
 <p>Les cinq parties de cet atelier sont individuelles. Les étapes et commandes sont documentées, mais les trois commits requis, les réponses et les captures personnelles restent à réaliser.</p>
+<?php elseif ($num === 7): ?>
+<p>Le support compare une V1 correcte (deux jobs) à une V2 volontairement problématique, avec des contrôles supplémentaires. Les captures personnelles et résultats GitLab/SonarQube restent à ajouter.</p>
 <?php else: ?>
 <p>Parties décrites dans le support du formateur. Les solutions personnelles ne sont pas encore publiées ici.</p>
 <?php endif; ?>
@@ -172,8 +174,8 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <?php else: ?>
 <p>Support pédagogique publié par le formateur. Ce document est un énoncé, pas une correction personnelle.</p>
 <a class="action" target="_blank" rel="noopener noreferrer" href="<?= h($atelier['pdf']) ?>">Consulter l'énoncé (PDF) <span aria-hidden="true">↗</span></a>
-<?php if (in_array($num, [1, 2, 3], true)): ?>
-<a class="action" style="margin-top:12px" href="/ateliers/atelier<?= $num ?>/index.html">Voir mes exercices individuels <span aria-hidden="true">↗</span></a>
+<?php if (in_array($num, [1, 2, 3, 7], true)): ?>
+<a class="action" style="margin-top:12px" href="/ateliers/atelier<?= $num ?>/index.html"><?= $num===7?'Voir le déroulement de l’Atelier 7':'Voir mes exercices individuels' ?> <span aria-hidden="true">↗</span></a>
 <?php endif; ?>
 <?php endif; ?>
 </section>
