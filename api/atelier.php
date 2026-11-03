@@ -17,9 +17,9 @@ $ateliers = [
   ],
   2 => [
     'title' => 'Agile Scrum & Sprint',
-    'desc' => 'Questions sur Agile et Scrum, puis sprint de conception de Quick Annonce avec Jira, Product Backlog, Planning, Review et Retrospective.',
+    'desc' => 'Partie individuelle : 16 questions sur les principes Agile et Scrum. Les réponses personnelles restent à réaliser ; le sprint de conception est un projet de groupe distinct.',
     'pdf' => $root.'At2_gestionprojet.pdf',
-    'parts' => ['Partie 1 — Travail individuel : Agile et Scrum', 'Partie 2 — Travail en groupe : Sprint de conception'],
+    'parts' => ['Partie 1 — Travail individuel : 16 questions Agile et Scrum'],
   ],
   3 => [
     'title' => 'Les bases de Git',
@@ -147,6 +147,8 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <?php elseif ($atelier['parts']): ?>
 <?php if ($num === 1): ?>
 <p>Les exercices PERT et Gantt de cet atelier sont individuels. Les réponses et les captures personnelles ne sont pas encore publiées.</p>
+<?php elseif ($num === 2): ?>
+<p>Les 16 questions d'Agile et Scrum sont à traiter individuellement. Le travail Jira et le prototype sont suivis séparément dans la rubrique Projets.</p>
 <?php else: ?>
 <p>Parties décrites dans le support du formateur. Les solutions personnelles ne sont pas encore publiées ici.</p>
 <?php endif; ?>
@@ -167,8 +169,8 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <?php else: ?>
 <p>Support pédagogique publié par le formateur. Ce document est un énoncé, pas une correction personnelle.</p>
 <a class="action" target="_blank" rel="noopener noreferrer" href="<?= h($atelier['pdf']) ?>">Consulter l'énoncé (PDF) <span aria-hidden="true">↗</span></a>
-<?php if ($num === 1): ?>
-<a class="action" style="margin-top:12px" href="/ateliers/atelier1/index.html">Voir mes exercices individuels <span aria-hidden="true">↗</span></a>
+<?php if ($num === 1 || $num === 2): ?>
+<a class="action" style="margin-top:12px" href="/ateliers/atelier<?= $num ?>/index.html">Voir mes exercices individuels <span aria-hidden="true">↗</span></a>
 <?php endif; ?>
 <?php endif; ?>
 </section>
