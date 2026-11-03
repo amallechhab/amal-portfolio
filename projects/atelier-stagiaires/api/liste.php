@@ -7,6 +7,8 @@ try {
     $stmt = $pdo->query('SELECT id, nom, prenom, ville, photo, date_inscription FROM stagiaires ORDER BY id DESC');
     echo json_encode($stmt->fetchAll());
 } catch (Throwable $e) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Erreur serveur']);
+    // Keep credentials and raw database errors out of the public JSON response.
+    error_log('Liste stagiaires: MySQL query failed (' . get_class($e) . ')');
+    http_response_code(503);
+    echo json_encode(['error' => 'Répertoire indisponible. Vérifiez la configuration MySQL du serveur.']);
 }
