@@ -40,15 +40,14 @@ $ateliers = [
   ],
   [
     "num"      => "Atelier 2",
-    "statut"   => "ok",
-    "title_fr" => "Gestion de projet : Agile Scrum",
-    "title_en" => "Project management: Agile Scrum",
-    "desc_fr"  => "Questions sur Agile et Scrum, puis sprint de conception du projet « Quick Annonce » avec Jira : Product Backlog, Sprint Planning, Review et Retrospective.",
-    "desc_en"  => "Agile and Scrum questions, then a design sprint for the “Quick Annonce” project with Jira: Product Backlog, Sprint Planning, Review and Retrospective.",
+    "statut"   => "bientot",
+    "title_fr" => "Gestion de projet Agile : Scrum",
+    "title_en" => "Agile project management: Scrum",
+    "desc_fr"  => "Partie individuelle : 16 questions théoriques sur Agile et Scrum. Les réponses personnelles seront ajoutées après réalisation.",
+    "desc_en"  => "Individual part: 16 theory questions about Agile and Scrum. Personal answers will be added when completed.",
     "doc"      => "https://portfoliofs202.vercel.app/docs/At2_gestionprojet.pdf", // énoncé de l'atelier (PDF)
     "exercices" => [
-      ["label" => "Partie 1 (individuel)", "photos" => [], "doc" => ""],
-      ["label" => "Partie 2 (groupe)",     "photos" => [], "doc" => ""],
+      ["label" => "Partie 1 — 16 questions individuelles", "photos" => [], "doc" => ""],
     ],
   ],
   [
@@ -136,6 +135,16 @@ $projets = [
     "desc_en"  => "Group planning: tasks, dependencies, V-model, PERT, critical path and Gantt. Draft to validate with the group.",
     "file"     => "",
     "overview" => "/projects/quick-annonces-groupe/index.html",
+  ],
+  [
+    "type"     => "GROUPE",
+    "groupe"   => true,
+    "title_fr" => "Quick Annonce — Sprint de conception",
+    "title_en" => "Quick Annonce — Design sprint",
+    "desc_fr"  => "Projet de groupe : Scrum, Jira, User Stories, Product Backlog, Sprint Planning, prototype et rétrospective. Livrables personnels non encore fournis.",
+    "desc_en"  => "Group project: Scrum, Jira, User Stories, Product Backlog, Sprint Planning, prototype and retrospective. Team deliverables not yet provided.",
+    "file"     => "",
+    "overview" => "/projects/quick-annonces-scrum/index.html",
   ],
   [
     "type"     => "PDF", // "PDF" ou "PPTX"
@@ -428,8 +437,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   $cardText = [
     1 => ["Méthodes classiques : PERT & Gantt", "Planifier un projet, organiser les tâches et construire un diagramme clair.",
           "Classical methods: PERT & Gantt", "Plan a project, organize tasks and create a clear diagram."],
-    2 => ["Agile Scrum & Sprint", "Comprendre les rôles Agile et construire un backlog et un sprint.",
-          "Agile Scrum & Sprint", "Learn Agile roles and build a backlog and sprint."],
+    2 => ["Agile & Scrum — Travail individuel", "16 questions de cours sur l'Agilité et Scrum, réponses à rédiger.",
+          "Agile & Scrum — Individual work", "16 theory questions on Agile and Scrum, answers to write."],
     3 => ["Les bases de Git", "Initialiser un dépôt, enregistrer des versions et suivre l'historique.",
           "Git fundamentals", "Initialize a repository, record versions and track history."],
     6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "Préparer une application avec formulaire, base de données et gestion d'images.",
@@ -443,7 +452,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     $n=(int)preg_replace('/[^0-9]/','',$a["num"]);
     $copy=$cardText[$n] ?? [$a["title_fr"],$a["desc_fr"],$a["title_en"],$a["desc_en"]];
     $isApp=$n===6;
-    $isPersonal=$n===1;
+    $isPersonal=in_array($n,[1,2],true);
 ?>
         <article class="at-card">
           <div class="at-top">
@@ -455,7 +464,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           <div class="at-bottom">
             <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Application publiée","Application published"):($isPersonal?t("Exercices à réaliser","Exercises to complete"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Application publiée':($isPersonal?'Exercices à réaliser':'Énoncé disponible') ?></span>
 <?php if ($isPersonal): ?>
-            <a class="at-detail" href="/ateliers/atelier1/index.html" aria-label="Exercices individuels de l'atelier 1">
+            <a class="at-detail" href="/ateliers/atelier<?= $n ?>/index.html" aria-label="Exercices individuels de l'atelier <?= $n ?>">
               <span <?= t("Mes exercices", "My exercises") ?>>Mes exercices</span> <span aria-hidden="true">↗</span>
             </a>
 <?php else: ?>
@@ -467,7 +476,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
         </article>
 <?php endforeach; ?>
       </div>
-      <p class="at-note" <?= t("Les PDF sont des énoncés du formateur ; mes exercices personnels sont ajoutés uniquement après réalisation.", "The PDFs are the teacher's instructions; my individual exercises are added only when completed.") ?>>Les PDF sont des énoncés de formation ; une proposition de planification est publiée pour l'Atelier 1, avec ses hypothèses explicites.</p>
+      <p class="at-note" <?= t("Les PDF sont des énoncés du formateur ; mes exercices personnels sont ajoutés uniquement après réalisation.", "The PDFs are the teacher's instructions; my individual exercises are added only when completed.") ?>>Les PDF sont des énoncés du formateur ; mes exercices personnels sont ajoutés uniquement après réalisation.</p>
     </div>
   </section>
 
