@@ -1,9 +1,4 @@
-<!doctype html>
-<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Atelier 7 M02 : GitLab CI/CD, SonarQube Cloud et GitLab Pages. Analyse d'une V1 correcte et d'une V2 à comparer, captures personnelles à ajouter.">
-<title>Atelier 7 — GitLab CI/CD & SonarQube Cloud | Amal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700;800&display=swap">
-<style>
+<!doctype html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Comparaison du pipeline et de l'analyse des versions V1 et V2."><title>Atelier 7 — GitLab CI/CD &amp;amp; SonarQube | Amal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700;800&display=swap"><style>
 :root{--bg:#f5f7fb;--fg:#13213b;--muted:#56637a;--accent:#1d4ed8;--accent-fg:#fff;--lilac:#dce6fa;--peach:#e0eef0;--card:#fff;--line:#d5deec;color-scheme:light}
 @media(prefers-color-scheme:dark){:root{--bg:#0e1626;--fg:#e8eefb;--muted:#9db0cc;--accent:#6ea8fe;--accent-fg:#0a1426;--lilac:#1c2d52;--peach:#173a42;--card:#15203a;--line:#2a3b5e;color-scheme:dark}}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 Figtree,system-ui,sans-serif}
@@ -29,115 +24,10 @@ footer{padding:20px 0 40px;border-top:2px dashed var(--line);font-size:13px;colo
 @media(max-width:680px){.grid{grid-template-columns:1fr}.hero{padding-top:36px}.box,.ex-body{padding:19px}.ex-header{padding:20px}}
 @media print{header,.actions{display:none}body{background:white;color:#13213b}.ex,.box{break-inside:avoid}.placeholder{border-style:solid}}
 
-.questions{display:grid;gap:12px;margin:22px 0}.question{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px}.question .num{background:var(--accent);color:var(--accent-fg);min-width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:13px}.question strong{font-size:14px;display:block}.question p{font-size:13px;color:var(--muted);margin:7px 0 0}.groupnote{padding:18px;background:color-mix(in srgb,var(--peach) 55%,var(--card));border:1px solid var(--line);border-radius:17px}.section-anchor{scroll-margin-top:18px}
-
-.part{margin-top:20px;background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden}
-.part-head{padding:21px 24px;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-bottom:1px solid var(--line)}
-.part-head .pill{margin-bottom:9px}.part-head h3{font-size:20px;margin-bottom:2px}.part-head p{color:var(--muted);font-size:13px;margin:0}
-.part-body{padding:24px}.part-body h4{margin:18px 0 9px;font-size:14px;color:var(--fg)}.part-body h4:first-child{margin-top:0}
-.cmd{background:#172540;color:#eaf0ff;border-radius:16px;padding:18px 20px;overflow-x:auto;font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;margin:8px 0 15px;white-space:pre}
-.qs{display:grid;gap:9px;list-style:none;margin:0;padding:0}
-.qs li{background:color-mix(in srgb,var(--lilac) 32%,var(--card));border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:14px}
-.qs small{display:block;color:var(--muted);font-size:12px;margin-top:3px}.badge-time{border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--muted)}
-.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:19px}.to-do{border-radius:14px;background:color-mix(in srgb,var(--peach) 53%,var(--card));border:1px solid var(--line);padding:13px 16px;font-size:13px;color:var(--muted)}
-.result{margin-top:13px;border:2px dashed var(--line);border-radius:14px;padding:23px 18px;text-align:center;color:var(--muted);font-size:13px}
-.result strong{display:block;color:var(--fg);margin-bottom:4px}
-.cheat{width:100%;border-collapse:collapse;margin:12px 0}.cheat th,.cheat td{text-align:left;border:1px solid var(--line);padding:9px 12px;font-size:13px}.cheat th{background:var(--lilac)}.cheat td:first-child{font-family:ui-monospace,Consolas,monospace;font-weight:700}
-.steps li{margin:3px 0}.mini-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.mini-links a{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
-@media(max-width:780px){.two-col{grid-template-columns:1fr}.part-body{padding:18px}.part-head{padding:19px}.cmd{font-size:12px}}
-@media print{.part{break-inside:avoid;page-break-inside:avoid}.cmd{color:#13213b;background:#edf2ff;white-space:pre-wrap}.result{display:none}}
-
-.part{margin-top:20px;background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden}
-.part-head{padding:21px 24px;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-bottom:1px solid var(--line)}
-.part-head .pill{margin-bottom:9px}.part-head h3{font-size:20px;margin-bottom:4px}.part-head p{color:var(--muted);font-size:14px;margin:0}
-.part-body{padding:24px}.part-body h4{margin:18px 0 9px;font-size:14px;color:var(--fg)}.part-body h4:first-child{margin-top:0}
-.two-col{display:grid;grid-template-columns:1.12fr .88fr;gap:20px}.to-do{border-radius:14px;background:color-mix(in srgb,var(--peach) 53%,var(--card));border:1px solid var(--line);padding:13px 16px;font-size:13px;color:var(--muted)}
-.result{margin-top:13px;border:2px dashed var(--line);border-radius:14px;padding:21px 18px;text-align:center;color:var(--muted);font-size:13px}.result strong{display:block;color:var(--fg);margin-bottom:4px}
-.resources{display:grid;gap:9px}.resources a{display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;border:2px solid var(--accent);border-radius:999px;padding:9px 15px;color:var(--accent);font-weight:700;font-size:13px}.resources a:hover{background:var(--accent);color:var(--accent-fg)}
-.muted{font-size:13px;color:var(--muted)}.cmd{background:#172540;color:#eaf0ff;border-radius:15px;padding:15px;overflow-x:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
-.mini-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.mini-links a{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);font-size:13px}
-.arch{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch;margin-top:16px}.arch div{border:1px solid var(--line);border-radius:15px;text-align:center;background:color-mix(in srgb,var(--lilac) 43%,var(--card));padding:15px}.arch strong{display:block;color:var(--accent)}.arch span{display:block;color:var(--muted);font-size:12px;margin-top:5px}
-.arch div:nth-child(2){background:color-mix(in srgb,var(--peach) 55%,var(--card))}
-.checklist{margin:8px 0;padding-left:22px}.checklist li{margin-bottom:8px}.notice{background:color-mix(in srgb,var(--peach) 56%,var(--card));border-left:4px solid var(--accent);padding:16px 19px;border-radius:13px;font-size:14px}
-.section-anchor{scroll-margin-top:28px}.status{border-color:var(--line)}.actions{margin-bottom:8px}
-@media(max-width:800px){.arch{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.part-body{padding:18px}}
-@media(max-width:480px){.arch{grid-template-columns:1fr}.part-head{padding:18px}}
-@media print{.result,.mini-links{display:none}.part{break-inside:avoid}.cmd{background:#edf2ff;color:#13213b}}
-
-.unit{margin-top:20px;background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden}
-.unithead{padding:22px 25px;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-bottom:1px solid var(--line)}
-.unithead .pill{margin-bottom:9px}.unithead h3{font-size:20px;margin:0 0 5px}.unithead p{font-size:14px;color:var(--muted);margin:0}
-.unitbody{padding:24px}.unitbody h4{margin:18px 0 9px;font-size:14px}.unitbody h4:first-child{margin-top:0}
-.to-do{border-radius:14px;background:color-mix(in srgb,var(--peach) 53%,var(--card));border:1px solid var(--line);padding:13px 16px;font-size:13px;color:var(--muted)}
-.result{margin-top:13px;border:2px dashed var(--line);border-radius:14px;padding:22px 18px;text-align:center;color:var(--muted);font-size:13px}.result strong{display:block;color:var(--fg);margin-bottom:4px}
-.mini-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.mini-links a{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);font-size:13px}
-.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:18px 0}.flow span{display:grid;align-content:center;text-align:center;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border:1px solid var(--line);border-radius:13px;padding:10px 6px;font-size:13px;font-weight:800}
-.compare{width:100%;border-collapse:collapse;min-width:565px}.compare th,.compare td{text-align:left;padding:13px;border:1px solid var(--line);font-size:13px;vertical-align:top}.compare th{background:var(--lilac)}.tablewrap{overflow-x:auto;border-radius:14px}
-.note{margin-top:12px}.safe{border-left:4px solid var(--accent);border-radius:12px;background:color-mix(in srgb,var(--peach) 54%,var(--card));padding:16px 18px;font-size:14px}
-@media(max-width:770px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.unitbody,.unithead{padding:19px}}
-@media print{.unit{break-inside:avoid;page-break-inside:avoid}.flow{grid-template-columns:repeat(5,1fr)}.result{display:none}}
-</style></head>
-<body><header><nav class="wrap"><a class="logo" href="/">Amal</a><a class="back" href="/#ateliers">← Retour aux ateliers</a></nav></header>
-<main class="wrap">
-<section class="hero"><span class="eyebrow">Portfolio / M02 / Atelier 07</span>
-<h1>GitLab CI/CD<br>&amp; SonarQube Cloud</h1>
-<p class="lead">Étudier la qualité et la sécurité d'un mini-site HTML/CSS/JavaScript avec GitLab et SonarQube, puis comparer une version V1 correcte avec une version V2 volontairement problématique dans un environnement de test.</p>
-<span class="status">Énoncé documenté · Réalisations personnelles à ajouter</span>
-<div class="actions"><a class="btn solid" href="https://portfoliofs202.vercel.app/docs/At7_gitlab_sonarqube.pdf" target="_blank" rel="noopener noreferrer">Consulter l'énoncé (PDF)</a><a class="btn" href="#versions">Comparer V1 et V2</a><a class="btn" href="#etape-01">Voir les étapes</a></div></section>
-<div class="grid"><section class="box"><span class="pill">Objectif</span><h2>Ce que je dois apprendre</h2><p>Comprendre la création d'un pipeline CI/CD GitLab, l'analyse SonarQube Cloud, le Quality Gate et le fonctionnement de GitLab Pages, puis observer les effets des modifications de code.</p></section>
-<section class="box tint"><span class="pill">Mini-projet</span><h2>Travail à réaliser</h2><p>Préparer des fichiers <code>index.html</code>, <code>style.css</code>, <code>script.js</code>, <code>sonar-project.properties</code> et <code>.gitlab-ci.yml</code>.</p><p>Les liens GitLab, résultats SonarQube et captures de mon propre projet ne sont pas encore fournis.</p></section></div>
-<section class="box" id="versions"><span class="pill">Deux versions</span><h2>V1 correcte et V2 volontairement modifiée</h2><div class="tablewrap"><table class="compare"><thead><tr><th>Point de comparaison</th><th>V1 — correcte</th><th>V2 — expérience de sécurité</th></tr></thead><tbody>
-<tr><td>Code</td><td>Interface simple avec un bouton et affichage sûr du message.</td><td>Comportement volontairement problématique pour montrer un risque XSS.</td></tr>
-<tr><td>Analyse</td><td>SonarQube Cloud et Quality Gate.</td><td>Nouvelle analyse ; comparer les alertes et l'état du Quality Gate.</td></tr>
-<tr><td>Pipeline décrit dans le support</td><td>Deux jobs : <code>sonarqube-check</code> puis <code>deploy-pages</code>. Pas de job validate ni test automatisé dans cette V1 simplifiée.</td><td>La section V2 du PDF propose aussi <code>syntax-check</code> et <code>security-check</code>, en plus des jobs d'analyse et déploiement.</td></tr>
-<tr><td>Résultat personnel</td><td>À documenter après exécution.</td><td>À documenter après exécution.</td></tr>
-</tbody></table></div><p class="small">Le PDF présente d'abord une V1 à deux jobs, puis un fichier YAML plus détaillé dans la partie V2. Les deux configurations ne doivent pas être confondues.</p></section>
-<section class="box"><span class="pill">Architecture de l'atelier</span><h2>Du push au déploiement</h2>
-<div class="flow"><span>Git push</span><span>GitLab CI/CD</span><span>sonarqube-check</span><span>Quality Gate</span><span>deploy-pages</span></div>
-<p>Si la vérification de qualité échoue et que le pipeline est configuré pour attendre le Quality Gate, le déploiement peut être bloqué. Le résultat réel dépend de la configuration et des analyses de chaque version.</p></section>
-<section class="box"><span class="pill">Démarche</span><h2>Déroulement — 7 étapes</h2><p>Les étapes ci-dessous suivent la progression du support (SonarQube, mini-site V1, configuration, pipeline, V2 et comparaison), avec des emplacements pour ajouter mes propres preuves.</p><div class="mini-links"><a href="#etape-01">Étape 01</a><a href="#etape-02">Étape 02</a><a href="#etape-03">Étape 03</a><a href="#etape-04">Étape 04</a><a href="#etape-05">Étape 05</a><a href="#etape-06">Étape 06</a><a href="#etape-07">Étape 07</a></div></section>
-<section class="unit" id="etape-01">
-<div class="unithead"><span class="pill">ÉTAPE 01 / 07</span><h3>Comprendre SonarQube Cloud</h3><p>Analyse de qualité et sécurité du code et fonctionnement du Quality Gate.</p></div>
-<div class="unitbody"><h4>Travail demandé</h4><ol class="steps"><li>Identifier les métriques présentées : Bugs, Vulnerabilities, Security Hotspots, Code Smells, Coverage et Duplications.</li><li>Comprendre le rôle du Quality Gate dans la vérification de la qualité.</li><li>Comprendre le chemin GitLab → Pipeline → Analyse SonarQube → Quality Gate → Déploiement.</li></ol>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Notes de compréhension personnelles, éventuellement capture du tableau de bord de ton propre projet.</div><div class="result"><strong>Capture personnelle à ajouter</strong>Pas de capture, résultat ni validation attribués à mon projet sans preuve réelle.</div>
-</div></section>
-<section class="unit" id="etape-02">
-<div class="unithead"><span class="pill">ÉTAPE 02 / 07</span><h3>Créer le mini-site — Version V1 correcte</h3><p>Préparer un exemple HTML, CSS et JavaScript, puis le placer dans GitLab.</p></div>
-<div class="unitbody"><h4>Travail demandé</h4><ol class="steps"><li>Créer ou ouvrir un projet GitLab et le cloner en local.</li><li>Créer index.html, style.css et script.js.</li><li>Afficher un texte et un bouton ; modifier le message avec JavaScript de façon sûre, en utilisant textContent.</li><li>Enregistrer un commit V1 et envoyer les fichiers avec git push.</li></ol>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Captures de tes fichiers HTML/CSS/JS, de l&#39;interface V1 et du dépôt GitLab.</div><div class="result"><strong>Capture personnelle à ajouter</strong>Pas de capture, résultat ni validation attribués à mon projet sans preuve réelle.</div>
-</div></section>
-<section class="unit" id="etape-03">
-<div class="unithead"><span class="pill">ÉTAPE 03 / 07</span><h3>Configurer SonarQube Cloud</h3><p>Connecter le dépôt GitLab à l&#39;analyse SonarQube.</p></div>
-<div class="unitbody"><h4>Travail demandé</h4><ol class="steps"><li>Connecter SonarQube Cloud au projet GitLab.</li><li>Créer sonar-project.properties avec tes identifiants de projet et d&#39;organisation.</li><li>Créer un token SonarQube privé pour le pipeline.</li><li>Renseigner SONAR_HOST_URL et SONAR_TOKEN dans les variables CI/CD GitLab, sans les publier.</li></ol>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Capture de l&#39;intégration et de la configuration sans jamais afficher de token.</div><div class="result"><strong>Capture personnelle à ajouter</strong>Pas de capture, résultat ni validation attribués à mon projet sans preuve réelle.</div>
-</div></section>
-<section class="unit" id="etape-04">
-<div class="unithead"><span class="pill">ÉTAPE 04 / 07</span><h3>Pipeline V1 : analyse et déploiement</h3><p>V1 : uniquement les deux jobs demandés dans l&#39;introduction du PDF.</p></div>
-<div class="unitbody"><h4>Travail demandé</h4><ol class="steps"><li>Créer .gitlab-ci.yml avec les stages quality et deploy.</li><li>Ajouter le job sonarqube-check pour analyser le code et attendre le Quality Gate.</li><li>Ajouter deploy-pages pour publier index.html, style.css et script.js sur GitLab Pages.</li><li>Pousser V1 puis consulter le pipeline et le dashboard SonarQube.</li><li>Vérifier le comportement réel du pipeline ; le document montre aussi un cas d&#39;erreur en cas de double analyse automatique et CI.</li></ol>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Capture de ton pipeline V1, de ton Quality Gate et de ta page GitLab Pages, si elle est déployée.</div><div class="result"><strong>Capture personnelle à ajouter</strong>Pas de capture, résultat ni validation attribués à mon projet sans preuve réelle.</div>
-</div></section>
-<section class="unit" id="etape-05">
-<div class="unithead"><span class="pill">ÉTAPE 05 / 07</span><h3>Modifier le mini-site — Version V2</h3><p>Étudier un changement volontairement dangereux décrit dans le support.</p></div>
-<div class="unitbody"><h4>Travail demandé</h4><ol class="steps"><li>Créer une nouvelle version du mini-site pour la comparaison.</li><li>Examiner pourquoi interpréter du texte saisi par l&#39;utilisateur comme du HTML peut introduire une vulnérabilité XSS.</li><li>Réaliser cette démonstration uniquement dans un environnement de test isolé et avec des données fictives.</li><li>Pousser V2 et comparer les résultats de l&#39;analyse avec V1.</li></ol>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Captures V2, comparaison des versions et analyse SonarQube du code de démonstration.</div><div class="result"><strong>Capture personnelle à ajouter</strong>Pas de capture, résultat ni validation attribués à mon projet sans preuve réelle.</div>
-</div></section>
-<section class="unit" id="etape-06">
-<div class="unithead"><span class="pill">ÉTAPE 06 / 07</span><h3>Pipeline V2 : contrôles supplémentaires</h3><p>La partie V2 du support ajoute des contrôles que la V1 simplifiée n&#39;avait pas.</p></div>
-<div class="unitbody"><h4>Travail demandé</h4><ol class="steps"><li>Étudier l&#39;ajout du job syntax-check et du stage security dans le YAML de la partie V2.</li><li>Examiner le job security-check qui consulte les résultats de sécurité de SonarQube.</li><li>Comprendre les conditions d&#39;échec, notamment Quality Gate ou problèmes de sécurité relevés.</li><li>Observer si le job de déploiement est exécuté ou bloqué selon la configuration et les résultats réels.</li></ol>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Capture du YAML V2, des jobs et du comportement du pipeline ; indiquer les résultats observés, sans les supposer.</div><div class="result"><strong>Capture personnelle à ajouter</strong>Pas de capture, résultat ni validation attribués à mon projet sans preuve réelle.</div>
-</div></section>
-<section class="unit" id="etape-07">
-<div class="unithead"><span class="pill">ÉTAPE 07 / 07</span><h3>Bilan : comparer V1 et V2</h3><p>Présenter le rôle de GitLab, SonarQube et du Quality Gate.</p></div>
-<div class="unitbody"><h4>Travail demandé</h4><ol class="steps"><li>Comparer les résultats V1 et V2 dans SonarQube Cloud.</li><li>Noter les problèmes de sécurité et de maintenabilité détectés (s&#39;il y en a).</li><li>Décrire l&#39;état réel de chaque job dans GitLab CI/CD.</li><li>Expliquer dans quelles conditions un échec de l&#39;analyse peut empêcher le déploiement.</li><li>Proposer une correction et relancer l&#39;analyse après modification du code, si le test est réalisé.</li></ol>
-<h4>Mes preuves de réalisation</h4><div class="to-do">Captures comparatives et petite conclusion personnelle de l&#39;expérience.</div><div class="result"><strong>Capture personnelle à ajouter</strong>Pas de capture, résultat ni validation attribués à mon projet sans preuve réelle.</div>
-</div></section>
-<section class="box"><span class="pill">Mes livrables</span><h2>Captures et documents à ajouter</h2><ol class="steps">
-<li>Capture de mon dépôt GitLab et des fichiers du mini-site V1.</li>
-<li>Capture de mon pipeline V1 et du tableau de bord SonarQube Cloud.</li>
-<li>Lien du site GitLab Pages si la version V1 a été publiée.</li>
-<li>Captures de la V2 et de sa nouvelle analyse qualité/sécurité.</li>
-<li>Comparaison des deux pipelines et explication personnelle du Quality Gate.</li></ol>
-<div class="result"><strong>Ma galerie de captures</strong>Je publierai mes propres images et les liens du projet uniquement après réalisation et vérification.</div></section>
-<section class="box"><span class="pill">Sécurité et traçabilité</span><h2>Précautions avant de présenter mon travail</h2><div class="safe">Ne jamais publier <code>SONAR_TOKEN</code>, clés d'accès ou informations privées. La partie V2 du support contient une démonstration volontairement vulnérable : ne pas l'utiliser sur un site ouvert au public ni avec de vraies données. Pour un site réel, afficher du texte non fiable comme texte, pas comme HTML.</div>
-<p style="margin-top:15px">Ce document résume le travail demandé, mais ne prétend pas que le projet GitLab, les analyses SonarQube ou le déploiement ont déjà été exécutés sur mon compte.</p></section>
-</main><footer><div class="wrap">© Amal · OFPPT · M02 · Atelier 7 — GitLab CI/CD &amp; SonarQube Cloud</div></footer></body></html>
+.hero{padding:42px 0 16px}.lead{max-width:63ch}.short-label{font-size:13px;color:var(--muted);font-weight:600}.box{margin-top:16px}.compact-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.proof{padding:19px;border:2px dashed var(--line);border-radius:16px;background:color-mix(in srgb,var(--lilac) 18%,var(--card));margin-top:12px}.proof b{display:block;font-size:15px}.proof p{font-size:13px;color:var(--muted);margin:6px 0 0}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.links .btn{margin:0}.mono{font:12px ui-monospace,Consolas,monospace}.embed{width:100%;height:480px;display:block;border:1px solid var(--line);border-radius:15px;background:var(--card);margin-top:15px}.tiny{font-size:12px;color:var(--muted)}.cardlet{padding:19px;border:1px solid var(--line);border-radius:17px;background:color-mix(in srgb,var(--lilac) 20%,var(--card))}.cardlet h3{margin:4px 0 6px}.cardlet p{font-size:13px;color:var(--muted);margin:0}.cardlet .btn{margin-top:12px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{border:1px solid var(--line);background:var(--card);border-radius:15px;padding:12px;text-align:center}.metric strong{display:block;font-size:22px;color:var(--accent)}.metric span{color:var(--muted);font-size:12px}.faint{background:color-mix(in srgb,var(--peach) 32%,var(--card))}.footnote{color:var(--muted);font-size:12px;margin-top:12px}.tag{font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--accent)}@media(max-width:690px){.compact-row{grid-template-columns:1fr}.embed{height:365px}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.metric strong{font-size:19px}}
+</style></head><body><header><nav class="wrap"><a class="logo" href="/">Amal</a><a class="back" href="/#ateliers">← Retour</a></nav></header><main class="wrap"><section class="hero"><span class="eyebrow">Portfolio · M02</span><h1>Atelier 7 — GitLab CI/CD &amp; SonarQube</h1><p class="lead">Comparaison du pipeline et de l'analyse des versions V1 et V2.</p></section>
+<section class="box"><span class="pill">Mes résultats</span><div class="compact-row" style="margin-top:14px">
+<div class="cardlet"><h3>V1 · Code correct</h3><p>Pipeline et Quality Gate.</p><div class="proof"><b>Résultat V1</b><p>Capture GitLab / SonarQube à ajouter.</p></div></div>
+<div class="cardlet"><h3>V2 · Version de test</h3><p>Analyse de sécurité et comparaison.</p><div class="proof"><b>Résultat V2</b><p>Capture GitLab / SonarQube à ajouter.</p></div></div>
+</div><div class="links"><a class="btn " href="https://portfoliofs202.vercel.app/docs/At7_gitlab_sonarqube.pdf" target="_blank" rel="noopener noreferrer">Énoncé ↗</a></div></section>
+</main><footer><div class="wrap">© Amal · OFPPT · Portfolio</div></footer></body></html>
