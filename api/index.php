@@ -72,7 +72,7 @@ $ateliers = [
     "title_en" => "Sprint 3 prerequisites: Trainee registration",
     "desc_fr"  => "Atelier 6 : préparation au Sprint 3 Quick Annonces. Formulaire PHP, MySQL Aiven, photos Cloudinary, liste des stagiaires et déploiement Vercel.",
     "desc_en"  => "Workshop 6: Quick Annonces Sprint 3 preparation with PHP, Aiven MySQL, Cloudinary photos, trainee directory and Vercel deployment.",
-    "doc"      => "https://github.com/karim-azeggouar/portfoliofs202/blob/master/public/docs/At6_github.pdf",
+    "doc"      => "",
     "exercices" => [
       [
         "label" => "Formulaire d'inscription",
