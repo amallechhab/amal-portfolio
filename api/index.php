@@ -112,8 +112,8 @@ $ateliers = [
     "statut"   => "bientot",
     "title_fr" => "GitLab CI/CD et SonarQube Cloud",
     "title_en" => "GitLab CI/CD and SonarQube Cloud",
-    "desc_fr"  => "Comparer une V1 correcte et une V2 volontairement incorrecte, analyser le code avec SonarQube Cloud et observer le pipeline GitLab CI/CD. Solutions à ajouter.",
-    "desc_en"  => "Compare correct V1 and intentionally faulty V2, analyze the code with SonarQube Cloud and inspect the GitLab CI/CD pipeline. Solutions to be added.",
+    "desc_fr"  => "Comparer un mini-site V1 correct et une V2 volontairement problématique, configurer GitLab CI/CD et SonarQube Cloud, puis documenter l'analyse du pipeline.",
+    "desc_en"  => "Compare a correct V1 mini-site and a deliberately problematic V2, configure GitLab CI/CD and SonarQube Cloud, then document the pipeline analysis.",
     "doc"      => "https://portfoliofs202.vercel.app/docs/At7_gitlab_sonarqube.pdf",
     "exercices" => [
       ["label" => "V1 — Code correct", "photos" => [], "doc" => ""],
@@ -443,8 +443,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           "Git fundamentals", "Five individual sections: Git repository, three commits, files and history."],
     6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "9 étapes : application de stagiaires, PHP, base de données, photos et Vercel.",
           "Sprint 3: PHP, MySQL & Cloudinary", "Nine steps: trainee app, PHP, database, photos and Vercel."],
-    7 => ["GitLab CI/CD & SonarQube Cloud", "Découvrir l'analyse qualité et les étapes d'une pipeline CI/CD.",
-          "GitLab CI/CD & SonarQube Cloud", "Learn code quality analysis and the CI/CD pipeline process."]
+    7 => ["GitLab CI/CD & SonarQube Cloud", "Comparer V1 et V2 : pipeline GitLab, analyse SonarQube et Quality Gate.",
+          "GitLab CI/CD & SonarQube Cloud", "Compare V1 and V2: GitLab pipeline, SonarQube analysis and Quality Gate."]
   ];
 ?>
       <div class="at-grid">
@@ -452,7 +452,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     $n=(int)preg_replace('/[^0-9]/','',$a["num"]);
     $copy=$cardText[$n] ?? [$a["title_fr"],$a["desc_fr"],$a["title_en"],$a["desc_en"]];
     $isApp=$n===6;
-    $isPersonal=in_array($n,[1,2,3,6],true);
+    $isPersonal=in_array($n,[1,2,3,6,7],true);
 ?>
         <article class="at-card">
           <div class="at-top">
@@ -465,7 +465,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
             <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Pages et code disponibles","Pages and code available"):($isPersonal?t("Exercices à réaliser","Exercises to complete"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Pages et code disponibles':($isPersonal?'Exercices à réaliser':'Énoncé disponible') ?></span>
 <?php if ($isPersonal): ?>
             <a class="at-detail" href="/ateliers/atelier<?= $n ?>/index.html" aria-label="Voir l'atelier <?= $n ?>">
-              <span <?= $isApp?t("Voir l'atelier","View workshop"):t("Mes exercices", "My exercises") ?>><?= $isApp?"Voir l'atelier":"Mes exercices" ?></span> <span aria-hidden="true">↗</span>
+              <span <?= in_array($n,[6,7],true)?t("Voir l'atelier","View workshop"):t("Mes exercices", "My exercises") ?>><?= in_array($n,[6,7],true)?"Voir l'atelier":"Mes exercices" ?></span> <span aria-hidden="true">↗</span>
             </a>
 <?php else: ?>
             <a class="at-detail" href="/api/atelier.php?num=<?= $n ?>" aria-label="Détail atelier <?= $n ?>">
