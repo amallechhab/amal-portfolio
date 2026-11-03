@@ -47,6 +47,69 @@ $ateliers = [
   ],
 ];
 
+
+// Contenu issu des consignes M02 du formateur.
+// Il décrit le travail demandé, sans attribuer à Amal des solutions non publiées.
+$programme = [
+  1 => [
+    'objectif' => 'Organiser la planification de Quick Annonces à l’aide des méthodes classiques.',
+    'etapes' => [
+      'Décomposer le projet Quick Annonces en tâches.',
+      'Estimer les durées et identifier les dépendances entre les tâches.',
+      'Organiser les étapes selon un modèle en V ou en Y.',
+      'Construire un diagramme PERT et déterminer le chemin critique.',
+      'Préparer un diagramme de Gantt pour visualiser le calendrier du projet.',
+    ],
+    'livrables' => ['Liste des tâches et dépendances', 'Diagramme PERT et chemin critique', 'Diagramme de Gantt'],
+  ],
+  2 => [
+    'objectif' => 'Comprendre Agile et Scrum, puis préparer en équipe un sprint de conception de Quick Annonce.',
+    'etapes' => [
+      'Partie individuelle : répondre aux questions sur l’Agilité, les rôles Scrum, les backlogs, les User Stories et les cérémonies.',
+      'Former une équipe Scrum et définir Product Owner, Scrum Master et Developers.',
+      'Créer le projet dans Jira, les User Stories et le Product Backlog, puis estimer et prioriser les éléments.',
+      'Définir le Sprint Goal, sélectionner les User Stories et préparer les tâches du Sprint Backlog.',
+      'Réaliser le prototype, suivre l’avancement et organiser les échanges du sprint.',
+      'Présenter le résultat en Sprint Review puis proposer des améliorations en Retrospective.',
+    ],
+    'livrables' => ['Réponses de la partie individuelle', 'Product Backlog et Sprint Backlog dans Jira', 'Prototype Quick Annonce', 'Bilan du sprint'],
+  ],
+  3 => [
+    'objectif' => 'Apprendre à suivre les versions des fichiers d’un projet avec Git.',
+    'etapes' => [
+      'Partie 1 : vérifier Git, configurer l’identité, créer le dossier atelier-git et initialiser le dépôt.',
+      'Partie 2 : créer index.html, contrôler son état, l’ajouter au staging et enregistrer le premier commit.',
+      'Partie 3 : modifier index.html, consulter git diff et git diff --staged, puis créer un deuxième commit.',
+      'Partie 4 : ajouter style.css et README.md, contrôler les fichiers et enregistrer un troisième commit.',
+      'Partie 5 : consulter l’historique et répondre aux questions de bilan sur les commandes Git.',
+    ],
+    'livrables' => ['Dépôt Git local', 'Fichiers HTML, CSS et README', 'Historique des commits', 'Réponses aux questions'],
+  ],
+  6 => [
+    'objectif' => 'Préparer le Sprint 3 en développant une application simple d’inscription et de consultation de stagiaires.',
+    'etapes' => [
+      'Créer une base de données MySQL sur Aiven et une table stagiaires.',
+      'Configurer Cloudinary pour héberger les photos et garder les secrets hors du dépôt.',
+      'Développer le formulaire HTML et une API PHP qui valide les données et envoie la photo.',
+      'Enregistrer les informations et l’URL de la photo dans MySQL.',
+      'Développer la lecture des enregistrements et la page de liste des stagiaires.',
+      'Préparer le déploiement Vercel et les variables d’environnement.',
+    ],
+    'livrables' => ['Formulaire d’inscription', 'Page de liste des stagiaires', 'Code source PHP et configuration', 'Intégration Aiven et Cloudinary'],
+  ],
+  7 => [
+    'objectif' => 'Observer le contrôle de qualité du code et le déploiement avec GitLab CI/CD et SonarQube Cloud.',
+    'etapes' => [
+      'Préparer la version V1 correcte du mini-projet HTML, CSS et JavaScript.',
+      'Configurer le pipeline GitLab avec les jobs sonarqube-check et deploy-pages.',
+      'Lancer l’analyse SonarQube, consulter les indicateurs et le Quality Gate.',
+      'Préparer une version V2 volontairement incorrecte et relancer l’analyse.',
+      'Comparer les résultats V1/V2 et observer l’effet du pipeline sur le déploiement.',
+    ],
+    'livrables' => ['Code des versions V1 et V2', 'Configuration GitLab CI/CD', 'Résultats SonarQube et comparaison', 'Observations sur le pipeline'],
+  ],
+];
+
 $num = filter_input(INPUT_GET,'num',FILTER_VALIDATE_INT);
 if (!is_int($num) || !isset($ateliers[$num])) {
     http_response_code(404);
@@ -115,6 +178,7 @@ main{padding:14px 0 66px}
 .action:hover{background:var(--accent);color:var(--accent-fg)}
 .action span{font-size:18px}
 .notice{background:color-mix(in srgb,var(--peach) 40%,var(--card));border:1px solid var(--line);border-radius:14px;padding:15px;color:var(--muted);font-size:14px}
+.worklog{margin-top:20px}
 footer{border-top:2px dashed var(--line);padding:24px 0 35px;font-size:13px;color:var(--muted)}
 a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 @media(max-width:700px){
@@ -165,6 +229,24 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 <a class="action" target="_blank" rel="noopener noreferrer" href="<?= h($atelier['pdf']) ?>">Consulter l'énoncé (PDF) <span aria-hidden="true">↗</span></a>
 <?php endif; ?>
 </section>
+</div>
+<div class="content-grid worklog">
+  <section class="box">
+    <h2>Objectif et travail demandé</h2>
+    <p><?= h($programme[$num]['objectif']) ?></p>
+    <ul class="list"><?php foreach ($programme[$num]['etapes'] as $etape): ?><li><?= h($etape) ?></li><?php endforeach; ?></ul>
+  </section>
+  <section class="box">
+    <h2>Livrables attendus</h2>
+    <p>Ces éléments sont demandés dans l'atelier. Leur présence ici ne signifie pas que les solutions personnelles sont déjà publiées.</p>
+    <ul class="list"><?php foreach ($programme[$num]['livrables'] as $livrable): ?><li><?= h($livrable) ?></li><?php endforeach; ?></ul>
+    <h2 style="margin-top:24px">Travail personnel</h2>
+    <?php if ($num === 6): ?>
+      <p class="notice">Le code source, le formulaire, la page de liste et la présentation du projet sont accessibles dans les liens ci-dessus. Le fonctionnement des services externes n'est pas confirmé sur cette page.</p>
+    <?php else: ?>
+      <p class="notice">L'énoncé est disponible. Les captures d'écran, documents de réponse et liens vers mes réalisations ne sont pas encore publiés ici.</p>
+    <?php endif; ?>
+  </section>
 </div></main>
 <?php endif; ?>
 <footer><div class="wrap">© <?= date('Y') ?> Amal Lechhab · Portfolio OFPPT</div></footer>
