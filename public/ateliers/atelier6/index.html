@@ -1,9 +1,4 @@
-<!doctype html>
-<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Atelier 6 M02 : application de gestion des stagiaires, PHP, MySQL Aiven, Cloudinary et Vercel. Étapes, code existant et captures à compléter.">
-<title>Atelier 6 — PHP, MySQL Aiven, Cloudinary & Vercel | Amal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700;800&display=swap">
-<style>
+<!doctype html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Mon application PHP, MySQL Aiven et Cloudinary."><title>Atelier 6 — Inscription des stagiaires | Amal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;600;700;800&display=swap"><style>
 :root{--bg:#f5f7fb;--fg:#13213b;--muted:#56637a;--accent:#1d4ed8;--accent-fg:#fff;--lilac:#dce6fa;--peach:#e0eef0;--card:#fff;--line:#d5deec;color-scheme:light}
 @media(prefers-color-scheme:dark){:root{--bg:#0e1626;--fg:#e8eefb;--muted:#9db0cc;--accent:#6ea8fe;--accent-fg:#0a1426;--lilac:#1c2d52;--peach:#173a42;--card:#15203a;--line:#2a3b5e;color-scheme:dark}}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 Figtree,system-ui,sans-serif}
@@ -29,122 +24,13 @@ footer{padding:20px 0 40px;border-top:2px dashed var(--line);font-size:13px;colo
 @media(max-width:680px){.grid{grid-template-columns:1fr}.hero{padding-top:36px}.box,.ex-body{padding:19px}.ex-header{padding:20px}}
 @media print{header,.actions{display:none}body{background:white;color:#13213b}.ex,.box{break-inside:avoid}.placeholder{border-style:solid}}
 
-.questions{display:grid;gap:12px;margin:22px 0}.question{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px}.question .num{background:var(--accent);color:var(--accent-fg);min-width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-weight:800;font-size:13px}.question strong{font-size:14px;display:block}.question p{font-size:13px;color:var(--muted);margin:7px 0 0}.groupnote{padding:18px;background:color-mix(in srgb,var(--peach) 55%,var(--card));border:1px solid var(--line);border-radius:17px}.section-anchor{scroll-margin-top:18px}
-
-.part{margin-top:20px;background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden}
-.part-head{padding:21px 24px;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-bottom:1px solid var(--line)}
-.part-head .pill{margin-bottom:9px}.part-head h3{font-size:20px;margin-bottom:2px}.part-head p{color:var(--muted);font-size:13px;margin:0}
-.part-body{padding:24px}.part-body h4{margin:18px 0 9px;font-size:14px;color:var(--fg)}.part-body h4:first-child{margin-top:0}
-.cmd{background:#172540;color:#eaf0ff;border-radius:16px;padding:18px 20px;overflow-x:auto;font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;margin:8px 0 15px;white-space:pre}
-.qs{display:grid;gap:9px;list-style:none;margin:0;padding:0}
-.qs li{background:color-mix(in srgb,var(--lilac) 32%,var(--card));border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:14px}
-.qs small{display:block;color:var(--muted);font-size:12px;margin-top:3px}.badge-time{border:1px solid var(--line);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--muted)}
-.two-col{display:grid;grid-template-columns:1.05fr .95fr;gap:19px}.to-do{border-radius:14px;background:color-mix(in srgb,var(--peach) 53%,var(--card));border:1px solid var(--line);padding:13px 16px;font-size:13px;color:var(--muted)}
-.result{margin-top:13px;border:2px dashed var(--line);border-radius:14px;padding:23px 18px;text-align:center;color:var(--muted);font-size:13px}
-.result strong{display:block;color:var(--fg);margin-bottom:4px}
-.cheat{width:100%;border-collapse:collapse;margin:12px 0}.cheat th,.cheat td{text-align:left;border:1px solid var(--line);padding:9px 12px;font-size:13px}.cheat th{background:var(--lilac)}.cheat td:first-child{font-family:ui-monospace,Consolas,monospace;font-weight:700}
-.steps li{margin:3px 0}.mini-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.mini-links a{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
-@media(max-width:780px){.two-col{grid-template-columns:1fr}.part-body{padding:18px}.part-head{padding:19px}.cmd{font-size:12px}}
-@media print{.part{break-inside:avoid;page-break-inside:avoid}.cmd{color:#13213b;background:#edf2ff;white-space:pre-wrap}.result{display:none}}
-
-.part{margin-top:20px;background:var(--card);border:2px solid var(--line);border-radius:24px;overflow:hidden}
-.part-head{padding:21px 24px;background:color-mix(in srgb,var(--lilac) 35%,var(--card));border-bottom:1px solid var(--line)}
-.part-head .pill{margin-bottom:9px}.part-head h3{font-size:20px;margin-bottom:4px}.part-head p{color:var(--muted);font-size:14px;margin:0}
-.part-body{padding:24px}.part-body h4{margin:18px 0 9px;font-size:14px;color:var(--fg)}.part-body h4:first-child{margin-top:0}
-.two-col{display:grid;grid-template-columns:1.12fr .88fr;gap:20px}.to-do{border-radius:14px;background:color-mix(in srgb,var(--peach) 53%,var(--card));border:1px solid var(--line);padding:13px 16px;font-size:13px;color:var(--muted)}
-.result{margin-top:13px;border:2px dashed var(--line);border-radius:14px;padding:21px 18px;text-align:center;color:var(--muted);font-size:13px}.result strong{display:block;color:var(--fg);margin-bottom:4px}
-.resources{display:grid;gap:9px}.resources a{display:flex;align-items:center;justify-content:space-between;gap:10px;text-decoration:none;border:2px solid var(--accent);border-radius:999px;padding:9px 15px;color:var(--accent);font-weight:700;font-size:13px}.resources a:hover{background:var(--accent);color:var(--accent-fg)}
-.muted{font-size:13px;color:var(--muted)}.cmd{background:#172540;color:#eaf0ff;border-radius:15px;padding:15px;overflow-x:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
-.mini-links{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.mini-links a{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);font-size:13px}
-.arch{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch;margin-top:16px}.arch div{border:1px solid var(--line);border-radius:15px;text-align:center;background:color-mix(in srgb,var(--lilac) 43%,var(--card));padding:15px}.arch strong{display:block;color:var(--accent)}.arch span{display:block;color:var(--muted);font-size:12px;margin-top:5px}
-.arch div:nth-child(2){background:color-mix(in srgb,var(--peach) 55%,var(--card))}
-.checklist{margin:8px 0;padding-left:22px}.checklist li{margin-bottom:8px}.notice{background:color-mix(in srgb,var(--peach) 56%,var(--card));border-left:4px solid var(--accent);padding:16px 19px;border-radius:13px;font-size:14px}
-.section-anchor{scroll-margin-top:28px}.status{border-color:var(--line)}.actions{margin-bottom:8px}
-@media(max-width:800px){.arch{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.part-body{padding:18px}}
-@media(max-width:480px){.arch{grid-template-columns:1fr}.part-head{padding:18px}}
-@media print{.result,.mini-links{display:none}.part{break-inside:avoid}.cmd{background:#edf2ff;color:#13213b}}
-</style></head>
-<body><header><nav class="wrap"><a class="logo" href="/">Amal</a><a class="back" href="/#ateliers">← Retour aux ateliers</a></nav></header>
-<main class="wrap"><section class="hero"><span class="eyebrow">Portfolio / M02 / Atelier 06 · Prérequis Sprint 3</span>
-<h1>PHP, MySQL Aiven<br>Cloudinary &amp; Vercel</h1>
-<p class="lead">Application de formation pour inscrire des stagiaires et consulter leurs informations. Les pages et le code source sont disponibles ; les tests de bout en bout et les captures de réalisation restent à documenter.</p>
-<span class="status">Code et pages disponibles · Connexions externes à vérifier</span>
-<div class="actions"><a class="btn solid" href="/atelier-stagiaires/index.html">Ouvrir le formulaire</a><a class="btn" href="/atelier-stagiaires/liste.html">Voir la liste</a><a class="btn" href="#etape-1">Voir les 9 étapes</a></div>
-</section>
-<div class="grid">
-<section class="box"><span class="pill">Objectifs</span><h2>Le travail de l'atelier</h2><p>Développer une application Full Stack simple pour écrire des informations dans une base MySQL sur Aiven, transférer des photos vers Cloudinary, lire les données et préparer le déploiement Vercel.</p><p>Cette application prépare le Sprint 3 du projet Quick Annonces : il ne s'agit pas de la partie collective de planification des annonces.</p></section>
-<section class="box tint"><span class="pill">Ce qui existe dans mon dépôt</span><h2>Mon application</h2><p>Le dépôt contient un formulaire HTML, une page de liste, des fonctions PHP, la configuration et une présentation du projet. L'existence de ces fichiers ne prouve pas à elle seule que MySQL, Cloudinary et les inscriptions fonctionnent en production.</p><div class="actions"><a class="btn" href="/projects/atelier-stagiaires/overview.html">Présentation</a><a class="btn" href="https://github.com/amallechhab/amal-portfolio/tree/main/projects/atelier-stagiaires" target="_blank" rel="noopener noreferrer">Code GitHub</a></div></section>
+.hero{padding:42px 0 16px}.lead{max-width:63ch}.short-label{font-size:13px;color:var(--muted);font-weight:600}.box{margin-top:16px}.compact-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.proof{padding:19px;border:2px dashed var(--line);border-radius:16px;background:color-mix(in srgb,var(--lilac) 18%,var(--card));margin-top:12px}.proof b{display:block;font-size:15px}.proof p{font-size:13px;color:var(--muted);margin:6px 0 0}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.links .btn{margin:0}.mono{font:12px ui-monospace,Consolas,monospace}.embed{width:100%;height:480px;display:block;border:1px solid var(--line);border-radius:15px;background:var(--card);margin-top:15px}.tiny{font-size:12px;color:var(--muted)}.cardlet{padding:19px;border:1px solid var(--line);border-radius:17px;background:color-mix(in srgb,var(--lilac) 20%,var(--card))}.cardlet h3{margin:4px 0 6px}.cardlet p{font-size:13px;color:var(--muted);margin:0}.cardlet .btn{margin-top:12px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.metric{border:1px solid var(--line);background:var(--card);border-radius:15px;padding:12px;text-align:center}.metric strong{display:block;font-size:22px;color:var(--accent)}.metric span{color:var(--muted);font-size:12px}.faint{background:color-mix(in srgb,var(--peach) 32%,var(--card))}.footnote{color:var(--muted);font-size:12px;margin-top:12px}.tag{font-size:11px;font-weight:800;letter-spacing:.04em;color:var(--accent)}@media(max-width:690px){.compact-row{grid-template-columns:1fr}.embed{height:365px}.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.metric strong{font-size:19px}}
+</style></head><body><header><nav class="wrap"><a class="logo" href="/">Amal</a><a class="back" href="/#ateliers">← Retour</a></nav></header><main class="wrap"><section class="hero"><span class="eyebrow">Portfolio · M02</span><h1>Atelier 6 — Inscription des stagiaires</h1><p class="lead">Mon application PHP, MySQL Aiven et Cloudinary.</p></section>
+<section class="box"><span class="pill">Application</span><h2>Voir le travail</h2>
+<div class="compact-row">
+<div class="cardlet"><h3>Formulaire d'inscription</h3><p>Saisir les informations d'un stagiaire.</p><a class="btn solid" href="/atelier-stagiaires/index.html">Ouvrir le formulaire →</a></div>
+<div class="cardlet"><h3>Liste des stagiaires</h3><p>Consulter les inscriptions.</p><a class="btn solid" href="/atelier-stagiaires/liste.html">Ouvrir la liste →</a></div>
 </div>
-<section class="box"><span class="pill">Architecture pédagogique</span><h2>Comment l'application est organisée</h2>
-<div class="arch"><div><strong>Navigateur</strong><span>Formulaire + liste HTML</span></div><div><strong>PHP sur Vercel</strong><span>Validation, inscription, lecture</span></div><div><strong>Aiven MySQL</strong><span>Informations des stagiaires</span></div><div><strong>Cloudinary</strong><span>Photos hébergées et URL</span></div></div>
-<p style="margin-top:16px">Le navigateur envoie les données au backend PHP. PHP communique avec MySQL et Cloudinary côté serveur. Les données relationnelles restent dans MySQL, et les images sur Cloudinary.</p></section>
-<section class="box"><span class="pill">9 étapes du support</span><h2>Déroulement de l'Atelier 6</h2><p>Ces étapes reprennent la structure du document du formateur ; les liens renvoient vers les fichiers déjà présents dans mon dépôt.</p>
-<div class="mini-links"><a href="#etape-1">Étape 1</a><a href="#etape-2">Étape 2</a><a href="#etape-3">Étape 3</a><a href="#etape-4">Étape 4</a><a href="#etape-5">Étape 5</a><a href="#etape-6">Étape 6</a><a href="#etape-7">Étape 7</a><a href="#etape-8">Étape 8</a><a href="#etape-9">Étape 9</a></div></section>
-<article class="part" id="etape-1">
-<div class="part-head"><span class="pill">ÉTAPE 1 / 9</span><h3>Créer la base MySQL sur Aiven</h3><p>Préparer une base de données distante et la table stagiaires.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer un service MySQL sur Aiven.</li><li>Récupérer les paramètres de connexion dans la console, sans publier leurs valeurs.</li><li>Créer la table stagiaires (nom, prénom, ville, URL photo, date d&#39;inscription).</li><li>Vérifier la structure et la connexion MySQL.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><div class="resources"><a href="https://github.com/amallechhab/amal-portfolio/blob/main/init.sql" target="_blank" rel="noopener noreferrer">Script SQL du dépôt <span aria-hidden="true">↗</span></a></div>
-
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Capture de la structure de la table (sans hostname, utilisateur ni mot de passe visibles).</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<article class="part" id="etape-2">
-<div class="part-head"><span class="pill">ÉTAPE 2 / 9</span><h3>Préparer Cloudinary</h3><p>Séparer l&#39;hébergement des images de la base relationnelle.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer/configurer l&#39;espace Cloudinary.</li><li>Repérer le Cloud name, l&#39;API Key et l&#39;API Secret dans un espace privé.</li><li>Prévoir le stockage des photos sur Cloudinary et de leur URL dans MySQL.</li><li>Conserver les informations d&#39;accès dans des variables d&#39;environnement.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><p class="muted">Configuration d'un service externe. Ne pas publier les identifiants ou les clés.</p>
-
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Capture de la configuration Cloudinary masquant clés, secrets et identifiants.</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<article class="part" id="etape-3">
-<div class="part-head"><span class="pill">ÉTAPE 3 / 9</span><h3>Créer le projet et préparer Composer / Vercel</h3><p>Préparer l&#39;arborescence, les dépendances PHP et le déploiement.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer un dépôt GitHub et le cloner en local.</li><li>Organiser les dossiers HTML, api/, config/ et certs/.</li><li>Préparer composer.json pour Cloudinary PHP et les dépendances.</li><li>Préparer vercel.json pour exécuter les fonctions PHP.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><div class="resources"><a href="https://github.com/amallechhab/amal-portfolio/blob/main/projects/atelier-stagiaires/composer.json" target="_blank" rel="noopener noreferrer">composer.json <span aria-hidden="true">↗</span></a><a href="https://github.com/amallechhab/amal-portfolio/blob/main/projects/atelier-stagiaires/vercel.json" target="_blank" rel="noopener noreferrer">vercel.json <span aria-hidden="true">↗</span></a></div>
-<h4>Commandes du support</h4><pre class="cmd"><code>composer install
-composer dump-autoload</code></pre>
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Capture de l&#39;arborescence du projet et de l&#39;installation Composer, si elle a été exécutée.</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<article class="part" id="etape-4">
-<div class="part-head"><span class="pill">ÉTAPE 4 / 9</span><h3>Configurer la connexion sécurisée à MySQL</h3><p>Relier PHP à Aiven avec PDO et un certificat TLS.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer le fichier config/db.php.</li><li>Lire DB_HOST, DB_PORT, DB_NAME, DB_USER et DB_PASSWORD depuis l&#39;environnement.</li><li>Configurer PDO et le certificat CA pour la connexion TLS.</li><li>Vérifier l&#39;accès sans exposer les informations privées.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><div class="resources"><a href="https://github.com/amallechhab/amal-portfolio/blob/main/projects/atelier-stagiaires/config/db.php" target="_blank" rel="noopener noreferrer">config/db.php <span aria-hidden="true">↗</span></a></div>
-
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Capture du code (sans secrets) et du résultat d&#39;un test de connexion si effectué.</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<article class="part" id="etape-5">
-<div class="part-head"><span class="pill">ÉTAPE 5 / 9</span><h3>Développer la page d&#39;inscription</h3><p>Créer l&#39;interface HTML pour saisir les informations d&#39;un stagiaire.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer le formulaire avec nom, prénom, ville et photo.</li><li>Envoyer les données au backend PHP avec une requête HTTP.</li><li>Afficher un message de succès ou d&#39;erreur selon la réponse.</li><li>Vérifier la présentation sur mobile et ordinateur.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><div class="resources"><a href="https://github.com/amallechhab/amal-portfolio/blob/main/public/atelier-stagiaires/index.html" target="_blank" rel="noopener noreferrer">Formulaire HTML <span aria-hidden="true">↗</span></a></div>
-
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Capture réelle du formulaire avec des données de test anonymes.</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<article class="part" id="etape-6">
-<div class="part-head"><span class="pill">ÉTAPE 6 / 9</span><h3>Enregistrer le stagiaire (PHP + Cloudinary + MySQL)</h3><p>Recevoir le formulaire, transférer la photo et insérer les informations.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Recevoir et contrôler les champs du formulaire et le fichier image.</li><li>Envoyer la photo à Cloudinary.</li><li>Récupérer son URL sécurisée.</li><li>Insérer les données et l&#39;URL dans MySQL.</li><li>Retourner une réponse JSON au navigateur.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><div class="resources"><a href="https://github.com/amallechhab/amal-portfolio/blob/main/projects/atelier-stagiaires/api/inscrire.php" target="_blank" rel="noopener noreferrer">API d&#39;inscription <span aria-hidden="true">↗</span></a></div>
-
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Preuve d&#39;un essai d&#39;inscription réussi, sans données personnelles réelles ni secrets.</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<article class="part" id="etape-7">
-<div class="part-head"><span class="pill">ÉTAPE 7 / 9</span><h3>Lire les stagiaires depuis MySQL</h3><p>Créer l&#39;endpoint PHP qui récupère les inscriptions.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer api/liste.php.</li><li>Interroger la table stagiaires via la connexion MySQL.</li><li>Retourner les données attendues au format JSON.</li><li>Vérifier le comportement lorsque la liste est vide ou qu&#39;une erreur survient.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><div class="resources"><a href="https://github.com/amallechhab/amal-portfolio/blob/main/projects/atelier-stagiaires/api/liste.php" target="_blank" rel="noopener noreferrer">API de liste <span aria-hidden="true">↗</span></a></div>
-
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Capture d&#39;une réponse de test ou des logs anonymisés.</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<article class="part" id="etape-8">
-<div class="part-head"><span class="pill">ÉTAPE 8 / 9</span><h3>Créer la liste des stagiaires et préparer Git</h3><p>Afficher les informations enregistrées et préparer un dépôt propre.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Créer liste.html pour afficher nom, prénom, ville et photos.</li><li>Charger les images à partir des URL Cloudinary.</li><li>Préparer .gitignore pour exclure les dépendances et les fichiers de secrets.</li><li>Conserver composer.json et composer.lock pour reproduire l&#39;installation.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><div class="resources"><a href="https://github.com/amallechhab/amal-portfolio/blob/main/public/atelier-stagiaires/liste.html" target="_blank" rel="noopener noreferrer">Page de liste <span aria-hidden="true">↗</span></a><a href="https://github.com/amallechhab/amal-portfolio/blob/main/projects/atelier-stagiaires/.gitignore" target="_blank" rel="noopener noreferrer">Fichier .gitignore <span aria-hidden="true">↗</span></a></div>
-<h4>Commandes du support</h4><pre class="cmd"><code>git status
-git add .gitignore composer.json composer.lock
-git commit -m &quot;Préparer le déploiement&quot;
-git push</code></pre>
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Capture de la liste affichée avec des données fictives et d&#39;un commit Git si réalisé.</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<article class="part" id="etape-9">
-<div class="part-head"><span class="pill">ÉTAPE 9 / 9</span><h3>Configurer les variables et déployer sur Vercel</h3><p>Publier les pages et configurer les services externes côté serveur.</p></div>
-<div class="part-body"><div class="two-col"><div><h4>Travail demandé</h4><ol class="steps"><li>Ajouter les variables DB_HOST, DB_PORT, DB_NAME, DB_USER et DB_PASSWORD dans Vercel.</li><li>Ajouter CLOUDINARY_URL dans les variables d&#39;environnement côté serveur.</li><li>Configurer les environnements concernés puis redéployer l&#39;application.</li><li>Tester l&#39;inscription, la lecture depuis MySQL et l&#39;affichage de la photo Cloudinary.</li></ol></div>
-<div><h4>Fichiers et ressources</h4><div class="resources"><a href="https://github.com/amallechhab/amal-portfolio/blob/main/vercel.json" target="_blank" rel="noopener noreferrer">Configuration Vercel <span aria-hidden="true">↗</span></a></div>
-
-</div></div><h4>Preuve / capture à ajouter</h4><div class="to-do">Captures du déploiement et du test de bout en bout, avec toutes les valeurs sensibles masquées.</div><div class="result"><strong>Ma capture personnelle</strong>À ajouter après vérification réelle de cette étape.</div></div></article>
-<section class="box"><span class="pill">Livrables</span><h2>Résultat attendu et vérifications</h2><ol class="checklist">
-<li><strong>Page d'inscription :</strong> saisie du nom, prénom, ville et photo ; envoi au backend PHP.</li>
-<li><strong>Stockage :</strong> insertion des informations dans MySQL et hébergement de l'image chez Cloudinary.</li>
-<li><strong>Page de liste :</strong> récupération des inscriptions et affichage des photos par leur URL.</li>
-<li><strong>Déploiement :</strong> configuration Vercel avec variables d'environnement et fonctions PHP compatibles.</li>
-</ol><div class="notice"><strong>Statut de vérification :</strong> les liens et fichiers du projet existent. Je dois encore ajouter des captures réelles et vérifier le parcours complet inscription → stockage → liste. Aucun résultat de test réussi n'est affirmé sur cette page.</div></section>
-<section class="box"><span class="pill">Confidentialité</span><h2>Avant d'ajouter mes screenshots</h2>
-<p>Masquer systématiquement les mots de passe MySQL, clés API, CLOUDINARY_URL, tokens, informations de connexion et données réelles des stagiaires. Utiliser des données fictives pour les captures. Les captures du PDF du formateur ne sont pas mes propres réalisations.</p>
-<div class="actions"><a class="btn solid" href="/atelier-stagiaires/index.html">Formulaire</a><a class="btn" href="/atelier-stagiaires/liste.html">Liste des stagiaires</a><a class="btn" href="/projects/atelier-stagiaires/overview.html">Présentation du projet</a></div></section>
-</main><footer><div class="wrap">© Amal · OFPPT · M02 · Atelier 6 — Inscription des stagiaires</div></footer></body></html>
+<div class="links"><a class="btn " href="/projects/atelier-stagiaires/overview.html">Présentation →</a><a class="btn " href="https://github.com/amallechhab/amal-portfolio/tree/main/projects/atelier-stagiaires" target="_blank" rel="noopener noreferrer">Code GitHub ↗</a></div>
+<p class="footnote">Pages et code disponibles. L'enregistrement MySQL et l'envoi Cloudinary restent à vérifier en production.</p></section>
+</main><footer><div class="wrap">© Amal · OFPPT · Portfolio</div></footer></body></html>
