@@ -72,8 +72,8 @@ $ateliers = [
     "statut"   => "ok",
     "title_fr" => "Prérequis Sprint 3 : Inscription des stagiaires",
     "title_en" => "Sprint 3 prerequisites: Trainee registration",
-    "desc_fr"  => "Atelier 6 : préparation au Sprint 3 Quick Annonces. Formulaire PHP, MySQL Aiven, photos Cloudinary, liste des stagiaires et déploiement Vercel.",
-    "desc_en"  => "Workshop 6: Quick Annonces Sprint 3 preparation with PHP, Aiven MySQL, Cloudinary photos, trainee directory and Vercel deployment.",
+    "desc_fr"  => "Application de formation : formulaire, API PHP, MySQL Aiven et Cloudinary. Code et pages publiés ; intégration de bout en bout à vérifier.",
+    "desc_en"  => "Training app: form, PHP API, Aiven MySQL and Cloudinary. Pages and code published; end-to-end integration still to verify.",
     "doc"      => "",
     "exercices" => [
       [
@@ -441,8 +441,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           "Agile & Scrum — Individual work", "16 theory questions on Agile and Scrum, answers to write."],
     3 => ["Les bases de Git", "5 parties individuelles : dépôt Git, 3 commits, fichiers et historique.",
           "Git fundamentals", "Five individual sections: Git repository, three commits, files and history."],
-    6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "Préparer une application avec formulaire, base de données et gestion d'images.",
-          "Sprint 3: PHP, MySQL & Cloudinary", "Build a training app with a form, database and image uploads."],
+    6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "9 étapes : application de stagiaires, PHP, base de données, photos et Vercel.",
+          "Sprint 3: PHP, MySQL & Cloudinary", "Nine steps: trainee app, PHP, database, photos and Vercel."],
     7 => ["GitLab CI/CD & SonarQube Cloud", "Découvrir l'analyse qualité et les étapes d'une pipeline CI/CD.",
           "GitLab CI/CD & SonarQube Cloud", "Learn code quality analysis and the CI/CD pipeline process."]
   ];
@@ -452,7 +452,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     $n=(int)preg_replace('/[^0-9]/','',$a["num"]);
     $copy=$cardText[$n] ?? [$a["title_fr"],$a["desc_fr"],$a["title_en"],$a["desc_en"]];
     $isApp=$n===6;
-    $isPersonal=in_array($n,[1,2,3],true);
+    $isPersonal=in_array($n,[1,2,3,6],true);
 ?>
         <article class="at-card">
           <div class="at-top">
@@ -462,10 +462,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           <h3 <?= t($copy[0],$copy[2]) ?>><?= e($copy[0]) ?></h3>
           <p <?= t($copy[1],$copy[3]) ?>><?= e($copy[1]) ?></p>
           <div class="at-bottom">
-            <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Application publiée","Application published"):($isPersonal?t("Exercices à réaliser","Exercises to complete"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Application publiée':($isPersonal?'Exercices à réaliser':'Énoncé disponible') ?></span>
+            <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Pages et code disponibles","Pages and code available"):($isPersonal?t("Exercices à réaliser","Exercises to complete"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Pages et code disponibles':($isPersonal?'Exercices à réaliser':'Énoncé disponible') ?></span>
 <?php if ($isPersonal): ?>
-            <a class="at-detail" href="/ateliers/atelier<?= $n ?>/index.html" aria-label="Exercices individuels de l'atelier <?= $n ?>">
-              <span <?= t("Mes exercices", "My exercises") ?>>Mes exercices</span> <span aria-hidden="true">↗</span>
+            <a class="at-detail" href="/ateliers/atelier<?= $n ?>/index.html" aria-label="Voir l'atelier <?= $n ?>">
+              <span <?= $isApp?t("Voir l'atelier","View workshop"):t("Mes exercices", "My exercises") ?>><?= $isApp?"Voir l'atelier":"Mes exercices" ?></span> <span aria-hidden="true">↗</span>
             </a>
 <?php else: ?>
             <a class="at-detail" href="/api/atelier.php?num=<?= $n ?>" aria-label="Détail atelier <?= $n ?>">
@@ -476,7 +476,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
         </article>
 <?php endforeach; ?>
       </div>
-      <p class="at-note" <?= t("Les PDF sont des énoncés du formateur ; mes exercices personnels sont ajoutés uniquement après réalisation.", "The PDFs are the teacher's instructions; my individual exercises are added only when completed.") ?>>Les PDF sont des énoncés du formateur ; mes exercices personnels sont ajoutés uniquement après réalisation.</p>
+      <p class="at-note" <?= t("Les énoncés sont des supports de formation ; les captures et résultats personnels sont ajoutés après vérification.", "Teacher handouts are course materials; personal screenshots and results are added after verification.") ?>>Les PDF sont des énoncés du formateur ; mes exercices personnels sont ajoutés uniquement après réalisation.</p>
     </div>
   </section>
 
