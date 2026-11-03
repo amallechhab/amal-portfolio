@@ -340,6 +340,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   .tp:hover,.chip:hover{transform:translateY(-4px)}
 }
 </style>
+<link rel="stylesheet" href="/assets/amal-ateliers.css">
 </head>
 <body>
 
@@ -422,29 +423,57 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     </div>
   </section>
 
-  <section id="ateliers">
+  <section id="ateliers" class="atelier-showcase">
     <div class="wrap">
-      <span class="tag" <?= t("Ateliers", "Workshops") ?>>Ateliers</span>
-      <h2 <?= t("Mes ateliers", "My workshops") ?>>Mes ateliers</h2>
-      <p class="sub" <?= t("Clique sur un atelier pour voir ses exercices et leurs solutions.", "Click a workshop to see its exercises and their solutions.") ?>>Clique sur un atelier pour voir ses exercices et leurs solutions.</p>
-      <div class="grid">
-<?php foreach ($ateliers as $a): ?>
-        <article class="tp has-gallery" tabindex="0" role="button" aria-haspopup="dialog"
-                 data-title-fr="<?= e($a["num"] . " · " . $a["title_fr"]) ?>" data-title-en="<?= e($a["num"] . " · " . $a["title_en"]) ?>"
-                 data-doc="<?= e($a["doc"] ?? "") ?>"
-                 data-ex="<?= e(json_encode($a["exercices"] ?? [])) ?>">
-          <div class="row">
-            <span class="badge"><?= e($a["num"]) ?></span>
-<?php if ($a["statut"] !== "ok"): ?>
-            <span class="state" <?= t("Bientôt", "Soon") ?>>Bientôt</span>
-<?php endif; ?>
+      <span class="tag" <?= t("ATELIERS", "WORKSHOPS") ?>>ATELIERS</span>
+      <h2 <?= t("Les 7 ateliers M02.", "The 7 M02 workshops.") ?>>Les 7 ateliers M02.</h2>
+      <p class="sub" <?= t(
+        "Mes exercices de gestion de projets, Agile, Git, GitHub, PHP/MySQL et GitLab. Les énoncés sont accessibles et mes travaux seront ajoutés au fur et à mesure.",
+        "My workshops on project management, Agile, Git, GitHub, PHP/MySQL and GitLab. Instructions are available, and my work will be added progressively."
+      ) ?>>Mes exercices de gestion de projets, Agile, Git, GitHub, PHP/MySQL et GitLab. Les énoncés sont accessibles et mes travaux seront ajoutés au fur et à mesure.</p>
+<?php
+  // Titres et résumés courts pour ces cartes uniquement. Les données détaillées
+  // des ateliers et des projets ci-dessus restent inchangées.
+  $cardText = [
+    1 => ["Méthodes classiques : PERT & Gantt", "Planifier un projet, organiser les tâches et construire un diagramme clair.",
+          "Classical methods: PERT & Gantt", "Plan a project, organize tasks and create a clear diagram."],
+    2 => ["Agile Scrum & Sprint", "Comprendre les rôles Agile et construire un backlog et un sprint.",
+          "Agile Scrum & Sprint", "Learn Agile roles and build a backlog and sprint."],
+    3 => ["Les bases de Git", "Initialiser un dépôt, enregistrer des versions et suivre l'historique.",
+          "Git fundamentals", "Initialize a repository, record versions and track history."],
+    4 => ["GitHub : travail collaboratif", "Travailler avec un dépôt distant et découvrir la collaboration sur GitHub.",
+          "GitHub: collaboration", "Use a remote repository and learn GitHub collaboration."],
+    5 => ["Entraînement Git type EFM", "S'exercer aux commandes Git avec un sujet de type EFM.",
+          "Git practice: EFM", "Practice Git commands with an EFM-style assignment."],
+    6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "Préparer une application avec formulaire, base de données et gestion d'images.",
+          "Sprint 3: PHP, MySQL & Cloudinary", "Build a training app with a form, database and image uploads."],
+    7 => ["GitLab CI/CD & SonarQube Cloud", "Découvrir l'analyse qualité et les étapes d'une pipeline CI/CD.",
+          "GitLab CI/CD & SonarQube Cloud", "Learn code quality analysis and the CI/CD pipeline process."]
+  ];
+?>
+      <div class="at-grid">
+<?php foreach ($ateliers as $a):
+    $n=(int)preg_replace('/[^0-9]/','',$a["num"]);
+    $copy=$cardText[$n] ?? [$a["title_fr"],$a["desc_fr"],$a["title_en"],$a["desc_en"]];
+    $isApp=$n===6;
+?>
+        <article class="at-card">
+          <div class="at-top">
+            <span class="at-number"><?= str_pad((string)$n,2,'0',STR_PAD_LEFT) ?></span>
+            <span class="at-module">M02</span>
           </div>
-          <h3 <?= t($a["title_fr"], $a["title_en"]) ?>><?= e($a["title_fr"]) ?></h3>
-          <p <?= t($a["desc_fr"], $a["desc_en"]) ?>><?= e($a["desc_fr"]) ?></p>
-<span class="btn solid" <?= t("Voir les exercices", "See the exercises") ?>>Voir les exercices</span>
+          <h3 <?= t($copy[0],$copy[2]) ?>><?= e($copy[0]) ?></h3>
+          <p <?= t($copy[1],$copy[3]) ?>><?= e($copy[1]) ?></p>
+          <div class="at-bottom">
+            <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Application publiée","Application published"):t("Énoncé disponible","Instructions available") ?>><?= $isApp?'Application publiée':'Énoncé disponible' ?></span>
+            <a class="at-detail" href="/api/atelier.php?num=<?= $n ?>" aria-label="Détail atelier <?= $n ?>">
+              <span <?= t("Détail", "Details") ?>>Détail</span> <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </article>
 <?php endforeach; ?>
       </div>
+      <p class="at-note" <?= t("Les PDF sont des énoncés de formation ; les solutions personnelles sont ajoutées séparément.", "The PDFs are course instructions; personal solutions are added separately.") ?>>Les PDF sont des énoncés de formation ; les solutions personnelles sont ajoutées séparément.</p>
     </div>
   </section>
 
