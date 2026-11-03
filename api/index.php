@@ -26,14 +26,16 @@ $competences = ["HTML", "CSS", "Bootstrap", "JavaScript", "POO", "PHP", "MySQL",
 $ateliers = [
   [
     "num"      => "Atelier 1",
-    "statut"   => "ok",
+    "statut"   => "bientot",
     "title_fr" => "Gestion de projet : Méthodes classiques",
     "title_en" => "Project management: classic methods",
-    "desc_fr"  => "Planification du projet « Quick Annonces » : tâches, dépendances, diagramme de PERT, chemin critique et diagramme de Gantt.",
-    "desc_en"  => "Planning of the “Quick Annonces” project: tasks, dependencies, PERT diagram, critical path and Gantt chart.",
+    "desc_fr"  => "Exercices individuels de planification : tableaux des tâches, diagrammes PERT et Gantt et chemin critique. Réponses personnelles à ajouter.",
+    "desc_en"  => "Individual planning exercises: task tables, PERT and Gantt diagrams, and critical path. Personal answers to be added.",
     "doc"      => "https://portfoliofs202.vercel.app/docs/At1_gestionprojet.pdf", // énoncé de l'atelier (PDF)
     "exercices" => [
-      ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
+      ["label" => "Ex 1 — Gantt et chemin critique", "photos" => [], "doc" => ""],
+      ["label" => "Ex 2 — PERT", "photos" => [], "doc" => ""],
+      ["label" => "Ex 3 — Gantt et chemin critique", "photos" => [], "doc" => ""],
     ],
   ],
   [
@@ -125,6 +127,16 @@ $ateliers = [
 // Tes projets (PDF ou PPTX). Mets le fichier dans public/docs/ puis remplis "file".
 // Tant que "file" est vide, la carte affiche "Bientôt".
 $projets = [
+  [
+    "type"     => "GROUPE",
+    "groupe"   => true,
+    "title_fr" => "Quick Annonces — Projet de groupe",
+    "title_en" => "Quick Annonces — Group project",
+    "desc_fr"  => "Planification collective : tâches, dépendances, modèle en V, PERT, chemin critique et Gantt. Proposition de travail à valider avec le groupe.",
+    "desc_en"  => "Group planning: tasks, dependencies, V-model, PERT, critical path and Gantt. Draft to validate with the group.",
+    "file"     => "",
+    "overview" => "/projects/quick-annonces-groupe/index.html",
+  ],
   [
     "type"     => "PDF", // "PDF" ou "PPTX"
     "title_fr" => "Projet 1",
@@ -431,7 +443,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     $n=(int)preg_replace('/[^0-9]/','',$a["num"]);
     $copy=$cardText[$n] ?? [$a["title_fr"],$a["desc_fr"],$a["title_en"],$a["desc_en"]];
     $isApp=$n===6;
-    $isPlan=$n===1;
+    $isPersonal=$n===1;
 ?>
         <article class="at-card">
           <div class="at-top">
@@ -441,20 +453,21 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           <h3 <?= t($copy[0],$copy[2]) ?>><?= e($copy[0]) ?></h3>
           <p <?= t($copy[1],$copy[3]) ?>><?= e($copy[1]) ?></p>
           <div class="at-bottom">
-            <span class="at-status<?= ($isApp||$isPlan)?' is-ready':'' ?>" <?= $isApp?t("Application publiée","Application published"):($isPlan?t("Planification proposée","Proposed planning"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Application publiée':($isPlan?'Planification proposée':'Énoncé disponible') ?></span>
-<?php if ($isPlan): ?>
-            <a class="at-detail" href="/projects/atelier1-quick-annonces/index.html" aria-label="Voir le travail proposé pour l'atelier 1">
-              <span <?= t("Voir le travail", "View proposed work") ?>>Voir le travail</span> <span aria-hidden="true">↗</span>
+            <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Application publiée","Application published"):($isPersonal?t("Exercices à réaliser","Exercises to complete"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Application publiée':($isPersonal?'Exercices à réaliser':'Énoncé disponible') ?></span>
+<?php if ($isPersonal): ?>
+            <a class="at-detail" href="/ateliers/atelier1/index.html" aria-label="Exercices individuels de l'atelier 1">
+              <span <?= t("Mes exercices", "My exercises") ?>>Mes exercices</span> <span aria-hidden="true">↗</span>
             </a>
-<?php endif; ?>
+<?php else: ?>
             <a class="at-detail" href="/api/atelier.php?num=<?= $n ?>" aria-label="Détail atelier <?= $n ?>">
               <span <?= t("Détail", "Details") ?>>Détail</span> <span aria-hidden="true">↗</span>
             </a>
+<?php endif; ?>
           </div>
         </article>
 <?php endforeach; ?>
       </div>
-      <p class="at-note" <?= t("Les PDF sont des énoncés de formation ; une proposition de planification est publiée pour l'Atelier 1, avec ses hypothèses explicites.", "The PDFs are course instructions; a proposed plan is published for Workshop 1, with explicit assumptions.") ?>>Les PDF sont des énoncés de formation ; une proposition de planification est publiée pour l'Atelier 1, avec ses hypothèses explicites.</p>
+      <p class="at-note" <?= t("Les PDF sont des énoncés du formateur ; mes exercices personnels sont ajoutés uniquement après réalisation.", "The PDFs are the teacher's instructions; my individual exercises are added only when completed.") ?>>Les PDF sont des énoncés de formation ; une proposition de planification est publiée pour l'Atelier 1, avec ses hypothèses explicites.</p>
     </div>
   </section>
 
@@ -486,7 +499,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
             </div>
             <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><?= e($p["title_fr"]) ?></h3>
             <p <?= t($p["desc_fr"], $p["desc_en"]) ?>><?= e($p["desc_fr"]) ?></p>
-            <div class="pj-tech"><span <?= t("Projet de formation", "Training project") ?>>Projet de formation</span></div>
+            <div class="pj-tech"><span <?= !empty($p["groupe"])?t("Projet de groupe","Group project"):t("Projet de formation","Training project") ?>><?= !empty($p["groupe"])?"Projet de groupe":"Projet de formation" ?></span></div>
             <div class="btns">
 <?php if (!empty($p["file"])): ?>
               <a class="btn solid" href="<?= e($p["file"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Voir", "View") ?>>Voir</a>
