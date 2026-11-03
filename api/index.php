@@ -52,17 +52,40 @@ $ateliers = [
   [
     "num"      => "Atelier 3",
     "statut"   => "bientot",
-    "title_fr" => "Titre de l'atelier 3",
-    "title_en" => "Title of workshop 3",
-    "desc_fr"  => "Description courte de ce que j'ai réalisé dans cet atelier.",
-    "desc_en"  => "Short description of what I built in this workshop.",
-    "doc"      => "", // énoncé de l'atelier (PDF), ex. "/docs/atelier3.pdf"
+    "title_fr" => "Les bases de Git",
+    "title_en" => "Git fundamentals",
+    "desc_fr"  => "Créer un dépôt Git, suivre les changements, utiliser le staging, faire des commits et consulter l'historique. Support du formateur disponible ; solutions à ajouter.",
+    "desc_en"  => "Create a Git repository, track changes, use staging, make commits and inspect history. Teacher's instructions available; solutions to be added.",
+    "doc"      => "https://portfoliofs202.vercel.app/docs/At3_git.pdf",
     "exercices" => [
-      ["label" => "Ex 1",      "photos" => [], "doc" => ""],
-      ["label" => "Ex 2",      "photos" => [], "doc" => ""],
-      ["label" => "Ex 3",      "photos" => [], "doc" => ""],
-      ["label" => "Ex Groupe", "photos" => [], "doc" => ""],
+      ["label" => "Partie 1 — Configuration", "photos" => [], "doc" => ""],
+      ["label" => "Partie 2 — Premier commit", "photos" => [], "doc" => ""],
+      ["label" => "Partie 3 — Modifications", "photos" => [], "doc" => ""],
+      ["label" => "Partie 4 — Plusieurs fichiers", "photos" => [], "doc" => ""],
+      ["label" => "Partie 5 — Bilan", "photos" => [], "doc" => ""],
     ],
+  ],
+
+  [
+    "num"      => "Atelier 4",
+    "statut"   => "bientot",
+    "title_fr" => "GitHub",
+    "title_en" => "GitHub",
+    "desc_fr"  => "Atelier sur GitHub. Support du formateur disponible ; travail personnel à ajouter.",
+    "desc_en"  => "Workshop on GitHub. Teacher's instructions available; personal work to be added.",
+    "doc"      => "https://portfoliofs202.vercel.app/docs/At4_github.pdf",
+    "exercices" => [],
+  ],
+
+  [
+    "num"      => "Atelier 5",
+    "statut"   => "bientot",
+    "title_fr" => "Git : Exemple EFM",
+    "title_en" => "Git: EFM example",
+    "desc_fr"  => "Mise en pratique de Git à partir d'un sujet type EFM. Support du formateur disponible ; solution personnelle à ajouter.",
+    "desc_en"  => "Git practice with an EFM-style exercise. Teacher's instructions available; personal solution to be added.",
+    "doc"      => "https://portfoliofs202.vercel.app/docs/At5_github.pdf",
+    "exercices" => [],
   ],
 
   [
@@ -103,6 +126,20 @@ $ateliers = [
         "link_en" => "View source on GitHub"
       ]
     ]
+  ],
+
+  [
+    "num"      => "Atelier 7",
+    "statut"   => "bientot",
+    "title_fr" => "GitLab CI/CD et SonarQube Cloud",
+    "title_en" => "GitLab CI/CD and SonarQube Cloud",
+    "desc_fr"  => "Comparer une V1 correcte et une V2 volontairement incorrecte, analyser le code avec SonarQube Cloud et observer le pipeline GitLab CI/CD. Solutions à ajouter.",
+    "desc_en"  => "Compare correct V1 and intentionally faulty V2, analyze the code with SonarQube Cloud and inspect the GitLab CI/CD pipeline. Solutions to be added.",
+    "doc"      => "https://portfoliofs202.vercel.app/docs/At7_gitlab_sonarqube.pdf",
+    "exercices" => [
+      ["label" => "V1 — Code correct", "photos" => [], "doc" => ""],
+      ["label" => "V2 — Analyse SonarQube", "photos" => [], "doc" => ""],
+    ],
   ],
 
 ];
