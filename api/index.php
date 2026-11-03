@@ -123,44 +123,17 @@ $ateliers = [
 
 ];
 
-// Tes projets (PDF ou PPTX). Mets le fichier dans public/docs/ puis remplis "file".
-// Tant que "file" est vide, la carte affiche "Bientôt".
+// Projets présentés avec des preuves et des liens réels, pas de cartes de démonstration.
 $projets = [
   [
-    "type"     => "GROUPE",
+    "type"     => "SITE WEB",
     "groupe"   => true,
-    "title_fr" => "Quick Annonces — Projet de groupe",
-    "title_en" => "Quick Annonces — Group project",
-    "desc_fr"  => "Planification collective : tâches, dépendances, modèle en V, PERT, chemin critique et Gantt. Proposition de travail à valider avec le groupe.",
-    "desc_en"  => "Group planning: tasks, dependencies, V-model, PERT, critical path and Gantt. Draft to validate with the group.",
+    "title_fr" => "DEAL App — Projet de groupe",
+    "title_en" => "DEAL App — Group project",
+    "desc_fr"  => "Notre vrai projet de groupe : prototype responsive de petites annonces. Site Vercel en ligne, pages consultables, code GitHub, Sprint 1 et User Stories.",
+    "desc_en"  => "Our real group project: responsive classified-ads prototype. Live Vercel website, browsable pages, GitHub code, Sprint 1 and user stories.",
     "file"     => "",
-    "overview" => "/projects/quick-annonces-groupe/index.html",
-  ],
-  [
-    "type"     => "GROUPE",
-    "groupe"   => true,
-    "title_fr" => "Quick Annonce — Sprint de conception",
-    "title_en" => "Quick Annonce — Design sprint",
-    "desc_fr"  => "Projet de groupe : Scrum, Jira, User Stories, Product Backlog, Sprint Planning, prototype et rétrospective. Livrables personnels non encore fournis.",
-    "desc_en"  => "Group project: Scrum, Jira, User Stories, Product Backlog, Sprint Planning, prototype and retrospective. Team deliverables not yet provided.",
-    "file"     => "",
-    "overview" => "/projects/quick-annonces-scrum/index.html",
-  ],
-  [
-    "type"     => "PDF", // "PDF" ou "PPTX"
-    "title_fr" => "Projet 1",
-    "title_en" => "Project 1",
-    "desc_fr"  => "Description de mon projet 1.",
-    "desc_en"  => "Description of my project 1.",
-    "file"     => "", // ex. "/docs/projet1.pdf"
-  ],
-  [
-    "type"     => "PPTX",
-    "title_fr" => "Projet 2",
-    "title_en" => "Project 2",
-    "desc_fr"  => "Description de mon projet 2.",
-    "desc_en"  => "Description of my project 2.",
-    "file"     => "", // ex. "/docs/projet2.pptx"
+    "overview" => "/projects/deal-app/index.html",
   ],
 ];
 
@@ -437,8 +410,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   $cardText = [
     1 => ["Méthodes classiques : PERT & Gantt", "Planifier un projet, organiser les tâches et construire un diagramme clair.",
           "Classical methods: PERT & Gantt", "Plan a project, organize tasks and create a clear diagram."],
-    2 => ["Agile & Scrum — Travail individuel", "16 questions de cours sur l'Agilité et Scrum, réponses à rédiger.",
-          "Agile & Scrum — Individual work", "16 theory questions on Agile and Scrum, answers to write."],
+    2 => ["Agile & Scrum — Travail individuel", "16 questions Agile et Scrum : réponses et captures à documenter.",
+          "Agile & Scrum — Individual work", "16 questions on Agile and Scrum: answers and screenshots to document."],
     3 => ["Les bases de Git", "5 parties individuelles : dépôt Git, 3 commits, fichiers et historique.",
           "Git fundamentals", "Five individual sections: Git repository, three commits, files and history."],
     6 => ["Prérequis Sprint 3 : PHP, MySQL & Cloudinary", "9 étapes : application de stagiaires, PHP, base de données, photos et Vercel.",
@@ -462,7 +435,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
           <h3 <?= t($copy[0],$copy[2]) ?>><?= e($copy[0]) ?></h3>
           <p <?= t($copy[1],$copy[3]) ?>><?= e($copy[1]) ?></p>
           <div class="at-bottom">
-            <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Pages et code disponibles","Pages and code available"):($isPersonal?t("Exercices à réaliser","Exercises to complete"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Pages et code disponibles':($isPersonal?'Exercices à réaliser':'Énoncé disponible') ?></span>
+            <span class="at-status<?= $isApp?' is-ready':'' ?>" <?= $isApp?t("Pages et code disponibles","Pages and code available"):($isPersonal?t("Preuves à compléter","Evidence to add"):t("Énoncé disponible","Instructions available")) ?>><?= $isApp?'Pages et code disponibles':($isPersonal?'Preuves à compléter':'Énoncé disponible') ?></span>
 <?php if ($isPersonal): ?>
             <a class="at-detail" href="/ateliers/atelier<?= $n ?>/index.html" aria-label="Voir l'atelier <?= $n ?>">
               <span <?= in_array($n,[6,7],true)?t("Voir l'atelier","View workshop"):t("Mes exercices", "My exercises") ?>><?= in_array($n,[6,7],true)?"Voir l'atelier":"Mes exercices" ?></span> <span aria-hidden="true">↗</span>
@@ -484,7 +457,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
     <div class="wrap">
       <span class="tag" <?= t("Projets", "Projects") ?>>Projets</span>
       <h2 <?= t("Mes projets", "My projects") ?>>Mes projets</h2>
-      <p class="sub" <?= t("Mes projets de formation, présentés au fur et à mesure de leur réalisation.", "My training projects, added as they are completed.") ?>>Mes projets de formation, présentés au fur et à mesure de leur réalisation.</p>
+      <p class="sub" <?= t("Mes projets réellement réalisés, avec accès au site, au code source et aux documents.", "My real projects, with links to the website, source code and documents.") ?>>Mes projets réellement réalisés, avec accès au site, au code source et aux documents.</p>
       <div class="projet-grid">
 <?php foreach ($projets as $p): ?>
         <article class="pj">
