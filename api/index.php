@@ -442,6 +442,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
             <a class="at-detail" href="/ateliers/atelier<?= $n ?>/index.html" aria-label="Voir l'atelier <?= $n ?>">
               <span <?= in_array($n,[6,7],true)?t("Voir l'atelier","View workshop"):t("Mes exercices", "My exercises") ?>><?= in_array($n,[6,7],true)?"Voir l'atelier":"Mes exercices" ?></span> <span aria-hidden="true">↗</span>
             </a>
+<?php if ($n === 6): ?>
+            <a class="at-detail" href="/atelier-stagiaires/index.html" aria-label="Ouvrir le formulaire d'inscription des stagiaires">
+              <span <?= t("Formulaire", "Registration form") ?>>Formulaire</span> <span aria-hidden="true">↗</span>
+            </a>
+            <a class="at-detail" href="/atelier-stagiaires/liste.html" aria-label="Ouvrir la liste des stagiaires">
+              <span <?= t("Liste des stagiaires", "Trainee list") ?>>Liste des stagiaires</span> <span aria-hidden="true">↗</span>
+            </a>
+<?php endif; ?>
 <?php else: ?>
             <a class="at-detail" href="/api/atelier.php?num=<?= $n ?>" aria-label="Détail atelier <?= $n ?>">
               <span <?= t("Détail", "Details") ?>>Détail</span> <span aria-hidden="true">↗</span>
