@@ -87,8 +87,14 @@
         btn.textContent='Enregistrement…';
         try{
           var response=await fetch('/inscrire-stagiaire.php',{method:'POST',body:new FormData(form)});
-          var data=await response.json();
-          if(!response.ok || !data.success) throw new Error(data.error || 'Inscription impossible.');
+          var raw=await response.text();
+          var data;
+          try{
+            data=JSON.parse(raw);
+          }catch(parseError){
+            throw new Error('Réponse du serveur invalide (HTTP '+response.status+'). Le service PHP doit être vérifié sur Vercel.');
+          }
+          if(!response.ok || !data || !data.success) throw new Error((data && data.error) || 'Inscription impossible.');
           msg.textContent='Inscription enregistrée avec succès.';
           msg.classList.add('success');
           form.reset();
