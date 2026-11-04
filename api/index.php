@@ -126,6 +126,26 @@ $ateliers = [
 // Projets présentés avec des preuves et des liens réels, pas de cartes de démonstration.
 $projets = [
   [
+    "type"     => "PROJET 1",
+    "groupe"   => true,
+    "title_fr" => "Projet 1 — Identité visuelle DEAL",
+    "title_en" => "Project 1 — DEAL Visual Identity",
+    "desc_fr"  => "Choix du nom DEAL, logo et slogan de notre application de petites annonces.",
+    "desc_en"  => "DEAL project name, logo and slogan for our classified ads app.",
+    "file"     => "",
+    "overview" => "/projects/deal-identite/index.html",
+  ],
+  [
+    "type"     => "PROJET 2",
+    "groupe"   => true,
+    "title_fr" => "Projet 2 — Planification DEAL",
+    "title_en" => "Project 2 — DEAL Planning",
+    "desc_fr"  => "Planification du projet : 7 tâches, dépendances, modèle en V, Gantt et PERT.",
+    "desc_en"  => "Project schedule: seven tasks, dependencies, V-model, Gantt and PERT.",
+    "file"     => "",
+    "overview" => "/projects/deal-planification/index.html",
+  ],
+  [
     "type"     => "SITE WEB",
     "groupe"   => true,
     "title_fr" => "DEAL App — Projet de groupe",
