@@ -372,6 +372,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
         <div class="actions">
           <a class="btn solid" href="#ateliers" <?= t("Voir mes ateliers", "See my workshops") ?>>Voir mes ateliers</a>
           <a class="btn" href="<?= e($github) ?>" target="_blank" rel="noopener"><?= $githubIcon ?>GitHub</a>
+          <a class="btn" href="https://dealappamallechhab.vercel.app/" target="_blank" rel="noopener noreferrer" <?= t("Visiter Deal-App", "Visit Deal-App") ?>>Deal-App <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </header>
