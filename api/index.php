@@ -135,7 +135,7 @@ $projets = [
     "file"     => "",
     "overview" => "/projects/deal-identite/index.html",
     "presentation" => "/projects/deal-identite/presentation.html",
-    "preview"  => "/images/projets/deal-identite/deal-icon.svg",
+    "preview"  => "https://res.cloudinary.com/bnrnatw6/image/upload/v1794259457/portfolio/deal/logo-propose-original-deal.jpg",
   ],
   [
     "type"     => "PROJET 2",
