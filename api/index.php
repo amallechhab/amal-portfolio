@@ -531,6 +531,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 <?php elseif (!empty($p["overview"])): ?>
 <?php if (!empty($p["presentation"]) && !empty($p["pptx"])): ?>
               <a class="btn solid" href="<?= e($p["presentation"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Voir la présentation", "View presentation") ?>>Voir la présentation</a>
+              <a class="btn" href="<?= e($p["presentation"]) ?>?print=1" target="_blank" rel="noopener noreferrer" <?= t("Imprimer", "Print") ?>>Imprimer</a>
               <a class="btn" href="<?= e($p["pptx"]) ?>" download <?= t("Télécharger PPTX", "Download PPTX") ?>>Télécharger PPTX</a>
 <?php else: ?>
               <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Découvrir le projet", "View project") ?>>Découvrir le projet</a>
