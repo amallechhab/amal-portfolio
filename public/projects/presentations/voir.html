@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Présentation DEAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;700&display=swap">
+<style>
+:root{color-scheme:light;--bg:#f5f7fb;--fg:#13213b;--accent:#1d4ed8;--line:#d5deec;--card:#fff}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#0e1626;--fg:#e8eefb;--accent:#6ea8fe;--line:#2a3b5e;--card:#15203a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 Figtree,system-ui,sans-serif}
+.wrap{width:min(1100px,calc(100% - 34px));margin:auto}
+header{border-bottom:1px solid var(--line);background:var(--card)}
+nav{min-height:70px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 0}
+.back{color:var(--accent);font-weight:700;text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--accent);color:var(--accent);padding:8px 17px;text-decoration:none;font-size:13px;font-weight:800;border-radius:999px}
+h1{font-family:"DM Serif Display",Georgia,serif;font-size:clamp(25px,4vw,38px);font-weight:400;line-height:1.15;margin:27px 0 20px}
+iframe{display:block;width:100%;height:min(78vh,760px);border:1px solid var(--line);border-radius:17px;background:var(--card);margin-bottom:35px}
+</style>
+</head>
+<body>
+<header><nav class="wrap"><a class="back" href="/#projets">← Mes projets</a><a class="btn" id="download" href="#">Télécharger</a></nav></header>
+<main class="wrap"><h1 id="heading"></h1><iframe id="presentation" title="Présentation PowerPoint originale" allowfullscreen loading="eager"></iframe></main>
+<script>
+(function(){
+  const sources={
+    identite:{
+      title:"Présentation du Projet Deal",
+      path:"/docs/presentations/presentation-deal-identite-originale.pptx"
+    },
+    planification:{
+      title:"Planification de projet « Deal »",
+      path:"/docs/presentations/presentation-deal-planification-originale.ppsx"
+    }
+  };
+  const doc=new URLSearchParams(location.search).get("doc");
+  const selected=Object.prototype.hasOwnProperty.call(sources,doc)?sources[doc]:null;
+  if(!selected){location.replace("/#projets");return;}
+  document.title=selected.title+" | Portfolio";
+  document.getElementById("heading").textContent=selected.title;
+  const download=document.getElementById("download");
+  download.href=selected.path;
+  download.download=selected.path.split("/").pop();
+  const publicUrl=new URL(selected.path,location.origin).href;
+  document.getElementById("presentation").src="https://view.officeapps.live.com/op/embed.aspx?src="+encodeURIComponent(publicUrl);
+})();
+</script>
+</body>
+</html>
