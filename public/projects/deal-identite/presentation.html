@@ -26,7 +26,25 @@ ul{padding-left:23px}li{margin:6px 0}
 .solid{background:var(--accent);color:#fff}
 @media(prefers-color-scheme:dark){.solid{color:#071221}}
 @media(max-width:650px){.cards,.twocol{grid-template-columns:1fr}.slide{padding:18px}.hero-card{flex-direction:column;align-items:flex-start}}
-</style><title>Présentation — Identité visuelle DEAL</title></head><body><header><nav class="wrap"><b>Amal · Portfolio</b><a class="back" href="/projects/deal-identite/index.html">← Retour au Projet 1</a></nav></header><main>
+@media print{
+ @page{size:A4 portrait;margin:12mm}
+ :root{color-scheme:light;--bg:#fff;--fg:#13213b;--muted:#43536e;--card:#fff;--line:#cbd5e1;--tint:#eef3fc}
+ html,body{background:#fff!important;color:#13213b!important}
+ header,.actions,.print-toolbar,main>h1,main>.lead{display:none!important}
+ main,.wrap{width:100%!important;margin:0!important}
+ .slide{border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin:0!important;break-inside:avoid;page-break-inside:avoid;break-after:page;page-break-after:always}
+ .slide:last-of-type{break-after:auto;page-break-after:auto}
+ .slide h2{font-size:20pt;margin:0 0 8mm}
+ .slide .cards{gap:3mm}
+ .slide .box{padding:3mm;border:1px solid #cbd5e1}
+ .slide .box p{font-size:10pt}
+ .slide .media{max-height:205mm;object-fit:contain;max-width:100%}
+ .slide .hero-card{padding:5mm}
+ .slide table{font-size:9pt}
+ .slide th,.slide td{padding:2.2mm}
+ img{max-width:100%!important}
+}
+</style><title>Présentation — Identité visuelle DEAL</title></head><body><header><nav class="wrap"><b>Amal · Portfolio</b><a class="back" href="/projects/deal-identite/index.html">← Retour au Projet 1</a></nav></header><main><div class="print-toolbar" style="display:flex;justify-content:flex-end;margin-top:24px"><button type="button" class="btn solid" onclick="window.print()" aria-label="Imprimer la présentation sans télécharger PowerPoint" style="cursor:pointer;font-family:inherit;font-size:14px">Imprimer / PDF</button></div>
 <h1>Présentation — Identité visuelle DEAL</h1><p class="lead">Les six parties de notre présentation de groupe · Tâche 0</p>
 <section class="slide"><div class="n">01 · TÂCHE 0 — IDENTITÉ DU PROJET</div><h2>Plateforme « Deal »</h2><div class="hero-card"><img src="https://res.cloudinary.com/bnrnatw6/image/upload/v1794259457/portfolio/deal/logo-propose-original-deal.jpg" alt="Proposition du logo du groupe DEAL"><div><div class="quote">« Chaque annonce… une chance d’un bon deal »</div><p>Integrity · Security · Confidence</p></div></div><p class="note">Proposition du logo extraite de la présentation originale.</p></section>
 <section class="slide"><div class="n">02 · EXIGENCES 1 &amp; 2</div><h2>Choix du nom &amp; signification</h2><div class="cards"><div class="box"><strong>Nom choisi : Deal</strong><p>Un mot court, moderne et mémorisable.</p></div><div class="box"><strong>Accord équitable</strong><p>Évoque une transaction juste et avantageuse.</p></div><div class="box"><strong>Portée universelle</strong><p>Un nom compréhensible par différentes générations.</p></div></div></section>
@@ -34,4 +52,10 @@ ul{padding-left:23px}li{margin:6px 0}
 <section class="slide"><div class="n">04 · EXIGENCE 4</div><h2>Phrase d’accroche</h2><div class="hero-card"><div class="quote">« Chaque annonce… une chance d’un bon deal »</div></div><div class="cards" style="margin-top:14px"><div class="box"><strong>Chaque annonce</strong><p>Accessibilité</p></div><div class="box"><strong>Une chance</strong><p>Opportunité</p></div><div class="box"><strong>Un bon deal</strong><p>Résultat gagnant</p></div></div></section>
 <section class="slide"><div class="n">05 · EXIGENCE 5</div><h2>Cohérence avec le marché des petites annonces</h2><div class="cards"><div class="box"><strong>Clarté de la promesse</strong><p>Achat, vente ou échange rapide.</p></div><div class="box"><strong>Valorisation des offres</strong><p>Faire des annonces des opportunités.</p></div><div class="box"><strong>Climat de confiance</strong><p>Integrity · Security · Confidence.</p></div></div></section>
 <section class="slide"><div class="n">06 · SYNTHÈSE DU TRAVAIL</div><h2>Validation des 5 points de la Tâche 0</h2><table><thead><tr><th>Point</th><th>Résultat</th></tr></thead><tbody><tr><td>Nom</td><td>DEAL</td></tr><tr><td>Signification</td><td>Accord gagnant-gagnant</td></tr><tr><td>Logo proposé</td><td>Poignée de main, flèche, diamant</td></tr><tr><td>Slogan</td><td>Chaque annonce… une chance d’un bon deal</td></tr><tr><td>Marché</td><td>Petites annonces et transactions directes</td></tr></tbody></table></section>
-<div class="actions"><a class="btn solid" href="/projects/deal-identite/index.html">Retour au Projet 1</a><a class="btn" href="/projects/deal-planification/index.html">Projet 2 — Planification</a></div></main></body></html>
+<div class="actions"><a class="btn solid" href="/projects/deal-identite/index.html">Retour au Projet 1</a><a class="btn" href="/projects/deal-planification/index.html">Projet 2 — Planification</a></div></main><script>
+window.addEventListener('load', function () {
+  if (new URLSearchParams(window.location.search).get('print') === '1') {
+    window.print();
+  }
+});
+</script></body></html>
