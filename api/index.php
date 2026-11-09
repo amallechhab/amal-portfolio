@@ -134,6 +134,7 @@ $projets = [
     "desc_en"  => "DEAL project name, logo and slogan for our classified ads app.",
     "file"     => "",
     "overview" => "/projects/deal-identite/index.html",
+    "pptx" => "/docs/projets/Projet_1_Identite_visuelle_DEAL.pptx",
     "presentation" => "/projects/deal-identite/presentation.html",
     "preview"  => "https://res.cloudinary.com/bnrnatw6/image/upload/v1794259457/portfolio/deal/logo-propose-original-deal.jpg",
   ],
@@ -146,6 +147,7 @@ $projets = [
     "desc_en"  => "Project schedule: seven tasks, dependencies, V-model, Gantt and PERT.",
     "file"     => "",
     "overview" => "/projects/deal-planification/index.html",
+    "pptx" => "/docs/projets/Projet_2_Planification_DEAL.pptx",
     "presentation" => "/projects/deal-planification/presentation.html",
     "preview"  => "/images/ateliers/atelier1/groupe-gantt.jpg",
   ],
@@ -519,7 +521,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
               <span class="pj-pending" <?= t("Bientôt", "Soon") ?>>Bientôt</span>
 <?php endif; ?>
             </div>
-            <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><?= e($p["title_fr"]) ?></h3>
+            <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><a href="<?= e($p["overview"] ?? "#projets") ?>" class="pj-title-link"><?= e($p["title_fr"]) ?></a></h3>
             <p <?= t($p["desc_fr"], $p["desc_en"]) ?>><?= e($p["desc_fr"]) ?></p>
             <div class="pj-tech"><span <?= !empty($p["groupe"])?t("Projet de groupe","Group project"):t("Projet de formation","Training project") ?>><?= !empty($p["groupe"])?"Projet de groupe":"Projet de formation" ?></span></div>
             <div class="btns">
@@ -527,9 +529,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
               <a class="btn solid" href="<?= e($p["file"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Voir", "View") ?>>Voir</a>
               <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
 <?php elseif (!empty($p["overview"])): ?>
+<?php if (!empty($p["presentation"]) && !empty($p["pptx"])): ?>
+              <a class="btn solid" href="<?= e($p["presentation"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Voir la présentation", "View presentation") ?>>Voir la présentation</a>
+              <a class="btn" href="<?= e($p["pptx"]) ?>" download <?= t("Télécharger PPTX", "Download PPTX") ?>>Télécharger PPTX</a>
+<?php else: ?>
               <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Découvrir le projet", "View project") ?>>Découvrir le projet</a>
-<?php if (!empty($p["presentation"])): ?>
-              <a class="btn" href="<?= e($p["presentation"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Présentation", "Presentation") ?>>Présentation</a>
 <?php endif; ?>
 <?php if (!empty($p["live"])): ?>
               <a class="btn" href="<?= e($p["live"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Site en ligne", "Live website") ?>>Site en ligne</a>
