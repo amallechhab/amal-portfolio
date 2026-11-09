@@ -95,6 +95,8 @@
   font-weight:700;font-size:11px
 }
 #projets .pj h3{font-family:var(--font-display);font-size:1.55rem;font-weight:400;margin:0}
+#projets .pj-title-link{color:inherit;text-decoration:none}
+#projets .pj-title-link:hover{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
 #projets .pj p{font-size:14px;color:var(--muted);margin:0;flex:1}
 #projets .pj-tech{display:flex;flex-wrap:wrap;gap:7px}
 #projets .pj-tech span{
