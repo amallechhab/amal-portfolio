@@ -126,43 +126,18 @@ $ateliers = [
 // Projets présentés avec des preuves et des liens réels, pas de cartes de démonstration.
 $projets = [
   [
-    "type"     => "PROJET 1",
-    "groupe"   => true,
-    "title_fr" => "Projet 1 — Identité visuelle DEAL",
-    "title_en" => "Project 1 — DEAL Visual Identity",
-    "desc_fr"  => "Choix du nom DEAL, logo et slogan de notre application de petites annonces.",
-    "desc_en"  => "DEAL project name, logo and slogan for our classified ads app.",
-    "file"     => "",
-    "overview" => "/projects/deal-identite/index.html",
-    "pptx" => "/docs/projets/Projet_1_Identite_visuelle_DEAL.pptx",
-    "presentation" => "/projects/deal-identite/presentation.html",
-    "preview"  => "https://res.cloudinary.com/bnrnatw6/image/upload/v1794259457/portfolio/deal/logo-propose-original-deal.jpg",
+    "type" => "PPTX",
+    "title_fr" => "Présentation du Projet Deal",
+    "title_en" => "DEAL Project Presentation",
+    "presentation" => "/projects/presentations/voir.html?doc=identite",
+    "download" => "/docs/presentations/presentation-deal-identite-originale.pptx",
   ],
   [
-    "type"     => "PROJET 2",
-    "groupe"   => true,
-    "title_fr" => "Projet 2 — Planification DEAL",
-    "title_en" => "Project 2 — DEAL Planning",
-    "desc_fr"  => "Planification du projet : 7 tâches, dépendances, modèle en V, Gantt et PERT.",
-    "desc_en"  => "Project schedule: seven tasks, dependencies, V-model, Gantt and PERT.",
-    "file"     => "",
-    "overview" => "/projects/deal-planification/index.html",
-    "pptx" => "/docs/projets/Projet_2_Planification_DEAL.pptx",
-    "presentation" => "/projects/deal-planification/presentation.html",
-    "preview"  => "/images/ateliers/atelier1/groupe-gantt.jpg",
-  ],
-  [
-    "type"     => "SITE WEB",
-    "groupe"   => true,
-    "title_fr" => "DEAL App — Projet de groupe",
-    "title_en" => "DEAL App — Group project",
-    "desc_fr"  => "Notre vrai projet de groupe : prototype responsive de petites annonces. Site Vercel en ligne, pages consultables, code GitHub, Sprint 1 et User Stories.",
-    "desc_en"  => "Our real group project: responsive classified-ads prototype. Live Vercel website, browsable pages, GitHub code, Sprint 1 and user stories.",
-    "file"     => "",
-    "overview" => "/projects/deal-app/index.html",
-    "preview"  => "/images/ateliers/atelier2/deal-accueil.png",
-    "live"     => "https://dealappamallechhab.vercel.app",
-    "source"   => "https://github.com/amallechhab/Deal-App",
+    "type" => "PPSX",
+    "title_fr" => "Planification de projet « Deal »",
+    "title_en" => "DEAL Project Planning",
+    "presentation" => "/projects/presentations/voir.html?doc=planification",
+    "download" => "/docs/presentations/presentation-deal-planification-originale.ppsx",
   ],
 ];
 
@@ -493,9 +468,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 
   <section id="projets">
     <div class="wrap">
-      <span class="tag" <?= t("Projets", "Projects") ?>>Projets</span>
+      <span class="tag" <?= t("Présentations", "Presentations") ?>>Présentations</span>
       <h2 <?= t("Mes projets", "My projects") ?>>Mes projets</h2>
-      <p class="sub" <?= t("Mes projets réellement réalisés, avec accès au site, au code source et aux documents.", "My real projects, with links to the website, source code and documents.") ?>>Mes projets réellement réalisés, avec accès au site, au code source et aux documents.</p>
       <div class="projet-grid">
 <?php foreach ($projets as $p): ?>
         <article class="pj">
@@ -503,47 +477,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
             <div class="pj-window">
               <div class="pj-windowbar"><i></i><i></i><i></i></div>
               <div class="pj-window-content">
-<?php if (!empty($p["preview"])): ?>
-                <img class="pj-shot" src="<?= e($p["preview"]) ?>" alt="" loading="lazy" decoding="async">
-<?php else: ?>
                 <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                   <path d="M5 3h10l4 4v14H5zM15 3v5h4M8 12h8M8 16h6" />
                 </svg>
                 <span><?= e($p["type"]) ?></span>
-<?php endif; ?>
               </div>
             </div>
           </div>
           <div class="pj-body">
-            <div class="pj-heading">
-              <span class="pj-type"><?= e($p["type"]) ?></span>
-<?php if (empty($p["file"]) && empty($p["overview"])): ?>
-              <span class="pj-pending" <?= t("Bientôt", "Soon") ?>>Bientôt</span>
-<?php endif; ?>
-            </div>
-            <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><a href="<?= e($p["overview"] ?? "#projets") ?>" class="pj-title-link"><?= e($p["title_fr"]) ?></a></h3>
-            <p <?= t($p["desc_fr"], $p["desc_en"]) ?>><?= e($p["desc_fr"]) ?></p>
-            <div class="pj-tech"><span <?= !empty($p["groupe"])?t("Projet de groupe","Group project"):t("Projet de formation","Training project") ?>><?= !empty($p["groupe"])?"Projet de groupe":"Projet de formation" ?></span></div>
+            <div class="pj-heading"><span class="pj-type"><?= e($p["type"]) ?></span></div>
+            <h3 <?= t($p["title_fr"], $p["title_en"]) ?>><?= e($p["title_fr"]) ?></h3>
             <div class="btns">
-<?php if (!empty($p["file"])): ?>
-              <a class="btn solid" href="<?= e($p["file"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Voir", "View") ?>>Voir</a>
-              <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
-<?php elseif (!empty($p["overview"])): ?>
-<?php if (!empty($p["presentation"]) && !empty($p["pptx"])): ?>
               <a class="btn solid" href="<?= e($p["presentation"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Voir la présentation", "View presentation") ?>>Voir la présentation</a>
-              <a class="btn" href="<?= e($p["pptx"]) ?>" download <?= t("Télécharger PPTX", "Download PPTX") ?>>Télécharger PPTX</a>
-<?php else: ?>
-              <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Découvrir le projet", "View project") ?>>Découvrir le projet</a>
-<?php endif; ?>
-<?php if (!empty($p["live"])): ?>
-              <a class="btn" href="<?= e($p["live"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Site en ligne", "Live website") ?>>Site en ligne</a>
-<?php endif; ?>
-<?php if (!empty($p["source"])): ?>
-              <a class="btn" href="<?= e($p["source"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Code GitHub", "GitHub code") ?>>Code GitHub</a>
-<?php endif; ?>
-<?php else: ?>
-              <span class="btn" aria-disabled="true" <?= t("Projet à compléter", "Project to be added") ?>>Projet à compléter</span>
-<?php endif; ?>
+              <a class="btn" href="<?= e($p["download"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
             </div>
           </div>
         </article>
