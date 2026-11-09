@@ -148,6 +148,7 @@ jobs:
           
           build("public/projects/deal-identite/presentation.html","public/docs/projets/Projet_1_Identite_visuelle_DEAL.pptx","Projet 1 — Identité visuelle")
           build("public/projects/deal-planification/presentation.html","public/docs/projets/Projet_2_Planification_DEAL.pptx","Projet 2 — Planification")
+          PY
           
       - name: Commit presentations to public folder
         run: |
