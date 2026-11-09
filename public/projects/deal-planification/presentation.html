@@ -1,0 +1,39 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet"><style>
+:root{color-scheme:light;--bg:#f5f7fb;--fg:#13213b;--muted:#56637a;--accent:#1d4ed8;--card:#fff;--line:#d5deec;--tint:#dce6fa}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#0e1626;--fg:#e8eefb;--muted:#9db0cc;--accent:#6ea8fe;--card:#15203a;--line:#2a3b5e;--tint:#1c2d52}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Figtree,Arial,sans-serif}
+main,.wrap{width:min(1000px,calc(100% - 32px));margin:auto}header{border-bottom:1px solid var(--line);background:var(--card);padding:14px 0}
+nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+a{color:var(--accent)}.back{font-weight:700;text-decoration:none;font-size:14px}
+h1,h2{font-family:"DM Serif Display",Georgia,serif;font-weight:400;line-height:1.15}
+h1{font-size:clamp(29px,5vw,47px);margin:30px 0 8px}h2{font-size:clamp(22px,4vw,32px);margin:0 0 14px}
+.lead{color:var(--muted);margin:0 0 25px}.slide{background:var(--card);border:2px solid var(--line);border-radius:22px;margin:16px 0;padding:26px}
+.n{font-size:12px;color:var(--accent);font-weight:800;letter-spacing:.1em;margin-bottom:12px}
+.pill{display:inline-block;color:var(--accent);background:var(--tint);font-size:12px;border-radius:18px;padding:5px 10px;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.box{padding:18px;background:var(--bg);border:1px solid var(--line);border-radius:13px}
+.box strong{display:block;margin-bottom:8px}.box p{margin:0;color:var(--muted);font-size:14px}
+.media{width:100%;height:auto;border:1px solid var(--line);border-radius:12px;object-fit:contain;background:white}
+.hero-card{background:var(--bg);padding:30px;border-radius:16px;display:flex;gap:22px;align-items:center}
+.hero-card img{width:95px;height:95px;object-fit:contain}
+.quote{font-family:Georgia,serif;font-style:italic;font-size:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid var(--line);padding:10px;text-align:left}th{background:var(--tint)}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+ul{padding-left:23px}li{margin:6px 0}
+.note{color:var(--muted);font-size:13px;margin-top:12px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 45px}
+.btn{border:2px solid var(--accent);border-radius:30px;padding:9px 16px;text-decoration:none;font-size:13px;font-weight:800}
+.solid{background:var(--accent);color:#fff}
+@media(prefers-color-scheme:dark){.solid{color:#071221}}
+@media(max-width:650px){.cards,.twocol{grid-template-columns:1fr}.slide{padding:18px}.hero-card{flex-direction:column;align-items:flex-start}}
+</style><title>Présentation — Planification DEAL</title></head><body><header><nav class="wrap"><b>Amal · Portfolio</b><a class="back" href="/projects/deal-planification/index.html">← Retour au Projet 2</a></nav></header><main>
+<h1>Présentation — Planification DEAL</h1><p class="lead">Notre projet de groupe · Ordonnancement et planification · Six parties issues de la présentation</p>
+<section class="slide"><div class="n">01 · PRÉSENTATION DU PROJET</div><h2>Planification du projet « Deal »</h2><p>Application web interactive de publication, recherche et consultation de petites annonces.</p></section>
+<section class="slide"><div class="n">02 · DÉCOMPOSITION DU PROJET</div><h2>7 tâches principales</h2><table><thead><tr><th>Code</th><th>Tâche</th></tr></thead><tbody>
+<tr><td>A</td><td>Cahier des charges et spécifications</td></tr><tr><td>B</td><td>Conception de la base de données (MCD)</td></tr><tr><td>C</td><td>Design UI/UX et maquettes</td></tr><tr><td>D</td><td>Développement Backend</td></tr><tr><td>E</td><td>Développement Frontend</td></tr><tr><td>F</td><td>Tests et corrections</td></tr><tr><td>G</td><td>Déploiement en production</td></tr>
+</tbody></table><img class="media" style="margin-top:18px" src="/images/ateliers/atelier1/groupe-taches.png" alt="Capture des tâches du projet DEAL" loading="lazy"></section>
+<section class="slide"><div class="n">03 · DÉPENDANCES ET DURÉES ESTIMÉES</div><h2>Tableau des tâches</h2><table><thead><tr><th>Tâche</th><th>Description</th><th>Durée (jours)</th><th>Prédécesseurs</th></tr></thead><tbody><tr><td>A</td><td>Spécifications fonctionnelles</td><td>3</td><td>—</td></tr><tr><td>B</td><td>Conception de la base de données</td><td>2</td><td>A</td></tr><tr><td>C</td><td>Design des maquettes UI/UX</td><td>3</td><td>A</td></tr><tr><td>D</td><td>Développement du Backend</td><td>5</td><td>B</td></tr><tr><td>E</td><td>Développement du Frontend</td><td>4</td><td>C</td></tr><tr><td>F</td><td>Tests et corrections</td><td>2</td><td>E, D</td></tr><tr><td>G</td><td>Déploiement final</td><td>1</td><td>F</td></tr></tbody></table><p class="note">Durées fictives estimées dans la présentation du groupe, pas des durées réellement mesurées.</p></section>
+<section class="slide"><div class="n">04 · MODÈLE EN V</div><h2>Organisation selon le modèle en V</h2><img class="media" src="/images/ateliers/atelier1/groupe-modele-v.jpg" alt="Modèle en V du groupe" loading="lazy"><p class="note">Dans la présentation originale, le diagramme porte le nom « Quick Annonces ».</p></section>
+<section class="slide"><div class="n">05 · DIAGRAMME DE GANTT</div><h2>Planification temporelle</h2><img class="media" src="/images/ateliers/atelier1/groupe-gantt.jpg" alt="Diagramme de Gantt du groupe" loading="lazy"></section>
+<section class="slide"><div class="n">06 · DIAGRAMME PERT</div><h2>Dépendances et chemin critique</h2><img class="media" src="/images/ateliers/atelier1/groupe-pert.jpg" alt="Diagramme PERT du groupe" loading="lazy"></section>
+<div class="actions"><a class="btn solid" href="/projects/deal-planification/index.html">Retour au Projet 2</a><a class="btn" href="/projects/deal-app/index.html">Voir DEAL App</a></div></main></body></html>
