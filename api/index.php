@@ -134,6 +134,7 @@ $projets = [
     "desc_en"  => "DEAL project name, logo and slogan for our classified ads app.",
     "file"     => "",
     "overview" => "/projects/deal-identite/index.html",
+    "preview"  => "/images/projets/deal-identite/deal-icon.svg",
   ],
   [
     "type"     => "PROJET 2",
@@ -144,6 +145,7 @@ $projets = [
     "desc_en"  => "Project schedule: seven tasks, dependencies, V-model, Gantt and PERT.",
     "file"     => "",
     "overview" => "/projects/deal-planification/index.html",
+    "preview"  => "/images/ateliers/atelier1/groupe-gantt.jpg",
   ],
   [
     "type"     => "SITE WEB",
@@ -154,6 +156,7 @@ $projets = [
     "desc_en"  => "Our real group project: responsive classified-ads prototype. Live Vercel website, browsable pages, GitHub code, Sprint 1 and user stories.",
     "file"     => "",
     "overview" => "/projects/deal-app/index.html",
+    "preview"  => "/images/ateliers/atelier2/deal-accueil.png",
     "live"     => "https://dealappamallechhab.vercel.app",
     "source"   => "https://github.com/amallechhab/Deal-App",
   ],
@@ -496,10 +499,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
             <div class="pj-window">
               <div class="pj-windowbar"><i></i><i></i><i></i></div>
               <div class="pj-window-content">
+<?php if (!empty($p["preview"])): ?>
+                <img class="pj-shot" src="<?= e($p["preview"]) ?>" alt="" loading="lazy" decoding="async">
+<?php else: ?>
                 <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                   <path d="M5 3h10l4 4v14H5zM15 3v5h4M8 12h8M8 16h6" />
                 </svg>
                 <span><?= e($p["type"]) ?></span>
+<?php endif; ?>
               </div>
             </div>
           </div>
