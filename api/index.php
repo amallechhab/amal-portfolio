@@ -134,6 +134,7 @@ $projets = [
     "desc_en"  => "DEAL project name, logo and slogan for our classified ads app.",
     "file"     => "",
     "overview" => "/projects/deal-identite/index.html",
+    "presentation" => "/projects/deal-identite/presentation.html",
     "preview"  => "/images/projets/deal-identite/deal-icon.svg",
   ],
   [
@@ -145,6 +146,7 @@ $projets = [
     "desc_en"  => "Project schedule: seven tasks, dependencies, V-model, Gantt and PERT.",
     "file"     => "",
     "overview" => "/projects/deal-planification/index.html",
+    "presentation" => "/projects/deal-planification/presentation.html",
     "preview"  => "/images/ateliers/atelier1/groupe-gantt.jpg",
   ],
   [
@@ -526,6 +528,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
               <a class="btn" href="<?= e($p["file"]) ?>" download <?= t("Télécharger", "Download") ?>>Télécharger</a>
 <?php elseif (!empty($p["overview"])): ?>
               <a class="btn solid" href="<?= e($p["overview"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Découvrir le projet", "View project") ?>>Découvrir le projet</a>
+<?php if (!empty($p["presentation"])): ?>
+              <a class="btn" href="<?= e($p["presentation"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Présentation", "Presentation") ?>>Présentation</a>
+<?php endif; ?>
 <?php if (!empty($p["live"])): ?>
               <a class="btn" href="<?= e($p["live"]) ?>" target="_blank" rel="noopener noreferrer" <?= t("Site en ligne", "Live website") ?>>Site en ligne</a>
 <?php endif; ?>
