@@ -130,14 +130,14 @@ $projets = [
     "title_fr" => "Présentation du Projet Deal",
     "title_en" => "DEAL Project Presentation",
     "presentation" => "/projects/presentations/voir.html?doc=identite",
-    "download" => "/docs/presentations/presentation-deal-identite-originale.pptx",
+    "download" => "/docs/projets/Pr%C3%A9sentation%20du%20Projet%20Deal.pptx",
   ],
   [
-    "type" => "PPSX",
-    "title_fr" => "Planification de projet « Deal »",
-    "title_en" => "DEAL Project Planning",
+    "type" => "PPTX",
+    "title_fr" => "Présentation de DEAL en groupe",
+    "title_en" => "DEAL Group Presentation",
     "presentation" => "/projects/presentations/voir.html?doc=planification",
-    "download" => "/docs/presentations/presentation-deal-planification-originale.ppsx",
+    "download" => "/docs/projets/presentation%20de%20deal%20en%20greoup.ppsx.pptx",
   ],
 ];
 
