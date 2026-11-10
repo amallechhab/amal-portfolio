@@ -59,17 +59,17 @@ html[data-amal-theme="light"] .setup a { color:#fff; }
   width:46px;
   height:46px;
   padding:0;
-  border:2px solid #e0e6ee;
-  border-radius:14px;
-  background:#f5f7fb;
-  color:#14213b;
+  border:3px solid #e0e6ee;
+  border-radius:13px;
+  background:#f4f6fa;
+  color:#111b2f;
   cursor:pointer;
   box-shadow:0 3px 8px rgba(15,30,50,.08);
   transition:background-color .18s,border-color .18s,transform .18s;
 }
 html[data-amal-theme="dark"] .amal-theme-trigger {
   background:#121a29;
-  border-color:#27364b;
+  border-color:#253349;
   color:#f15b24;
   box-shadow:none;
 }
@@ -92,13 +92,13 @@ html[data-amal-theme="dark"] .amal-theme-moon { display:none; }
   z-index:20;
 }
 .amal-theme-dock--nav .amal-theme-trigger {
-  width:36px;
-  height:36px;
+  width:39px;
+  height:39px;
   border-radius:12px;
 }
 .amal-theme-dock--nav .amal-theme-icon {
-  width:21px;
-  height:21px;
+  width:22px;
+  height:22px;
 }
 @media(max-width:500px) {
   .amal-theme-dock:not(.amal-theme-dock--nav) { right:12px;bottom:12px; }
