@@ -55,13 +55,21 @@ html[data-amal-theme="light"] .setup a { color:#fff; }
   outline:3px solid var(--accent); outline-offset:3px;
 }
 .amal-theme-dock .amal-theme-trigger {
-  display:flex; align-items:center; gap:8px; margin-left:auto;
-  padding:10px 15px; border-radius:999px;
-  border:1px solid var(--line); color:var(--fg);
-  background:var(--card); font-weight:700;
-  box-shadow:0 8px 28px rgba(12,27,55,.22);
+  display:flex; align-items:center; justify-content:center; margin-left:auto;
+  width:46px; height:46px; padding:0; border-radius:13px;
+  border:1px solid #27354d; color:#ff791f;
+  background:#141e2e; font-weight:700;
+  box-shadow:0 8px 24px rgba(12,27,55,.19);
+  transition:background .18s ease, border-color .18s ease, transform .18s ease;
 }
-.amal-theme-symbol { display:inline-flex; font-size:18px; line-height:1; color:var(--accent); }
+.amal-theme-dock .amal-theme-trigger:hover {
+  background:#1b2a40; border-color:#385277; transform:translateY(-1px);
+}
+.amal-theme-dock .amal-theme-trigger:active { transform:translateY(0); }
+.amal-theme-symbol { display:block; width:24px; height:24px; color:#ff791f; }
+@media (prefers-reduced-motion:reduce) {
+  .amal-theme-trigger { transition:none!important; transform:none!important; }
+}
 .amal-theme-menu {
   position:absolute; right:0; bottom:calc(100% + 10px);
   width:min(310px,calc(100vw - 24px));
