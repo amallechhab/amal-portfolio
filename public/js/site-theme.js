@@ -1,62 +1,65 @@
 (function () {
   "use strict";
+
   var KEY = "amal-portfolio-appearance";
-  var choice = "system";
   var prefersDark = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  var mode = prefersDark && prefersDark.matches ? "dark" : "light";
 
   try {
-    var stored = window.localStorage.getItem(KEY);
-    if (stored === "system" || stored === "light" || stored === "dark") choice = stored;
+    var saved = window.localStorage.getItem(KEY);
+    if (saved === "light" || saved === "dark") mode = saved;
   } catch (error) {
-    // The switch still works if storage is blocked.
+    // Still switch themes if browser storage is unavailable.
   }
 
-  function currentTheme() {
-    return choice === "system" ? (prefersDark && prefersDark.matches ? "dark" : "light") : choice;
-  }
-
-  function applyTheme() {
-    var mode = currentTheme();
+  function renderMode() {
     document.documentElement.setAttribute("data-amal-theme", mode);
-    document.documentElement.setAttribute("data-amal-theme-choice", choice);
+    document.documentElement.setAttribute("data-amal-theme-choice", mode);
     document.documentElement.style.colorScheme = mode;
-  }
 
-  function saveTheme(next) {
-    if (next !== "system" && next !== "light" && next !== "dark") return;
-    choice = next;
-    try { window.localStorage.setItem(KEY, next); } catch (error) { /* Storage may be disabled. */ }
-    applyTheme();
-    updateButtons();
-  }
-
-  function updateButtons() {
-    var buttons = document.querySelectorAll(".amal-theme-choice");
-    buttons.forEach(function (button) {
-      var active = button.getAttribute("data-choice") === choice;
-      button.setAttribute("aria-pressed", String(active));
-    });
-    var trigger = document.querySelector(".amal-theme-trigger");
-    if (trigger) {
-      trigger.title = "Apparence : " + (choice === "system" ? "System" : choice === "light" ? "Light" : "Dark");
+    var button = document.querySelector(".amal-theme-trigger");
+    if (button) {
+      var nextLabel = mode === "dark" ? "Light Mode" : "Dark Mode";
+      button.title = nextLabel;
+      button.setAttribute("aria-label", nextLabel);
+      button.setAttribute("aria-pressed", String(mode === "dark"));
     }
   }
 
-  applyTheme();
+  function changeTheme() {
+    mode = mode === "dark" ? "light" : "dark";
+    try {
+      window.localStorage.setItem(KEY, mode);
+    } catch (error) {
+      // Keep current selection for this page.
+    }
+    renderMode();
+  }
+
+  renderMode();
+
+  window.addEventListener("storage", function (event) {
+    if (event.key !== KEY) return;
+    if (event.newValue === "light" || event.newValue === "dark") {
+      mode = event.newValue;
+    } else {
+      mode = prefersDark && prefersDark.matches ? "dark" : "light";
+    }
+    renderMode();
+  });
 
   if (prefersDark) {
-    var onSystemChange = function () { if (choice === "system") applyTheme(); };
+    var onSystemChange = function () {
+      var stored;
+      try { stored = window.localStorage.getItem(KEY); } catch (error) { stored = null; }
+      if (stored !== "light" && stored !== "dark") {
+        mode = prefersDark.matches ? "dark" : "light";
+        renderMode();
+      }
+    };
     if (prefersDark.addEventListener) prefersDark.addEventListener("change", onSystemChange);
     else if (prefersDark.addListener) prefersDark.addListener(onSystemChange);
   }
-
-  window.addEventListener("storage", function (event) {
-    if (event.key === KEY) {
-      choice = event.newValue === "light" || event.newValue === "dark" ? event.newValue : "system";
-      applyTheme();
-      updateButtons();
-    }
-  });
 
   document.addEventListener("DOMContentLoaded", function () {
     if (!document.body || document.querySelector(".amal-theme-dock")) return;
@@ -64,56 +67,27 @@
     var dock = document.createElement("div");
     dock.className = "amal-theme-dock";
     dock.innerHTML = [
-      '<button class="amal-theme-trigger" type="button" aria-controls="amal-theme-menu" aria-expanded="false" aria-label="Changer l’apparence">',
-      '<svg class="amal-theme-symbol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>',
-      '</button>',
-      '<div class="amal-theme-menu" id="amal-theme-menu" hidden>',
-      '<div class="amal-theme-title">Apparence</div>',
-      '<div class="amal-theme-subtitle">Choisis les couleurs du portfolio</div>',
-      '<div class="amal-theme-options" role="group" aria-label="Apparence du portfolio">',
-      '<button class="amal-theme-choice" type="button" data-choice="system" aria-pressed="false"><span aria-hidden="true">▣</span> System</button>',
-      '<button class="amal-theme-choice" type="button" data-choice="light" aria-pressed="false"><span aria-hidden="true">☼</span> Light</button>',
-      '<button class="amal-theme-choice" type="button" data-choice="dark" aria-pressed="false"><span aria-hidden="true">☾</span> Dark</button>',
-      '</div></div>'
+      '<button class="amal-theme-trigger" type="button" aria-label="Dark Mode">',
+      '<svg class="amal-theme-icon amal-theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">',
+      '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>',
+      '</svg>',
+      '<svg class="amal-theme-icon amal-theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">',
+      '<path d="M20.985 12.99A9 9 0 0 1 11.01 3.015 9 9 0 1 0 20.985 12.99Z"/>',
+      '</svg>',
+      '</button>'
     ].join("");
 
-    // On the main portfolio, place the sun just after the FR/EN language button.
-    // Other standalone pages retain the compact floating switch.
-    var langButton = document.getElementById("langBtn");
-    var navigationLinks = langButton && langButton.closest(".nav .links");
-    if (navigationLinks) {
+    // Keep the switch beside the existing language button on the homepage.
+    // On standalone project and atelier pages, leave it in its previous corner.
+    var languageButton = document.getElementById("langBtn");
+    if (languageButton && languageButton.closest(".nav .links")) {
       dock.classList.add("amal-theme-dock--nav");
-      langButton.insertAdjacentElement("afterend", dock);
+      languageButton.insertAdjacentElement("afterend", dock);
     } else {
       document.body.appendChild(dock);
     }
-    var trigger = dock.querySelector(".amal-theme-trigger");
-    var menu = dock.querySelector(".amal-theme-menu");
 
-    function closeMenu() {
-      menu.hidden = true;
-      trigger.setAttribute("aria-expanded", "false");
-    }
-    trigger.addEventListener("click", function () {
-      menu.hidden = !menu.hidden;
-      trigger.setAttribute("aria-expanded", String(!menu.hidden));
-    });
-    dock.querySelectorAll(".amal-theme-choice").forEach(function (button) {
-      button.addEventListener("click", function () {
-        saveTheme(button.getAttribute("data-choice"));
-        closeMenu();
-        trigger.focus();
-      });
-    });
-    document.addEventListener("click", function (event) {
-      if (!dock.contains(event.target)) closeMenu();
-    });
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && !menu.hidden) {
-        closeMenu();
-        trigger.focus();
-      }
-    });
-    updateButtons();
+    dock.querySelector(".amal-theme-trigger").addEventListener("click", changeTheme);
+    renderMode();
   });
 })();
