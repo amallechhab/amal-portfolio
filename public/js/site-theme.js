@@ -77,7 +77,16 @@
       '</div></div>'
     ].join("");
 
-    document.body.appendChild(dock);
+    // On the main portfolio, place the sun just after the FR/EN language button.
+    // Other standalone pages retain the compact floating switch.
+    var langButton = document.getElementById("langBtn");
+    var navigationLinks = langButton && langButton.closest(".nav .links");
+    if (navigationLinks) {
+      dock.classList.add("amal-theme-dock--nav");
+      langButton.insertAdjacentElement("afterend", dock);
+    } else {
+      document.body.appendChild(dock);
+    }
     var trigger = dock.querySelector(".amal-theme-trigger");
     var menu = dock.querySelector(".amal-theme-menu");
 
