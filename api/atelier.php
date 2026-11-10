@@ -124,6 +124,8 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
  header .wrap{flex-wrap:wrap}
 }
 </style>
+<script src="/js/site-theme.js"></script>
+<link rel="stylesheet" href="/assets/site-theme.css">
 </head>
 <body>
 <header><div class="wrap">

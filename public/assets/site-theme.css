@@ -1,0 +1,96 @@
+/* Shared appearance switch: System / Light / Dark.
+   All existing page layouts, fonts and project content remain unchanged. */
+html[data-amal-theme="light"] {
+  color-scheme: light;
+  --bg:#f5f7fb; --fg:#13213b; --muted:#56637a;
+  --accent:#1d4ed8; --accent-fg:#fff;
+  --lilac:#dce6fa; --peach:#e0eef0; --card:#fff; --line:#d5deec;
+  --soft:#e6edfc; --blue:#1d4ed8; --blue-dark:#183eaa;
+  --green:#176c48; --red:#ad2e2e;
+  --shadow:0 24px 70px rgba(28,49,91,.11);
+}
+html[data-amal-theme="dark"] {
+  color-scheme: dark;
+  --bg:#0e1626; --fg:#e8eefb; --muted:#9db0cc;
+  --accent:#6ea8fe; --accent-fg:#0a1426;
+  --lilac:#1c2d52; --peach:#173a42; --card:#15203a; --line:#2a3b5e;
+  --soft:#1c2d52; --blue:#6ea8fe; --blue-dark:#92bfff;
+  --green:#72cda3; --red:#ff8e8e;
+  --shadow:0 24px 70px rgba(0,0,0,.23);
+}
+/* A few older learning-project pages use literal light colors. */
+html[data-amal-theme="dark"] body:has(.shell) { background:var(--bg); }
+html[data-amal-theme="dark"] .field label { color:var(--fg); }
+html[data-amal-theme="dark"] .field input { background:var(--card); color:var(--fg); }
+html[data-amal-theme="dark"] .field input[type="file"] { background:var(--card); }
+html[data-amal-theme="dark"] .feature { background:var(--card); color:var(--fg); border-color:var(--line); }
+html[data-amal-theme="dark"] .message { background:var(--card); border-color:var(--line); }
+html[data-amal-theme="dark"] .shell .card { border-color:var(--line); }
+html[data-amal-theme="dark"] .shell .btn:not(.primary) { background:var(--card); color:var(--fg); }
+html[data-amal-theme="dark"] .shell .btn.primary { color:#0a1426; }
+html[data-amal-theme="dark"] .steps li { background:var(--card); }
+html[data-amal-theme="dark"] .datatable tr:nth-child(even) td { background:var(--bg); }
+html[data-amal-theme="dark"] .v-box,
+html[data-amal-theme="dark"] .v-box.right { background:var(--card); }
+html[data-amal-theme="dark"] .diagram-scroll { background:var(--card); }
+html[data-amal-theme="dark"] .setup { background:#1c2d52; color:#e8eefb; }
+html[data-amal-theme="dark"] .setup p,
+html[data-amal-theme="dark"] .setup ul { color:#e8eefb; }
+html[data-amal-theme="light"] .setup { background:#13213b; color:#fff; }
+html[data-amal-theme="light"] .setup p,
+html[data-amal-theme="light"] .setup ul { color:#d7e1f2; }
+html[data-amal-theme="light"] .setup a { color:#fff; }
+
+/* Compact switch stays available on every portfolio page. */
+.amal-theme-dock {
+  position:fixed; inset:auto 18px 18px auto;
+  z-index:2147483000;
+  font-family:Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:13px; line-height:1.4;
+  color:var(--fg);
+  max-width:calc(100vw - 24px);
+}
+.amal-theme-dock button { font:inherit; cursor:pointer; }
+.amal-theme-dock button:focus-visible {
+  outline:3px solid var(--accent); outline-offset:3px;
+}
+.amal-theme-dock .amal-theme-trigger {
+  display:flex; align-items:center; gap:8px; margin-left:auto;
+  padding:10px 15px; border-radius:999px;
+  border:1px solid var(--line); color:var(--fg);
+  background:var(--card); font-weight:700;
+  box-shadow:0 8px 28px rgba(12,27,55,.22);
+}
+.amal-theme-symbol { display:inline-flex; font-size:18px; line-height:1; color:var(--accent); }
+.amal-theme-menu {
+  position:absolute; right:0; bottom:calc(100% + 10px);
+  width:min(310px,calc(100vw - 24px));
+  padding:15px; border:1px solid var(--line);
+  border-radius:18px; background:var(--card);
+  color:var(--fg); box-shadow:0 14px 42px rgba(12,27,55,.26);
+}
+.amal-theme-menu[hidden] { display:none!important; }
+.amal-theme-title {font-size:15px; font-weight:800;}
+.amal-theme-subtitle {font-size:12px; color:var(--muted); margin:3px 0 14px;}
+.amal-theme-options {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:4px; padding:5px; border-radius:13px;
+  background:var(--bg); border:1px solid var(--line);
+}
+.amal-theme-options .amal-theme-choice {
+  display:flex; justify-content:center; align-items:center;
+  gap:4px; padding:9px 4px; border:0;
+  color:var(--fg); border-radius:10px;
+  background:transparent; font-size:12px; font-weight:700;
+  white-space:nowrap;
+}
+.amal-theme-choice[aria-pressed="true"] {
+  background:var(--accent)!important; color:var(--accent-fg)!important;
+  box-shadow:0 1px 5px rgba(0,0,0,.1);
+}
+.amal-theme-choice:hover:not([aria-pressed="true"]) { background:var(--lilac); }
+@media(max-width:500px) {
+  .amal-theme-dock { right:12px; bottom:12px; }
+  .amal-theme-trigger { padding:9px 12px; }
+}
+@media print { .amal-theme-dock { display:none!important; } }

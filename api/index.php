@@ -318,6 +318,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 </style>
 <link rel="stylesheet" href="/assets/amal-ateliers.css">
 <link rel="stylesheet" href="/assets/amal-projets.css">
+<script src="/js/site-theme.js"></script>
+<link rel="stylesheet" href="/assets/site-theme.css">
 </head>
 <body>
 
