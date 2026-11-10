@@ -70,6 +70,48 @@ html[data-amal-theme="light"] .setup a { color:#fff; }
 @media (prefers-reduced-motion:reduce) {
   .amal-theme-trigger { transition:none!important; transform:none!important; }
 }
+/* On the main page the icon sits immediately after the language button.
+   It matches the navbar's spacing and outline in both light and dark mode. */
+.amal-theme-dock.amal-theme-dock--nav {
+  position:relative;
+  inset:auto;
+  display:inline-flex;
+  align-items:center;
+  flex:0 0 auto;
+  max-width:none;
+  margin-left:6px;
+  z-index:20;
+}
+.amal-theme-dock--nav .amal-theme-trigger {
+  width:35px;
+  height:34px;
+  min-height:34px;
+  margin:0;
+  padding:0;
+  border:2px solid var(--accent);
+  border-radius:999px;
+  background:transparent;
+  color:#ff791f;
+  box-shadow:none;
+  transform:none;
+}
+.amal-theme-dock--nav .amal-theme-trigger:hover {
+  background:var(--lilac);
+  border-color:var(--accent);
+  transform:none;
+}
+.amal-theme-dock--nav .amal-theme-symbol {
+  width:19px;
+  height:19px;
+}
+.amal-theme-dock--nav .amal-theme-menu {
+  top:calc(100% + 12px);
+  bottom:auto;
+  right:0;
+}
+@media(max-width:500px){
+  .amal-theme-dock.amal-theme-dock--nav { right:auto; bottom:auto; margin-left:2px; }
+}
 .amal-theme-menu {
   position:absolute; right:0; bottom:calc(100% + 10px);
   width:min(310px,calc(100vw - 24px));
